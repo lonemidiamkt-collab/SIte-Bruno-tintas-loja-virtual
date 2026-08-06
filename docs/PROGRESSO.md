@@ -8,6 +8,48 @@
 
 ---
 
+## 06/08/2026 — Card de destaque solto no celular (corrigido)
+
+**Sintoma:** no celular o card do "Destaque da semana" parecia solto na
+página, colado na faixa de cima.
+
+**Causa:** `.destaque` estava com `padding: 0 0 var(--e8)` — sem respiro no
+topo abaixo de 900px. O card encostava direto no bloco dos CTAs/estatísticas,
+e como `.destaque` usa `--azul-profundo` enquanto `.capa__ctas` usa
+`--azul-noite`, a troca de azul caía exatamente na borda do card. Duas coisas
+somadas faziam ele parecer descolado do resto.
+
+**Correção:** `padding: var(--e6) 0 var(--e8)`. Desktop não muda — a media
+query de 900px vem depois e sobrescreve com o mesmo valor de antes.
+
+Sem spec, conforme CLAUDE.md: ajuste visual que não muda fluxo.
+
+---
+
+## 06/08/2026 — Arte de capa do celular está remontada, não redesenhada
+
+**Sintoma:** o topo do site no celular aparece "mal encaixado", com retângulos
+de azuis diferentes e bordas visíveis entre logo, título e foto.
+
+**Causa — não é CSS.** O defeito está dentro do arquivo `capa-mobile@2x`
+(2160×2700). Ele foi montado recortando pedaços do banner horizontal
+(`banner@2x`, 2048×868) e empilhando na vertical. Ficaram no arquivo:
+
+- a caixa do logo com borda visível e um pedaço cortado da pincelada branca
+- o bloco do título como outro retângulo, com azul diferente do fundo
+- um fragmento solto de letra na borda esquerda da foto — é o resto do "OBRA."
+  do título na composição horizontal original
+
+O banner do desktop está intacto: composição única, sem emenda. Ou seja, a
+arte original é boa; a versão de celular é que foi recortada dela.
+
+**Não corrigido ainda** — precisa de decisão: nova arte vertical feita de
+origem, ou montar o topo do celular em HTML/CSS com texto de verdade (é o que
+a versão das 03:20 fazia, antes de trocarem pelo recorte). Registrado no
+BACKLOG como P0.
+
+---
+
 ## 06/08/2026 — Deploy contínuo confirmado funcionando
 
 **O que:** verificado que a Vercel já estava ligada ao repositório. Os dois

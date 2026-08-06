@@ -26,6 +26,7 @@
 | Corte de entrega no mesmo dia | ⛔ desligado | `corteEntregaHoje: null` — falta o Bruno confirmar o horário |
 | PWA / instalar no celular | ⛔ removido | decisão consciente, ver ADR-002 |
 | Indexação no Google | ⛔ bloqueada | `noindex` proposital enquanto for URL de teste |
+| Topo do site no celular | 🐞 com defeito | arte remontada, emendas visíveis. Não é CSS — ver BACKLOG P0 |
 
 ## Pendente de terceiro
 

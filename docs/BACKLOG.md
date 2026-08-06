@@ -10,6 +10,20 @@ Prioridades: **P0** trava o projeto · **P1** próximo ciclo · **P2** depois ·
 
 ## P0 — travando
 
+### Arte de capa do celular está remontada, com emendas visíveis
+O arquivo `capa-mobile@2x` foi feito recortando pedaços do banner horizontal e
+empilhando — sobraram bordas de recorte, azuis que não batem e um fragmento de
+letra solto na foto. É o topo do site, na tela onde a maioria chega.
+**Não tem correção por CSS.** Duas saídas:
+
+- **nova arte vertical**, composta de origem (não recortada) — depende do
+  designer, mantém a identidade
+- **montar o topo em HTML/CSS**, com texto de verdade e só a foto como imagem —
+  dá para fazer agora, tira ~319 KB, texto nítido em qualquer tela e indexável.
+  É o que a versão das 03:20 fazia antes de trocarem pelo recorte.
+
+**Depende de decisão do Roberto.**
+
 ### Tabela de preços real
 Os 7 produtos em `dados.js` são exemplo. O site não pode sair de MVP sem os
 números confirmados pelo Bruno. **Depende do cliente.**
