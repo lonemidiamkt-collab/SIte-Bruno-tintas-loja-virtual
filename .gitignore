@@ -1,0 +1,8 @@
+.DS_Store
+.vercel/
+node_modules/
+
+# artefatos de teste que não devem voltar pro repo
+TESTE-LOCAL-*.html
+preview-*.html
+*.zip
