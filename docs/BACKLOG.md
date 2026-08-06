@@ -10,20 +10,6 @@ Prioridades: **P0** trava o projeto · **P1** próximo ciclo · **P2** depois ·
 
 ## P0 — travando
 
-### Arte de capa do celular está remontada, com emendas visíveis
-O arquivo `capa-mobile@2x` foi feito recortando pedaços do banner horizontal e
-empilhando — sobraram bordas de recorte, azuis que não batem e um fragmento de
-letra solto na foto. É o topo do site, na tela onde a maioria chega.
-**Não tem correção por CSS.** Duas saídas:
-
-- **nova arte vertical**, composta de origem (não recortada) — depende do
-  designer, mantém a identidade
-- **montar o topo em HTML/CSS**, com texto de verdade e só a foto como imagem —
-  dá para fazer agora, tira ~319 KB, texto nítido em qualquer tela e indexável.
-  É o que a versão das 03:20 fazia antes de trocarem pelo recorte.
-
-**Depende de decisão do Roberto.**
-
 ### Tabela de preços real
 Os 7 produtos em `dados.js` são exemplo. O site não pode sair de MVP sem os
 números confirmados pelo Bruno. **Depende do cliente.**
@@ -66,9 +52,15 @@ converte venda:
 ## P2 — depois
 
 ### Peso das imagens
-`imagens.js` tem 1,1 MB em base64 e desce inteiro em toda visita, inclusive
-foto de produto que o cliente nunca vai rolar até ver. A migração para Next
-resolve de graça com `next/image`; se a migração demorar, vale atacar antes.
+`imagens.js` tem 768 KB em base64 e desce inteiro em toda visita, inclusive
+foto de produto que o cliente nunca vai rolar até ver. Já caiu 333 KB com a
+troca da arte de capa (06/08), mas o problema de fundo continua: base64 não
+tem lazy-load nem tamanho por tela. A migração para Next resolve de graça com
+`next/image`; se a migração demorar, vale atacar antes.
+
+Os 3 banners restantes (`banner@2x` 207 KB, `banner-comprar@2x` 95 KB,
+`banner-pedido@2x` 82 KB) somam 384 KB e **só aparecem no desktop** — o
+celular baixa os três à toa.
 
 ### Links do Google Business
 `UNIDADES[].maps` hoje cai em busca por endereço. Com o link do perfil, o

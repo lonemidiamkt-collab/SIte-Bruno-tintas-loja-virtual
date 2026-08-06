@@ -8,6 +8,42 @@
 
 ---
 
+## 06/08/2026 — Topo do celular reconstruído (arte remontada resolvida)
+
+**O que:** o título do topo no celular deixou de ser imagem e virou texto de
+verdade. Só a foto continua como imagem.
+
+**Por quê:** a arte `capa-mobile@2x` era um remonte — pedaços recortados do
+banner horizontal, empilhados. As emendas estavam dentro do arquivo, então
+nenhum ajuste de CSS resolveria (ver entrada anterior).
+
+**Como foi feito:**
+- Extraída do arquivo antigo apenas a faixa da foto (y 1444–2592), cortando
+  125px da esquerda para eliminar o fragmento do "OBRA." que tinha sobrado
+- Redimensionada para 1080×609 e recodificada em WebP q84
+- Entra como chave nova `capa-foto-mobile@2x`; a `capa-mobile@2x` saiu
+- Título, selo e subtítulo agora são HTML, usando a fonte display do site
+- `.capa--mob` ganhou o gradiente que o hero antigo usava; `.capa__ctas` ficou
+  transparente no celular para não pintar por cima do gradiente
+
+**Ganho de peso:** `imagens.js` caiu de **1101 KB para 768 KB** — a arte
+pesava 319 KB e a foto limpa pesa 69 KB. São 333 KB a menos antes da primeira
+tela, na conexão de quem chega de anúncio no celular.
+
+**Ganho junto:** o título virou texto indexável e selecionável, nítido em
+qualquer densidade de tela, e o logo parou de aparecer duas vezes (a navbar
+já mostra ele logo acima).
+
+**Verificado:** celular e desktop; desktop não mudou (continua com o
+`banner@2x` inteiro, que é composição única e está impecável). Checklist da
+SPEC-001 passou: 7 produtos, 3 setores, 4 marcas, 2 lojas, carrinho soma
+R$ 279,90, PIX cai para R$ 265,91, WhatsApp abre na unidade certa, nenhuma
+imagem quebrada, console limpo.
+
+Sem spec, conforme CLAUDE.md: correção visual que não muda fluxo.
+
+---
+
 ## 06/08/2026 — Card de destaque solto no celular (corrigido)
 
 **Sintoma:** no celular o card do "Destaque da semana" parecia solto na

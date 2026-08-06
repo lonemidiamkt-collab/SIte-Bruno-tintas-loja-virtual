@@ -171,12 +171,29 @@ a{color:inherit;text-decoration:none}
 .secao__cabeca p{color:var(--texto-fraco);max-width:56ch;font-size:.92rem;line-height:1.5;text-wrap:pretty}
 .secao--azul .secao__cabeca p{color:#CFE0FB}
 
-/* ---------- banner de capa ---------- */
+/* ---------- banner de capa ----------
+   No desktop entra a arte inteira (banner@2x), que é composição única.
+   No celular o título é TEXTO, não imagem: a arte vertical que existia aqui
+   tinha sido remontada recortando pedaços do banner horizontal, e as emendas
+   apareciam na tela. Só a foto vem como imagem. */
 .capa{background:var(--azul-noite)}
-.capa--mob{display:block}
+.capa--mob{display:block;background:
+  radial-gradient(900px 440px at 80% 6%,rgba(46,123,246,.4),transparent 62%),
+  linear-gradient(160deg,var(--azul-noite) 0%,var(--azul-profundo) 62%,var(--azul-noite) 100%)}
 .capa--desk{display:none}
 .capa img,.capa__img{width:100%;height:auto;display:block}
+
+.capa__texto{padding-top:var(--e6);padding-bottom:var(--e4);color:var(--branco)}
+.capa__selo{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.24);padding:7px 14px;border-radius:999px;
+  font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:var(--e4)}
+.capa__texto h1{font-size:clamp(1.9rem,8.4vw,3.2rem);line-height:.98;margin-bottom:var(--e3);text-wrap:balance}
+.capa__texto h1 em{font-style:normal;color:var(--azul-sol);display:block}
+.capa__sub{font-size:.98rem;line-height:1.5;color:#CFE0FB;max-width:42ch;margin-bottom:var(--e4)}
 .capa__ctas{background:var(--azul-noite);padding:0 var(--e4) var(--e6)}
+/* no celular o fundo é o gradiente da seção, então os CTAs não podem
+   pintar por cima com cor chapada — senão aparece emenda embaixo da foto */
+.capa--mob .capa__ctas{background:transparent}
 .capa__ctas .wrap{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-top:var(--e4)}
 .capa__ctas .btn{padding:14px 10px;font-size:.86rem;white-space:nowrap}
 @media (min-width:560px){

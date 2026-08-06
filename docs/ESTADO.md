@@ -26,7 +26,7 @@
 | Corte de entrega no mesmo dia | ⛔ desligado | `corteEntregaHoje: null` — falta o Bruno confirmar o horário |
 | PWA / instalar no celular | ⛔ removido | decisão consciente, ver ADR-002 |
 | Indexação no Google | ⛔ bloqueada | `noindex` proposital enquanto for URL de teste |
-| Topo do site no celular | 🐞 com defeito | arte remontada, emendas visíveis. Não é CSS — ver BACKLOG P0 |
+| Topo do site no celular | ✅ funcionando | título em texto + foto limpa; a arte remontada saiu |
 
 ## Pendente de terceiro
 
@@ -42,7 +42,7 @@ Coisas que não dependem de código, e sim de informação que a loja precisa ma
 
 - 7 produtos, 5 setores, 9 marcas, 2 unidades
 - 4 formas de pagamento, 3 destinos de entrega
-- 18 imagens, todas em base64 dentro de `imagens.js` (1,1 MB)
+- 18 imagens, todas em base64 dentro de `imagens.js` (768 KB)
 
 ## Riscos conhecidos
 
