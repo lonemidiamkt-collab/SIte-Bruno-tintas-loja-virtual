@@ -8,6 +8,28 @@
 
 ---
 
+## 06/08/2026 — Deploy contínuo confirmado funcionando
+
+**O que:** verificado que a Vercel já estava ligada ao repositório. Os dois
+commits de hoje viraram deploy automático, sem intervenção.
+
+**Produção conferida** em https://s-ite-bruno-tintas-loja-virtual.vercel.app —
+servindo a versão nova (os três `<script src>` no lugar do bundle único), todos
+os assets em 200, headers do `vercel.json` aplicados (incluindo o `noindex`),
+7 produtos e 2 lojas renderizando, nenhuma imagem quebrada. Setores e marcas
+sem produto corretamente escondidos, conforme SPEC-001.
+
+**Achado:** existem **dois** projetos Vercel ligados no mesmo repositório —
+`s-ite-bruno-tintas-loja-virtual` (o bom) e `s-ite-bruno-tintas-loja-virtual-b1hj`
+(duplicado, cuja URL limpa dá 404). Todo push builda nos dois. Foi para o
+backlog como P1: risco de build dobrado e de alguém divulgar a URL errada.
+
+**Fecha o ciclo:** a cadeia commit → push → deploy → site no ar está inteira e
+verificada. O problema original — "o site no ar não é o que a gente fez" —
+está resolvido.
+
+---
+
 ## 06/08/2026 — Push destravado
 
 **O que:** o token do GitHub foi recriado com `Contents: Read and write` e o

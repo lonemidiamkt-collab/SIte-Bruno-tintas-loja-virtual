@@ -54,17 +54,21 @@ Coisas que não dependem de código, e sim de informação que a loja precisa ma
 
 ## Bloqueio ativo
 
-Nenhum. O push para o GitHub foi destravado em 06/08/2026 — ver PROGRESSO.
+Nenhum.
 
-## Fluxo de deploy
+## Fluxo de deploy — funcionando ponta a ponta
 
 ```
-git add -A  →  git commit  →  git push  →  Vercel publica
+git add -A  →  git commit  →  git push  →  Vercel publica sozinha
 ```
+
+**URL de produção:** https://s-ite-bruno-tintas-loja-virtual.vercel.app
+Verificada em 06/08/2026 servindo a versão atual, com os headers do
+`vercel.json` aplicados.
 
 A credencial do GitHub está salva no keychain do macOS, então o push não pede
 senha. **Push publica na loja ao vivo** — por isso o `CLAUDE.md` manda commitar
 automático mas nunca dar push sozinho.
 
-Falta ainda conectar o repositório ao projeto na Vercel para o deploy sair
-automático a cada push. Ver BACKLOG, P0.
+⚠️ Existe um **segundo projeto Vercel duplicado** (`...-b1hj`) ligado no mesmo
+repositório, que builda junto a cada push. Ver BACKLOG, P1.

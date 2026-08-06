@@ -10,15 +10,6 @@ Prioridades: **P0** trava o projeto · **P1** próximo ciclo · **P2** depois ·
 
 ## P0 — travando
 
-### Conectar o repositório ao projeto na Vercel
-O push já funciona, mas o deploy ainda não sai sozinho. Em
-**vercel.com → Add New → Project → Import** o repositório, framework *Other*,
-root `./`, sem build command. Se o projeto já existir, **Settings → Git** e
-conectar. **Depende do Roberto.**
-
-Atenção: no primeiro deploy o site publicado troca da versão antiga para a
-nova. É o esperado, mas vale conferir antes de mostrar pro Bruno.
-
 ### Tabela de preços real
 Os 7 produtos em `dados.js` são exemplo. O site não pode sair de MVP sem os
 números confirmados pelo Bruno. **Depende do cliente.**
@@ -31,6 +22,17 @@ números confirmados pelo Bruno. **Depende do cliente.**
 Catálogo sai do arquivo e vai para o banco, com painel para o Bruno editar
 preço sem depender de ninguém. → [SPEC-002](specs/SPEC-002-migracao-next-supabase.md)
 · estado: **Proposta**, aguardando aprovação.
+
+### Apagar o projeto Vercel duplicado
+Existem **dois** projetos Vercel ligados neste mesmo repositório, e todo push
+dispara build nos dois:
+
+- `s-ite-bruno-tintas-loja-virtual` ← **este é o bom**, serve a versão atual
+- `s-ite-bruno-tintas-loja-virtual-b1hj` ← duplicado, a URL limpa dele dá 404
+
+Riscos de deixar como está: build dobrado a cada push, e alguém compartilhar a
+URL do projeto errado. Antes de apagar, confirme que o domínio real não está
+apontado para o `-b1hj`. **Depende do Roberto.**
 
 ### Apontar o domínio brunodastintas.com.br
 Ao apontar, **remover o `X-Robots-Tag: noindex`** do `vercel.json`, senão o
