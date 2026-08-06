@@ -1,0 +1,23 @@
+{
+  "name": "Bruno das Tintas — Araruama e Iguaba",
+  "short_name": "Bruno das Tintas",
+  "description": "Tintas, ferramentas e acessórios para pintura. Monte seu pedido pelo site e retire em 15 minutos ou receba em casa.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#062B78",
+  "background_color": "#062B78",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "categories": ["shopping", "business"],
+  "icons": [
+    { "src": "icone-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icone-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icone-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Ver catálogo", "url": "./#catalogo" },
+    { "name": "Nossas lojas", "url": "./#lojas" }
+  ]
+}
