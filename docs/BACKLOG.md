@@ -10,6 +10,21 @@ Prioridades: **P0** trava o projeto · **P1** próximo ciclo · **P2** depois ·
 
 ## P0 — travando
 
+### Fixar a versão certa em produção
+A Vercel está reprocessando a fila de deploys atrasados **fora de ordem**, e a
+produção anda para trás: chegou a servir o commit mais novo e depois voltou
+dois atrás. Enquanto a fila drena, o site oscila entre versões.
+
+Correção: em **Deployments**, achar o deploy do commit mais recente e clicar em
+**Promote to Production**. Isso fixa e para a oscilação.
+
+Como saber qual está no ar sem abrir o painel — o tamanho do `dados.js`
+identifica o commit:
+
+```bash
+curl -s https://s-ite-bruno-tintas-loja-virtual.vercel.app/dados.js | wc -c
+```
+
 ### Webhook da Vercel parou de disparar
 Vários commits estão no GitHub sem build correspondente, a partir do `7a851ac`
 (as 26 fotos). Enquanto não destravar, **nada que for commitado chega ao
@@ -71,6 +86,20 @@ cliente indo à loja atrás de um produto que não existe.
 ---
 
 ## P1 — próximo ciclo
+
+### Abrir detalhes do produto num box
+Ideia do Roberto (17/08): clicar no produto abre uma caixinha com informações
+dele. Hoje o card mostra nome, preço e o aviso de cor, e nada mais — não tem
+rendimento, número de demãos, tempo de secagem, onde aplicar, nem a foto
+grande.
+
+É mudança de comportamento, então **precisa de spec** antes do código. Antes de
+escrever, decidir de onde vem o conteúdo: rendimento e secagem existem na ficha
+técnica de cada fabricante, mas alguém precisa cadastrar produto a produto — são
+26. Sem esse texto, o box abre vazio e fica pior que não ter.
+
+Se a SPEC-003 (escolha de cores) for aprovada, as duas se encontram: o box é o
+lugar natural para escolher a cor.
 
 ### Migração para Next.js + Supabase
 Catálogo sai do arquivo e vai para o banco, com painel para o Bruno editar

@@ -8,6 +8,36 @@
 
 ---
 
+## 17/08/2026 — Produção oscilando entre versões; card blindado contra foto quebrada
+
+**Sintoma reportado:** "deu erro no sistema" — os cards apareceram como
+retângulos azuis com o nome do produto escrito por cima, que é o texto
+alternativo de imagem quebrada.
+
+**Causa:** a produção está **andando para trás**. Minutos depois de eu
+confirmar o `cb39fe1` no ar, o `dados.js` servido voltou a ser o do `2cd5358`
+(identificado pelo tamanho exato do arquivo, 10684b). A Vercel está
+reprocessando a fila de webhooks atrasados fora de ordem, e cada deploy antigo
+vira produção por sua vez.
+
+Enquanto isso acontece existe uma janela em que o navegador tem o `dados.js`
+novo em cache, apontando para `fotos/`, e o deploy servido é anterior à pasta
+existir. Resultado: 404 em todas as fotos.
+
+**Correção aplicada — não conserta a Vercel, conserta o que o cliente vê.**
+Toda foto agora leva `data-inicial`, e um listener de `error` em fase de
+captura troca a imagem falha pelo selo com a inicial da marca. O evento
+`error` não borbulha, por isso captura e não bubbling.
+
+Antes: retângulo azul com o nome do produto escrito por cima — lê-se como site
+quebrado. Depois: o mesmo selo elegante que já existia para produto sem foto.
+Vale para qualquer motivo de falha, inclusive rede ruim do cliente.
+
+**Ainda depende do Roberto:** promover na Vercel o deploy do commit mais novo,
+senão a produção continua oscilando conforme a fila drena.
+
+---
+
 ## 17/08/2026 — Aviso de cor corrigido; escolha de cores virou SPEC-003
 
 **Bug que estava no ar:** os 26 produtos exibiam "Cor feita na hora, na máquina

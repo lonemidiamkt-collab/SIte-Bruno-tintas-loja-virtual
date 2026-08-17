@@ -21,11 +21,22 @@ const img = nome => !nome ? undefined : (MAPA_IMG[nome] || `fotos/${nome}.webp`)
 /* Produto sem foto cadastrada: devolve um selo com a inicial da marca em vez
    de <img src="undefined">, que renderiza como imagem quebrada. Some sozinho
    quando a foto entrar no MAPA_IMG. */
-const semFoto = p => `<span class="sem-foto" aria-hidden="true">${
-  esc((p.marca && p.marca !== '—' ? p.marca : p.nome).trim().charAt(0).toUpperCase())}</span>`;
+const semFoto = p => `<span class="sem-foto" aria-hidden="true">${esc(inicialDe(p))}</span>`;
+const inicialDe = p => (p.marca && p.marca !== '—' ? p.marca : p.nome).trim().charAt(0).toUpperCase();
 const fotoOu = (p, alt, extra = '') => img(p.foto)
-  ? `<img src="${img(p.foto)}" width="400" height="400" alt="${esc(alt)}" ${extra}>`
+  ? `<img src="${img(p.foto)}" width="400" height="400" alt="${esc(alt)}"
+      data-inicial="${esc(inicialDe(p))}" ${extra}>`
   : semFoto(p);
+
+/* Se a foto falhar em carregar — arquivo faltando, deploy pela metade, rede
+   ruim — o card mostra o selo da marca em vez de deixar o texto alternativo
+   escrito por cima do azul, que é o que o cliente lê como "site quebrado".
+   O evento error não borbulha, por isso o listener é na fase de captura. */
+document.addEventListener('error', e => {
+  const el = e.target;
+  if (!el || el.tagName !== 'IMG' || !el.dataset.inicial) return;
+  el.outerHTML = `<span class="sem-foto" aria-hidden="true">${esc(el.dataset.inicial)}</span>`;
+}, true);
 const imgMarca = nome => MAPA_IMG['marcas/' + nome];
 const unidade = id => UNIDADES.find(u => u.id === id) || UNIDADES[0];
 const linkWhatsUnidade = (id, txt) =>
