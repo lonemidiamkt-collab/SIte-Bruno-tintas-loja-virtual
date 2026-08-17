@@ -8,6 +8,43 @@
 
 ---
 
+## 17/08/2026 — Catálogo de exemplo removido (branch `catalogo-novo`)
+
+**O que:** os 7 produtos de exemplo saíram do `dados.js`, junto com as 7 fotos
+correspondentes no `imagens.js` e os ids do `UPSELL` que apontavam para eles.
+
+**Por quê:** a pedido do Roberto, para entrar o catálogo real (Coral, Lukscolor,
+Qualyvinil, Maza). Os preços que estavam no ar eram de exemplo — ver
+Constituição, princípio 4.
+
+**Em branch, não na main.** Com `PRODUTOS` vazio o site não mostra setor,
+marca, catálogo nem destaque — comportamento correto pela SPEC-001, mas
+significa loja vazia no ar. A `main` fica em `15dc6d3`, publicável, até o
+catálogo real entrar.
+
+**Correção que veio junto, e era obrigatória:** o card "Destaque da semana"
+estava **escrito à mão no index.html** — marca, nome, preço, preço no PIX e o
+`data-add="1"`. Com os produtos removidos ele viraria um produto fantasma com
+botão morto. Agora é montado por `renderDestaque()` a partir do primeiro
+produto com `oferta:true`, e a seção inteira some quando não há nenhum.
+
+Isso também mata um bug silencioso que já existia: mudar o preço no `dados.js`
+**não** mudava o preço mostrado nesse card.
+
+**Peso:** `imagens.js` de 768 KB para **661 KB**.
+
+**Verificado** (headless, invariantes do estado vazio): PRODUTOS vazio, nenhum
+setor/marca aparecendo, destaque escondido, UPSELL sem id órfão, e o que não
+podia sumir continua — 2 unidades, 4 formas de pagamento, 3 destinos, 5
+setores e 9 marcas prontos para receber produto, desconto de 5% intacto,
+nenhuma foto órfã no `imagens.js`. Sintaxe dos três arquivos validada.
+
+Não deu para conferir no navegador: o pane passou a bloquear localhost.
+
+**Aberto:** falta o catálogo real. Ver BACKLOG, P0.
+
+---
+
 ## 06/08/2026 — Topo do celular reconstruído (arte remontada resolvida)
 
 **O que:** o título do topo no celular deixou de ser imagem e virou texto de

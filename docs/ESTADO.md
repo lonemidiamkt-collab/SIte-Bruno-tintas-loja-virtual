@@ -3,7 +3,10 @@
 > Retrato do agora. Este arquivo é **sobrescrito** a cada commit — não é
 > histórico. O histórico está em [PROGRESSO.md](PROGRESSO.md).
 
-**Atualizado em:** 06/08/2026
+**Atualizado em:** 17/08/2026
+**Branch ativa:** `catalogo-novo` — catálogo vazio, aguardando os produtos
+reais. A `main` (`15dc6d3`) é o que está publicado e continua com o catálogo
+de exemplo.
 **Versão no site:** v6 · MVP para aprovação interna
 **Stack:** HTML + CSS + JS puro, sem build
 **Deploy:** Vercel, branch `main`

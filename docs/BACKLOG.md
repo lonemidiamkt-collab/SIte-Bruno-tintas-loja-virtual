@@ -10,6 +10,16 @@ Prioridades: **P0** trava o projeto · **P1** próximo ciclo · **P2** depois ·
 
 ## P0 — travando
 
+### Cadastrar o catálogo real
+Branch `catalogo-novo` está com `PRODUTOS` vazio, esperando. Para cada
+produto é preciso: **nome, preço, setor, marca** e a **foto em arquivo**
+(não serve imagem colada no chat — precisa estar em disco para virar base64).
+
+Marcas que as fotos já indicam e ainda **não estão** em `MARCAS`:
+**Lukscolor** e **Maza**. Coral e Qualyvinil já estão.
+
+Enquanto isso, `UPSELL` está zerado e precisa ser refeito com os ids novos.
+
 ### Tabela de preços real
 Os 7 produtos em `dados.js` são exemplo. O site não pode sair de MVP sem os
 números confirmados pelo Bruno. **Depende do cliente.**

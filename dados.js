@@ -62,11 +62,14 @@ const DESTINOS = [
 
 /* Sugestão de itens ao adicionar produto de cada setor (aumenta o ticket).
    Vale o id do produto. Item já no carrinho não é sugerido de novo. */
+/* Zerado junto com PRODUTOS em 17/08/2026: apontava para os ids de exemplo.
+   Refazer quando o catálogo real entrar — vale o id do produto acessório
+   que deve ser sugerido ao adicionar algo daquele setor. */
 const UPSELL = {
-  interna:    [5, 7, 6],
-  externa:    [5, 7, 6],
-  madeira:    [5, 7],
-  imper:      [7, 5],
+  interna:    [],
+  externa:    [],
+  madeira:    [],
+  imper:      [],
   acessorios: []
 };
 
@@ -104,35 +107,16 @@ const MARCAS = [
 ];
 
 /* Produtos.
-   foto  = arquivo em assets/img (sem extensão)
-   tinta = mostra o aviso de tingimento na hora
-   Preços de exemplo até o cliente mandar a tabela. */
+   foto   = chave em MAPA_IMG (imagens.js)
+   tinta  = mostra o aviso de tingimento na hora
+   oferta = o primeiro com oferta:true vira o "Destaque da semana"
+
+   VAZIO DE PROPÓSITO (17/08/2026): os 7 produtos de exemplo foram retirados
+   a pedido do Roberto para entrar o catálogo real. Enquanto esta lista
+   estiver vazia o site não mostra setor, marca, catálogo nem destaque —
+   é o comportamento correto (SPEC-001), não um bug.
+
+   Para cadastrar: id único, set = id de SETORES, marca = nome exato em
+   MARCAS, foto = chave em MAPA_IMG. */
 const PRODUTOS = [
-  { id: 1, set: 'interna', marca: 'Coral',
-    nome: 'Rende Muito Acrílico Fosco 20L', preco: 279.90,
-    foto: 'coral-rende-20l', tinta: true, oferta: true },
-
-  { id: 2, set: 'interna', marca: 'Coral',
-    nome: 'Rende Muito Acrílico Fosco 16L', preco: 229.90,
-    foto: 'coral-rende-16l', tinta: true, oferta: false },
-
-  { id: 3, set: 'interna', marca: 'Sherwin Williams',
-    nome: 'Novacor Paredes Pro Fosco', preco: 199.90,
-    foto: 'sherwin-novacor', tinta: true, oferta: false },
-
-  { id: 4, set: 'externa', marca: 'Textura Rio',
-    nome: 'Textura Acrílica 5kg', preco: 59.90,
-    foto: 'textura-rio-lata', tinta: true, oferta: false },
-
-  { id: 5, set: 'acessorios', marca: 'Atlas',
-    nome: 'Kit Completo de Pintura 7 peças', preco: 69.90,
-    foto: 'kit-atlas-7', tinta: false, oferta: true },
-
-  { id: 6, set: 'acessorios', marca: 'Atlas',
-    nome: 'Kit Prático de Pintura 3 peças', preco: 39.90,
-    foto: 'kit-atlas-3', tinta: false, oferta: false },
-
-  { id: 7, set: 'acessorios', marca: '—',
-    nome: 'Lona Plástica Preta', preco: 29.90,
-    foto: 'lona-preta', tinta: false, oferta: false }
 ];

@@ -150,6 +150,34 @@ function renderGrade() {
     : '<p style="color:var(--texto-fraco);grid-column:1/-1">Nada encontrado aqui. Chame no WhatsApp que a gente procura pra você.</p>';
 }
 
+/* ---------------- destaque da semana ----------------
+   Mostra o primeiro produto com oferta:true. Sem nenhum produto em oferta
+   a seção inteira some, em vez de deixar um card vazio ou desatualizado. */
+function renderDestaque() {
+  const sec = $('#destaque'), alvo = $('#destaqueCard');
+  if (!sec || !alvo) return;
+  const p = PRODUTOS.find(x => x.oferta);
+  if (!p) { sec.hidden = true; alvo.innerHTML = ''; return; }
+  sec.hidden = false;
+  const foto = img(p.foto);
+  alvo.innerHTML = `
+    <div class="hero__card">
+      <div class="hero__card-topo"><span>Destaque da semana</span><b>${esc(p.nome)}</b></div>
+      <div class="hero__card-corpo">
+        <div class="hero__card-item">
+          <div class="hero__card-foto">${foto
+            ? `<img src="${foto}" width="400" height="400" alt="${esc(p.nome)}">` : ''}</div>
+          <div class="hero__card-info">
+            ${p.marca && p.marca !== '—' ? `<p class="hero__card-marca">${esc(p.marca)}</p>` : ''}
+            <p class="hero__card-preco">${brl(p.preco)}</p>
+            <p class="hero__card-avista">${brl(comDesconto(p.preco))} no PIX ou dinheiro</p>
+          </div>
+        </div>
+        <button class="btn btn--azul btn--bloco" data-add="${p.id}">Adicionar ao pedido</button>
+      </div>
+    </div>`;
+}
+
 /* ---------------- carrinho ---------------- */
 
 function adicionar(id) {
@@ -721,6 +749,7 @@ renderMarcas();
 renderLojas();
 renderFiltros();
 renderGrade();
+renderDestaque();
 renderCarrinho();
 ligarTrilhos();
 
