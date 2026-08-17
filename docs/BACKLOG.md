@@ -11,9 +11,10 @@ Prioridades: **P0** trava o projeto · **P1** próximo ciclo · **P2** depois ·
 ## P0 — travando
 
 ### Webhook da Vercel parou de disparar
-Dois commits estão no GitHub sem build correspondente: `7a851ac` (as 26 fotos)
-e `b4521fa`. Enquanto não destravar, **nada mais que for commitado chega ao
-site** — o deploy contínuo está morto.
+Vários commits estão no GitHub sem build correspondente, a partir do `7a851ac`
+(as 26 fotos). Enquanto não destravar, **nada que for commitado chega ao
+site** — o deploy contínuo está morto. O último deploy que saiu foi o
+`fe61fcb`, com o catálogo mas sem as fotos.
 
 Como conferir se voltou, sem abrir a Vercel:
 
@@ -28,10 +29,9 @@ repositório; se não resolver, checar a permissão do GitHub App da Vercel no
 repo; e conferir se o projeto duplicado `-b1hj` está atrapalhando.
 **Depende do Roberto** — não há CLI da Vercel nem token nesta máquina.
 
-### Confirmar 6 pontos do catálogo novo
-Os 26 produtos estão cadastrados na branch `catalogo-novo` com os preços do
-cupom (soma confere no centavo). Falta confirmar, e cada um destes muda o que
-o cliente vê:
+### Confirmar 5 pontos do catálogo novo
+Os 26 produtos estão na `main`, com os preços do cupom (soma confere no
+centavo). Falta confirmar, e cada um destes muda o que o cliente vê:
 
 1. **Os preços são de venda?** O cupom parece orçamento, mas se for nota de
    compra, a loja estaria vendendo a preço de custo. É o risco mais caro
@@ -45,8 +45,8 @@ o cliente vê:
    parece dizer 10%. O site está mostrando 5%.
 5. **Parcelamento é sem juros?** O cupom parece dizer "12x sem juros". Hoje o
    site não afirma nada (`semJuros: null`). Confirmando, dá para afirmar.
-6. ~~Qual produto é o Destaque da semana~~ — resolvido: virou rodízio semanal automático.
-   "Oferta" sem desconto real seria promessa falsa. A seção está escondida.
+6. ~~Qual produto é o Destaque da semana?~~ **Resolvido** — virou rodízio
+   semanal automático entre os setores, não precisa escolher.
 
 ### Produtos mandados sem preço
 - **Qualyvinil Colorit Eco** (esmalte base água, 900ml) — não está no cupom
@@ -90,16 +90,14 @@ converte venda:
 
 ## P2 — depois
 
-### Peso das imagens
-`imagens.js` tem 768 KB em base64 e desce inteiro em toda visita, inclusive
-foto de produto que o cliente nunca vai rolar até ver. Já caiu 333 KB com a
-troca da arte de capa (06/08), mas o problema de fundo continua: base64 não
-tem lazy-load nem tamanho por tela. A migração para Next resolve de graça com
-`next/image`; se a migração demorar, vale atacar antes.
+### Peso dos banners
+As fotos de produto já saíram do base64 e viraram arquivo com lazy-load
+(17/08), então o problema agora é só o `imagens.js`, com 661 KB.
 
-Os 3 banners restantes (`banner@2x` 207 KB, `banner-comprar@2x` 95 KB,
-`banner-pedido@2x` 82 KB) somam 384 KB e **só aparecem no desktop** — o
-celular baixa os três à toa.
+O grosso são 3 banners — `banner@2x` 207 KB, `banner-comprar@2x` 95 KB,
+`banner-pedido@2x` 82 KB — que somam 384 KB e **só aparecem no desktop**. O
+celular baixa os três à toa. Mesmo tratamento das fotos resolve: virar
+arquivo e carregar sob demanda.
 
 ### Links do Google Business
 `UNIDADES[].maps` hoje cai em busca por endereço. Com o link do perfil, o
