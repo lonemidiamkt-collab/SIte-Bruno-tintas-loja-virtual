@@ -118,8 +118,13 @@ const MARCAS = [
    CATÁLOGO REAL — 26 itens, preços do cupom de 17/08/2026.
    A soma dos 26 confere com o total impresso no cupom (R$ 6.054,70).
 
-   Todos os preços são da BASE BRANCA. Nenhum produto tem foto cadastrada
-   ainda, então o card mostra a inicial da marca no lugar. */
+   Todos os preços são da BASE BRANCA.
+
+   O "Destaque da semana" é automático: rodízio semanal que alterna os
+   setores (ver produtoDestaque() no app.js). Não precisa marcar nada.
+   Para fixar um produto à mão, ponha destaque:true nele — isso ganha do
+   rodízio. Não confunda com oferta:true, que mostra o selo "Oferta" ao
+   cliente e só vale com desconto de verdade. */
 const PRODUTOS = [
   /* ---- área interna: linha Decora (premium) + econômica de interior ---- */
   { id: 1,  set: 'interna', marca: 'Coral',

@@ -166,12 +166,37 @@ function renderGrade() {
 }
 
 /* ---------------- destaque da semana ----------------
-   Mostra o primeiro produto com oferta:true. Sem nenhum produto em oferta
-   a seção inteira some, em vez de deixar um card vazio ou desatualizado. */
+   Rodízio automático, misturando os setores: a cada semana entra um produto
+   de um setor diferente, e a cada volta completa avança para o próximo item
+   daquele setor. Com 4 setores no ar, leva meses até repetir.
+
+   É determinístico de propósito, calculado a partir da semana do calendário —
+   não é sorteio a cada carregamento. Se sorteasse, o cliente veria um produto
+   diferente a cada refresh, e a seção se chama "da semana".
+
+   Para fixar um produto à mão, basta pôr destaque:true nele no dados.js;
+   isso ganha do rodízio. Note que NÃO é o mesmo que oferta:true — oferta
+   mostra o selo "Oferta" ao cliente e só deve ser usado com desconto real. */
+const semanaAtual = () => {
+  // ancorado em São Paulo para todo cliente ver o mesmo destaque na mesma semana
+  const hoje = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Sao_Paulo' });
+  return Math.floor(Date.parse(hoje + 'T00:00:00Z') / 86400000 / 7);
+};
+
+function produtoDestaque() {
+  const fixo = PRODUTOS.find(p => p.destaque);
+  if (fixo) return fixo;
+  const setores = SETORES.filter(s => temProduto(s.id));
+  if (!setores.length) return null;
+  const w = semanaAtual();
+  const doSetor = PRODUTOS.filter(p => p.set === setores[w % setores.length].id);
+  return doSetor[Math.floor(w / setores.length) % doSetor.length];
+}
+
 function renderDestaque() {
   const sec = $('#destaque'), alvo = $('#destaqueCard');
   if (!sec || !alvo) return;
-  const p = PRODUTOS.find(x => x.oferta);
+  const p = produtoDestaque();
   if (!p) { sec.hidden = true; alvo.innerHTML = ''; return; }
   sec.hidden = false;
   const foto = img(p.foto);

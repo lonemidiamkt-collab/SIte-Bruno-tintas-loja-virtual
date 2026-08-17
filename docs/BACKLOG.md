@@ -45,7 +45,7 @@ o cliente vê:
    parece dizer 10%. O site está mostrando 5%.
 5. **Parcelamento é sem juros?** O cupom parece dizer "12x sem juros". Hoje o
    site não afirma nada (`semJuros: null`). Confirmando, dá para afirmar.
-6. **Qual produto é o Destaque da semana?** Nenhum foi marcado — o selo
+6. ~~Qual produto é o Destaque da semana~~ — resolvido: virou rodízio semanal automático.
    "Oferta" sem desconto real seria promessa falsa. A seção está escondida.
 
 ### Produtos mandados sem preço

@@ -8,6 +8,33 @@
 
 ---
 
+## 17/08/2026 — Destaque da semana virou rodízio automático
+
+**O que:** a seção "Destaque da semana" deixou de depender de alguém escolher
+um produto. Agora `produtoDestaque()` faz rodízio semanal alternando os
+setores — a pedido do Roberto, "sorteios mistos".
+
+**Determinístico, não sorteado.** A escolha vem do número da semana do
+calendário, ancorado em São Paulo. Sorteio de verdade daria um produto
+diferente a cada carregamento: o cliente atualizaria a página e veria outra
+coisa, o que quebra a promessa da palavra "semana" e faz o site parecer
+defeituoso.
+
+**Como mistura:** a cada semana entra um setor diferente; a cada volta
+completa pelos setores, avança para o próximo produto daquele setor.
+Simulado: nunca repete o setor em semanas seguidas, e leva **31 semanas**
+para percorrer os 26 produtos antes de repetir qualquer um.
+
+**Override manual:** `destaque: true` em qualquer produto ganha do rodízio.
+Deliberadamente separado de `oferta: true` — oferta mostra o selo "Oferta" ao
+cliente e só deve ser usado quando existir desconto real. Misturar os dois
+faria o rodízio anunciar promoção inexistente toda semana.
+
+**Efeito colateral bom:** a seção parou de ficar escondida. Ela era o primeiro
+bloco depois da capa e estava deixando um buraco na página.
+
+---
+
 ## 17/08/2026 — BLOQUEIO: webhook da Vercel parou de disparar
 
 **Sintoma:** dois commits chegaram ao GitHub e **nenhuma build foi criada** —
