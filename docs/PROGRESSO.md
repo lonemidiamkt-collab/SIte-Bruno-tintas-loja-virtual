@@ -8,6 +8,25 @@
 
 ---
 
+## 17/08/2026 — Preços confirmados como de venda; catálogo real publicado
+
+**O que:** o Roberto confirmou que os preços do cupom são **de venda** — a nota
+foi puxada só para trazer os produtos. Com isso a branch `catalogo-novo` foi
+para a `main` e publicada.
+
+**Aviso do topo corrigido junto.** A faixa dizia *"produtos e preços são de
+teste. Nada aqui foi confirmado com a loja"* — o que virou mentira no instante
+em que os preços reais entraram, e é a primeira linha que o cliente lê. Agora
+diz que os preços vêm do sistema da loja em 17/08/2026 e que as fotos ainda
+estão entrando. Continua marcada como versão para aprovação, porque o Bruno
+ainda não validou.
+
+**Segue em aberto** (BACKLOG P0): fotos dos produtos, escolha do Destaque da
+semana, e as dúvidas de desconto 5% × 10%, parcelamento sem juros, tingimento
+incluso e o volume da Coral Rende Muito.
+
+---
+
 ## 17/08/2026 — Catálogo real cadastrado: 26 produtos
 
 **O que:** entraram os 26 produtos do cupom de 17/08/2026, com os preços reais.
