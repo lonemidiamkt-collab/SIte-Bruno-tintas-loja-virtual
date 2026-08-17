@@ -36,17 +36,32 @@ centavo). Falta confirmar, e cada um destes muda o que o cliente vê:
 1. **Os preços são de venda?** O cupom parece orçamento, mas se for nota de
    compra, a loja estaria vendendo a preço de custo. É o risco mais caro
    desta lista.
-2. **O preço vale para a base branca sem tingimento?** Todos os itens do cupom
-   são "BRANCO". Se tingir custa à parte, o preço no site engana quem quer cor.
-3. **Coral Rende Muito: 3,6L ou 3,2L?** A lata nova diz "NOVO VOLUME: DE 3,6L
-   PARA 3,2L" e "3,2L rende = branco 3,6L". O cupom ainda diz 3,6LTS. Está
-   cadastrado como 3,6L, seguindo o cupom.
+2. ~~O preço vale para a base branca sem tingimento?~~ **Respondido** — vale.
+   Linha Decora é tingida na máquina e a cor é orçamento à parte; Coral Rende
+   Muito e Qualy Econômica têm cores prontas. Já está no aviso de cada card.
+3. ~~Coral Rende Muito: 3,6L ou 3,2L?~~ **Respondido** — são os dois: branco
+   18L / galão 3,6L, cores 16L / galão 3,2L. Os itens cadastrados são o branco.
+   **Falta o preço da versão colorida** → SPEC-003.
 4. **Desconto: 5% ou 10%?** O `dados.js` diz 5% no PIX; o cabeçalho do cupom
    parece dizer 10%. O site está mostrando 5%.
 5. **Parcelamento é sem juros?** O cupom parece dizer "12x sem juros". Hoje o
    site não afirma nada (`semJuros: null`). Confirmando, dá para afirmar.
 6. ~~Qual produto é o Destaque da semana?~~ **Resolvido** — virou rodízio
    semanal automático entre os setores, não precisa escolher.
+
+### Preço da Coral Rende Muito colorida
+Bloqueia a [SPEC-003](specs/SPEC-003-escolha-de-cores.md). Falta o preço da
+lata **16L** e do galão **3,2L** — a versão colorida, que tem menos volume que
+o branco e portanto não pode custar o mesmo. Enquanto não vier, o site só
+consegue vender a cor por orçamento.
+
+Junto com isso: a **Qualyvinil Acrílica Cor Econômica** também muda de volume
+quando é colorida, ou o preço é o mesmo do branco?
+
+### Quais cores a loja tem prontas
+A carta da Coral Rende Muito tem 27 cores, mas o que vale é o que a loja
+estoca. **Listar cor que não tem é pior que não listar cor nenhuma** — vira
+cliente indo à loja atrás de um produto que não existe.
 
 ### Produtos mandados sem preço
 - **Qualyvinil Colorit Eco** (esmalte base água, 900ml) — não está no cupom

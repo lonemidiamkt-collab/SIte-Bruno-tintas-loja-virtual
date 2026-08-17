@@ -131,6 +131,18 @@ function renderFiltros() {
   });
 }
 
+/* O preço cadastrado é sempre o da base branca. Este aviso existe para o
+   cliente não achar que qualquer cor sai pelo mesmo valor — em produto
+   tingido na máquina a cor é orçamento à parte, e nas cores prontas o
+   volume da lata muda (Coral Rende Muito: branco 18L, cor 16L).
+   Produto sem `cor` definida não afirma nada, de propósito. */
+const AVISO_COR = {
+  maquina: 'Cor feita na máquina, na hora. O preço é o da base branca — a cor sai por orçamento.',
+  prontas: 'Tem cores prontas. O preço é o do branco; outras cores podem ter volume e preço diferentes.'
+};
+const avisoCor = p => AVISO_COR[p.cor]
+  ? `<span class="prod__tingir">${AVISO_COR[p.cor]}</span>` : '';
+
 function cardProduto(p) {
   return `<article class="prod">
     <div class="prod__img">
@@ -141,7 +153,7 @@ function cardProduto(p) {
     <div class="prod__corpo">
       <span class="prod__cat">${esc(nomeSetor(p.set))}</span>
       <h3 class="prod__nome">${esc(p.nome)}</h3>
-      ${p.tinta ? '<span class="prod__tingir">Cor feita na hora, na máquina de tingimento</span>' : ''}
+      ${avisoCor(p)}
       <div class="prod__preco">
         <b>${brl(p.preco)}</b>
         <span class="prod__avista">${brl(comDesconto(p.preco))} no PIX ou dinheiro</span>

@@ -8,6 +8,39 @@
 
 ---
 
+## 17/08/2026 — Aviso de cor corrigido; escolha de cores virou SPEC-003
+
+**Bug que estava no ar:** os 26 produtos exibiam "Cor feita na hora, na máquina
+de tingimento" — inclusive massa corrida e esmalte. Eu tinha marcado
+`tinta: true` para tudo que era tinta, sem saber que só a linha Decora é
+tingida na máquina.
+
+**Correção:** o booleano `tinta` virou o campo `cor`, com três estados, e o
+aviso passa a ser específico:
+
+| `cor` | produtos | aviso ao cliente |
+|---|---|---|
+| `'maquina'` | linha Decora (6) | cor feita na máquina; preço é da base branca, cor sai por orçamento |
+| `'prontas'` | Coral Rende Muito e Qualy Econômica (4) | tem cores prontas; preço é do branco, outras cores podem ter volume e preço diferentes |
+| `null` | massas e o que falta confirmar (16) | não afirma nada |
+
+**Achado grave, informado pelo Roberto:** na Coral Rende Muito o volume muda
+com a cor — branco **18L** (galão 3,6L), cores **16L** (galão 3,2L). É outro
+produto, com outro preço, e o site mostrava um valor só. Por isso os dois itens
+passaram a se chamar "... Branco 18L" e "... Branco 3,6L": o preço cadastrado é
+só do branco. Confirmado também na carta da fabricante.
+
+**A escolha de cores virou [SPEC-003](specs/SPEC-003-escolha-de-cores.md)**, em
+`Proposta`. É mudança de comportamento, então precisa de spec antes do código
+(CLAUDE.md). E está bloqueada por falta de dado: **não existe o preço da Coral
+Rende Muito colorida**, que é justamente a parte que mais importa.
+
+Levantada a carta de cores prontas da Coral Rende Muito (27 cores) como ponto
+de partida — mas ela é da fabricante, não do estoque da loja. Cadastrar cor que
+a loja não tem é pior que não listar cor nenhuma.
+
+---
+
 ## 17/08/2026 — Destaque da semana virou rodízio automático
 
 **O que:** a seção "Destaque da semana" deixou de depender de alguém escolher
