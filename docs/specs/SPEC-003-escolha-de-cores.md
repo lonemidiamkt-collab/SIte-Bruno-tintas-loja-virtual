@@ -1,8 +1,39 @@
-# SPEC-003 — Cliente escolhe a cor
+# SPEC-003 — Detalhe do produto e escolha de cor
 
-- **Estado:** **Proposta** — tem pergunta aberta e falta preço. **Não implementar.**
 - **Criada em:** 17/08/2026
-- **Relacionadas:** SPEC-001, SPEC-002, ADR-005
+- **Relacionadas:** SPEC-001, SPEC-002
+
+**Estado por fase:**
+
+| fase | o que é | estado |
+|---|---|---|
+| **1 — box de detalhe** | clicar no produto abre um box com foto grande, preço e as condições | **Implementada** (17/08) |
+| **2 — escolha de cor** | escolher a cor dentro do box, com preço por cor | **Proposta** — bloqueada, falta preço |
+
+A fase 1 foi separada porque não depende de nenhum dado que falta, e entrega
+sozinha o ganho da foto grande. A fase 2 mora dentro dela.
+
+---
+
+## Fase 1 — o box de detalhe (feita)
+
+O card na grade mostra a lata com uns 170px no celular, e nesse tamanho o
+rótulo é ilegível. Num comércio de tinta isso importa: **o cliente reconhece o
+produto pelo rótulo**, porque é a lata que ele já viu na obra ou usou antes.
+
+Clicar na foto ou no nome abre um box com a foto grande, o setor, o aviso de
+cor, o preço com PIX e parcelamento, e o botão de adicionar. O botão
+"Adicionar" do card continua funcionando — quem já sabe o que quer não é
+obrigado a passar pelo box.
+
+Reaproveita o modal do checkout; os dois nunca ficam abertos ao mesmo tempo.
+
+O box é também o lugar onde a fase 2 vai morar: hoje ele mostra o aviso de cor
+em texto, e é ali que entram as cores para escolher.
+
+---
+
+## Fase 2 — escolha de cor (proposta)
 
 ---
 

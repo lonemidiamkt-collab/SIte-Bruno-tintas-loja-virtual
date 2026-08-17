@@ -8,6 +8,38 @@
 
 ---
 
+## 17/08/2026 — Box de detalhe do produto (fase 1 da SPEC-003)
+
+**O que:** clicar na foto ou no nome de um produto abre um box com foto
+grande, setor, aviso de cor, preço com PIX e parcelamento, e botão de
+adicionar. Ideia do Roberto.
+
+**Por que fazer só a fase 1 agora:** a escolha de cor depende de preços que
+ainda não temos. O box em si não depende de nada e já entrega sozinho o ganho
+que mais importa — **a foto grande**. Na grade a lata sai com uns 170px no
+celular e o rótulo fica ilegível; num comércio de tinta o cliente reconhece o
+produto pelo rótulo, porque é a lata que ele já usou na obra.
+
+Eu mesmo tinha argumentado que um box "com nome e preço e mais nada" ficaria
+pior que não ter. Continua valendo — o que justifica a fase 1 é a foto, não o
+texto.
+
+**Decisão de arquitetura:** reaproveita o modal do checkout em vez de criar
+outro. Os dois nunca ficam abertos ao mesmo tempo, e assim herda de graça o
+véu, o foco, o fechar no ESC e no clique fora.
+
+**O botão "Adicionar" do card continua funcionando.** Quem já sabe o que quer
+não é obrigado a passar pelo box.
+
+**Preparado para a fase 2:** o bloco de cor já existe no box, hoje mostrando o
+aviso em texto. É ali que as cores entram quando os preços chegarem.
+
+**Verificado:** 26 cards com foto e nome clicáveis, box abrindo com título,
+foto, preço e botão certos; bloco de cor presente nos produtos de máquina e de
+cores prontas e **ausente nas massas**, como deve ser.
+
+---
+
 ## 17/08/2026 — Produção oscilando entre versões; card blindado contra foto quebrada
 
 **Sintoma reportado:** "deu erro no sistema" — os cards apareceram como

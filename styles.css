@@ -277,6 +277,30 @@ a{color:inherit;text-decoration:none}
 .prod__img{aspect-ratio:1/1;background:var(--azul);position:relative;overflow:hidden}
 .prod__img img{width:100%;height:100%;object-fit:cover}
 
+/* foto e nome abrem o detalhe; o botao nao pode herdar visual de botao */
+.prod__abrir{display:block;width:100%;padding:0;border:0;cursor:pointer;font:inherit;color:inherit}
+.prod__nome-btn{background:none;border:0;padding:0;margin:0;font:inherit;color:inherit;
+  text-align:left;cursor:pointer}
+.prod__nome-btn:hover{text-decoration:underline}
+.prod__abrir:focus-visible,.prod__nome-btn:focus-visible{outline:2px solid var(--azul-claro);outline-offset:2px}
+
+/* ---------- detalhe do produto no modal ---------- */
+.det__foto{aspect-ratio:1/1;max-width:320px;margin:0 auto var(--e4);border-radius:var(--raio-g);
+  overflow:hidden;background:var(--azul)}
+.det__foto img{width:100%;height:100%;object-fit:cover;display:block}
+.det__setor{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--texto-fraco);margin-bottom:var(--e4)}
+.det__bloco{padding-top:var(--e4);margin-top:var(--e4);border-top:1px solid var(--gelo-2,#E7EDF7)}
+.det__bloco:first-of-type{border-top:0;margin-top:0}
+.det__rotulo{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--texto-fraco);margin-bottom:var(--e2)}
+.det__cor{font-size:.9rem;line-height:1.45;color:var(--texto)}
+.det__cor-ajuda{font-size:.82rem;line-height:1.45;color:var(--texto-fraco);margin-top:4px}
+.det__preco{font-family:var(--display);font-size:2rem;font-weight:800;color:var(--azul-profundo);line-height:1}
+.det__avista{font-size:.9rem;font-weight:600;color:var(--azul);margin-top:4px}
+.det__parcela{font-size:.82rem;color:var(--texto-fraco);margin-top:2px}
+.det .btn{margin-top:var(--e6)}
+
 /* Produto ainda sem foto: inicial da marca sobre o azul da marca, em vez de
    ícone de imagem quebrada. Sai de cena sozinho quando a foto for cadastrada. */
 .sem-foto{

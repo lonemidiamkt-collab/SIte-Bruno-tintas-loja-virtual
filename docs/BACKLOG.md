@@ -87,19 +87,14 @@ cliente indo à loja atrás de um produto que não existe.
 
 ## P1 — próximo ciclo
 
-### Abrir detalhes do produto num box
-Ideia do Roberto (17/08): clicar no produto abre uma caixinha com informações
-dele. Hoje o card mostra nome, preço e o aviso de cor, e nada mais — não tem
-rendimento, número de demãos, tempo de secagem, onde aplicar, nem a foto
-grande.
+### Ficha técnica dentro do box
+O box de detalhe já existe (SPEC-003 fase 1), mas hoje só tem foto, preço e o
+aviso de cor. O que daria corpo a ele é rendimento em m², número de demãos,
+tempo de secagem e onde aplicar.
 
-É mudança de comportamento, então **precisa de spec** antes do código. Antes de
-escrever, decidir de onde vem o conteúdo: rendimento e secagem existem na ficha
-técnica de cada fabricante, mas alguém precisa cadastrar produto a produto — são
-26. Sem esse texto, o box abre vazio e fica pior que não ter.
-
-Se a SPEC-003 (escolha de cores) for aprovada, as duas se encontram: o box é o
-lugar natural para escolher a cor.
+Está na ficha técnica de cada fabricante, mas alguém precisa cadastrar
+**produto a produto — são 26**. Dá para fazer aos poucos: o box mostra a ficha
+só de quem já tiver, e ignora quem não tem.
 
 ### Migração para Next.js + Supabase
 Catálogo sai do arquivo e vai para o banco, com painel para o Bruno editar

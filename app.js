@@ -156,14 +156,15 @@ const avisoCor = p => AVISO_COR[p.cor]
 
 function cardProduto(p) {
   return `<article class="prod">
-    <div class="prod__img">
+    <button class="prod__img prod__abrir" data-ver="${p.id}"
+            aria-label="Ver detalhes de ${esc(p.nome)}">
       ${fotoOu(p, p.marca + ' ' + p.nome, 'loading="lazy"')}
       ${p.marca !== '—' ? `<span class="prod__marca">${esc(p.marca)}</span>` : ''}
       ${p.oferta ? '<span class="prod__oferta">Oferta</span>' : ''}
-    </div>
+    </button>
     <div class="prod__corpo">
       <span class="prod__cat">${esc(nomeSetor(p.set))}</span>
-      <h3 class="prod__nome">${esc(p.nome)}</h3>
+      <h3 class="prod__nome"><button class="prod__nome-btn" data-ver="${p.id}">${esc(p.nome)}</button></h3>
       ${avisoCor(p)}
       <div class="prod__preco">
         <b>${brl(p.preco)}</b>
@@ -186,6 +187,47 @@ function renderGrade() {
   $('#grade').innerHTML = lista.length
     ? lista.map(cardProduto).join('')
     : '<p style="color:var(--texto-fraco);grid-column:1/-1">Nada encontrado aqui. Chame no WhatsApp que a gente procura pra você.</p>';
+}
+
+/* ---------------- detalhe do produto ----------------
+   Reaproveita o modal do checkout — os dois nunca ficam abertos juntos.
+   O que o box entrega além do card é a FOTO GRANDE: na grade a lata sai com
+   uns 170px no celular e o rótulo fica ilegível, e é pelo rótulo que o
+   cliente reconhece o produto que ele já usou.
+
+   O bloco de cor está preparado mas desligado: só liga quando os preços por
+   cor forem confirmados (ver SPEC-003). Melhor não mostrar cor nenhuma do que
+   mostrar cor com preço errado. */
+function blocoCorDoProduto(p) {
+  if (!AVISO_COR[p.cor]) return '';
+  const titulo = p.cor === 'maquina' ? 'Cor' : 'Cores';
+  return `
+    <div class="det__bloco">
+      <h4 class="det__rotulo">${titulo}</h4>
+      <p class="det__cor">${AVISO_COR[p.cor]}</p>
+      <p class="det__cor-ajuda">Fale com a loja para acertar a cor e fechar o valor.</p>
+    </div>`;
+}
+
+function verProduto(id) {
+  const p = PRODUTOS.find(x => x.id === id);
+  if (!p) return;
+  const temMarca = p.marca && p.marca !== '—';
+  $('#tituloModal').textContent = temMarca ? `${p.marca} ${p.nome}` : p.nome;
+  $('#corpoModal').innerHTML = `
+    <div class="det">
+      <div class="det__foto">${fotoOu(p, (temMarca ? p.marca + ' ' : '') + p.nome)}</div>
+      <p class="det__setor">${esc(nomeSetor(p.set))}</p>
+      ${blocoCorDoProduto(p)}
+      <div class="det__bloco">
+        <h4 class="det__rotulo">Preço</h4>
+        <p class="det__preco">${brl(p.preco)}</p>
+        <p class="det__avista">${brl(comDesconto(p.preco))} no PIX ou dinheiro</p>
+        <p class="det__parcela">ou ${LOJA.parcelas}x de ${brl(parcela(p.preco, LOJA.parcelas))} no cartão</p>
+      </div>
+      <button class="btn btn--azul btn--bloco" data-add="${p.id}">Adicionar ao pedido</button>
+    </div>`;
+  abrirModal();
 }
 
 /* ---------------- destaque da semana ----------------
@@ -751,6 +793,8 @@ function etapaFim(precisaEnvioManual) {
 /* ---------------- ligações ---------------- */
 
 document.addEventListener('click', e => {
+  const ver = e.target.closest('[data-ver]');
+  if (ver) { verProduto(+ver.dataset.ver); return; }
   const add = e.target.closest('[data-add]');
   if (add) adicionar(+add.dataset.add);
 });
