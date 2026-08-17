@@ -8,6 +8,42 @@
 
 ---
 
+## 17/08/2026 — 26 fotos de produto entraram, como arquivo e não base64
+
+**O que:** as 26 fotos de `~/Desktop/Bruno tintas site versel` foram
+normalizadas e cadastradas. Todo produto tem foto; nenhum card mostra mais o
+selo com a inicial da marca.
+
+**Tratamento:** cada imagem foi achatada sobre branco (algumas vinham com
+transparência), encaixada num quadrado de 520px sem cortar, com respiro, e
+salva em WebP q80. Precisava ser quadrada porque o card usa `object-fit:cover`
+— com as originais em retrato, a lata seria cortada em cima e embaixo.
+
+**Decisão de arquitetura: foto de produto virou ARQUIVO, não base64.**
+`imagens.js` continua com banner, logo e capa, que aparecem sempre. As fotos
+de produto ficam em `fotos/<chave>.webp` e o `img()` resolve o caminho.
+
+O motivo é direto: **base64 dentro do JS anula o `loading="lazy"`.** Em base64
+as 26 fotos viriam junto com o `imagens.js`, antes de a primeira tela pintar —
+1276 KB obrigatórios. Em arquivo, são 753 KB fixos e 382 KB sob demanda, e no
+celular o cliente vê 4 ou 6 cards, então baixa 4 ou 6 fotos.
+
+**Conferência:** o mapa foto→produto casa 1:1 com a pasta (26 e 26), todo `foto`
+aponta para um arquivo que existe, nenhum arquivo ficou sem dono. Render
+headless: 26 cards, 26 `<img>` com lazy, zero `src="undefined"`, zero selo de
+foto ausente.
+
+Detalhe do caminho: os nomes com acento vinham em NFD do macOS e o mapa em
+NFC, o que fazia a comparação falhar mesmo com o arquivo existindo. Resolvido
+normalizando os dois lados.
+
+**Ponto de atenção:** a foto do *Esmalte Qualyvinil 900ml* tem nome de arquivo
+"Esmalte Premium Base Água Branco Acetinado", que é linha diferente do
+"Esmalte Sintético Standard" cadastrado a partir do cupom. Vale confirmar se
+é o mesmo produto.
+
+---
+
 ## 17/08/2026 — Preços confirmados como de venda; catálogo real publicado
 
 **O que:** o Roberto confirmou que os preços do cupom são **de venda** — a nota

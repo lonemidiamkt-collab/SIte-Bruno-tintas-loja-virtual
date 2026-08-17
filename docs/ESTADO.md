@@ -47,10 +47,11 @@ Coisas que não dependem de código, e sim de informação que a loja precisa ma
 - Por setor: interna 8 · externa 6 · madeira e metal 6 · preparação 6
 - Impermeabilizantes e Acessórios sem produto, portanto escondidos
 - Faixa de preço: R$ 16,70 (Massa Corrida 900ml) a R$ 928,00 (Decora Diamante 18L)
-- **Nenhuma foto de produto** — os cards mostram a inicial da marca
+- **26 fotos**, uma por produto, em `fotos/<chave>.webp` (382 KB, lazy)
 - 6 setores e 11 marcas cadastrados, 2 unidades
 - 4 formas de pagamento, 3 destinos de entrega
-- 9 imagens em base64 no `imagens.js` (661 KB)
+- Banner, logo e capa seguem em base64 no `imagens.js` (661 KB)
+- Peso do primeiro acesso: **753 KB fixos** + foto só do que o cliente rolar
 
 ## Riscos conhecidos
 

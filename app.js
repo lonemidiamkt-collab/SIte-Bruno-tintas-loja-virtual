@@ -11,7 +11,12 @@ const brl = v => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' 
 const esc = s => String(s).replace(/[&<>"']/g,
   c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
 
-const img = nome => MAPA_IMG[nome];
+/* Banner, logo e capa continuam em base64 no MAPA_IMG porque aparecem sempre.
+   Foto de PRODUTO resolve para arquivo em fotos/<chave>.webp — base64 dentro
+   do JS anula o loading="lazy": o cliente baixaria as 26 fotos antes de ver a
+   primeira. Em arquivo ele baixa só a que rolar até enxergar.
+   Chave nula devolve undefined, e aí entra o selo de marca do fotoOu(). */
+const img = nome => !nome ? undefined : (MAPA_IMG[nome] || `fotos/${nome}.webp`);
 
 /* Produto sem foto cadastrada: devolve um selo com a inicial da marca em vez
    de <img src="undefined">, que renderiza como imagem quebrada. Some sozinho

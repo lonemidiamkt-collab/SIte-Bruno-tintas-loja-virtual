@@ -30,11 +30,6 @@ o cliente vê:
 6. **Qual produto é o Destaque da semana?** Nenhum foi marcado — o selo
    "Oferta" sem desconto real seria promessa falsa. A seção está escondida.
 
-### Fotos dos produtos
-Os 26 produtos aparecem com a inicial da marca no lugar da foto. As imagens
-foram mandadas por chat e **precisam estar em arquivo no disco** para virar
-base64. Basta salvar numa pasta e passar o caminho.
-
 ### Produtos mandados sem preço
 - **Qualyvinil Colorit Eco** (esmalte base água, 900ml) — não está no cupom
 - **Qualyvinil Complementos Premium** — provavelmente é a embalagem das massas
