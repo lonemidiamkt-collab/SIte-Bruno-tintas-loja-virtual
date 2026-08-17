@@ -3,7 +3,10 @@
 > Retrato do agora. Este arquivo é **sobrescrito** a cada commit — não é
 > histórico. O histórico está em [PROGRESSO.md](PROGRESSO.md).
 
-**Atualizado em:** 06/08/2026
+**Atualizado em:** 17/08/2026
+**Branch ativa:** `catalogo-novo` — 26 produtos reais cadastrados, sem foto e
+com 6 pontos a confirmar (ver BACKLOG P0). A `main` (`15dc6d3`) é o que está
+publicado e ainda mostra o catálogo de exemplo.
 **Versão no site:** v6 · MVP para aprovação interna
 **Stack:** HTML + CSS + JS puro, sem build
 **Deploy:** Vercel, branch `main`
@@ -38,11 +41,16 @@ Coisas que não dependem de código, e sim de informação que a loja precisa ma
 - **Links do Google Business** das duas lojas. Hoje cai em busca por endereço. `dados.js:10`
 - **Domínio `brunodastintas.com.br`** apontado para a Vercel.
 
-## Números do catálogo hoje
+## Números do catálogo (branch `catalogo-novo`)
 
-- 7 produtos, 5 setores, 9 marcas, 2 unidades
+- **26 produtos**: Coral 8 · Qualyvinil 14 · Lukscolor 2 · Maza 2
+- Por setor: interna 8 · externa 6 · madeira e metal 6 · preparação 6
+- Impermeabilizantes e Acessórios sem produto, portanto escondidos
+- Faixa de preço: R$ 16,70 (Massa Corrida 900ml) a R$ 928,00 (Decora Diamante 18L)
+- **Nenhuma foto de produto** — os cards mostram a inicial da marca
+- 6 setores e 11 marcas cadastrados, 2 unidades
 - 4 formas de pagamento, 3 destinos de entrega
-- 18 imagens, todas em base64 dentro de `imagens.js` (768 KB)
+- 9 imagens em base64 no `imagens.js` (661 KB)
 
 ## Riscos conhecidos
 

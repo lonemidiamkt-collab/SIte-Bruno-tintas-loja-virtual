@@ -62,11 +62,15 @@ const DESTINOS = [
 
 /* Sugestão de itens ao adicionar produto de cada setor (aumenta o ticket).
    Vale o id do produto. Item já no carrinho não é sugerido de novo. */
+/* Refeito em 17/08/2026 com os ids do catálogo real.
+   Atenção técnica: massa corrida é SÓ para interior. Por isso a área externa
+   sugere massa acrílica, e não massa corrida. */
 const UPSELL = {
-  interna:    [5, 7, 6],
-  externa:    [5, 7, 6],
-  madeira:    [5, 7],
-  imper:      [7, 5],
+  interna:    [22, 25],   // massa corrida 3,6L + massa acrílica 3,6L
+  externa:    [25],       // só massa acrílica
+  madeira:    [],
+  preparacao: [],
+  imper:      [],
   acessorios: []
 };
 
@@ -83,7 +87,8 @@ const PAGAMENTOS = [
 const SETORES = [
   { id: 'interna',    nome: 'Área interna',       desc: 'Sala, quarto, cozinha e teto' },
   { id: 'externa',    nome: 'Área externa',       desc: 'Fachada, muro e área aberta' },
-  { id: 'madeira',    nome: 'Madeira',            desc: 'Porta, janela, portão e móvel' },
+  { id: 'madeira',    nome: 'Madeira e metal',    desc: 'Porta, janela, portão e móvel' },
+  { id: 'preparacao', nome: 'Preparação',         desc: 'Massa corrida, massa acrílica e selador' },
   { id: 'imper',      nome: 'Impermeabilizantes', desc: 'Laje, telhado e infiltração' },
   { id: 'acessorios', nome: 'Acessórios',         desc: 'Rolo, pincel, lona e fita' }
 ];
@@ -93,10 +98,12 @@ const SETORES = [
    Marca sem produto cadastrado não aparece na faixa. */
 const MARCAS = [
   { nome: 'Coral',            logo: 'coral' },
+  { nome: 'Qualyvinil',       logo: null },
+  { nome: 'Lukscolor',        logo: null },
+  { nome: 'Maza',             logo: null },
   { nome: 'Sherwin Williams', logo: 'sherwin-williams' },
   { nome: 'Atlas',            logo: 'atlas' },
   { nome: 'Textura Rio',      logo: 'textura-rio' },
-  { nome: 'Qualyvinil',       logo: null },
   { nome: 'Suvinil',          logo: null },
   { nome: 'Sinteplast',       logo: null },
   { nome: 'Sika',             logo: null },
@@ -104,35 +111,121 @@ const MARCAS = [
 ];
 
 /* Produtos.
-   foto  = arquivo em assets/img (sem extensão)
-   tinta = mostra o aviso de tingimento na hora
-   Preços de exemplo até o cliente mandar a tabela. */
+   foto   = chave em MAPA_IMG (imagens.js)
+   tinta  = mostra o aviso de tingimento na hora
+   oferta = o primeiro com oferta:true vira o "Destaque da semana"
+
+   CATÁLOGO REAL — 26 itens, preços do cupom de 17/08/2026.
+   A soma dos 26 confere com o total impresso no cupom (R$ 6.054,70).
+
+   Todos os preços são da BASE BRANCA. Nenhum produto tem foto cadastrada
+   ainda, então o card mostra a inicial da marca no lugar. */
 const PRODUTOS = [
-  { id: 1, set: 'interna', marca: 'Coral',
-    nome: 'Rende Muito Acrílico Fosco 20L', preco: 279.90,
-    foto: 'coral-rende-20l', tinta: true, oferta: true },
+  /* ---- área interna: linha Decora (premium) + econômica de interior ---- */
+  { id: 1,  set: 'interna', marca: 'Coral',
+    nome: 'Decora Diamante Semi Brilho Acrílico Premium 18L', preco: 928.00,
+    foto: null, tinta: true, oferta: false },
 
-  { id: 2, set: 'interna', marca: 'Coral',
-    nome: 'Rende Muito Acrílico Fosco 16L', preco: 229.90,
-    foto: 'coral-rende-16l', tinta: true, oferta: false },
+  { id: 2,  set: 'interna', marca: 'Coral',
+    nome: 'Decora Diamante Semi Brilho Acrílico Premium 3,6L', preco: 220.00,
+    foto: null, tinta: true, oferta: false },
 
-  { id: 3, set: 'interna', marca: 'Sherwin Williams',
-    nome: 'Novacor Paredes Pro Fosco', preco: 199.90,
-    foto: 'sherwin-novacor', tinta: true, oferta: false },
+  { id: 3,  set: 'interna', marca: 'Coral',
+    nome: 'Decora Seda Acetinado Acrílico Premium 18L', preco: 846.00,
+    foto: null, tinta: true, oferta: false },
 
-  { id: 4, set: 'externa', marca: 'Textura Rio',
-    nome: 'Textura Acrílica 5kg', preco: 59.90,
-    foto: 'textura-rio-lata', tinta: true, oferta: false },
+  { id: 4,  set: 'interna', marca: 'Coral',
+    nome: 'Decora Seda Acetinado Acrílico Premium 3,6L', preco: 220.00,
+    foto: null, tinta: true, oferta: false },
 
-  { id: 5, set: 'acessorios', marca: 'Atlas',
-    nome: 'Kit Completo de Pintura 7 peças', preco: 69.90,
-    foto: 'kit-atlas-7', tinta: false, oferta: true },
+  { id: 5,  set: 'interna', marca: 'Coral',
+    nome: 'Decora Matte Fosco Acrílico Premium 18L', preco: 670.00,
+    foto: null, tinta: true, oferta: false },
 
-  { id: 6, set: 'acessorios', marca: 'Atlas',
-    nome: 'Kit Prático de Pintura 3 peças', preco: 39.90,
-    foto: 'kit-atlas-3', tinta: false, oferta: false },
+  { id: 6,  set: 'interna', marca: 'Coral',
+    nome: 'Decora Matte Fosco Acrílico Premium 3,6L', preco: 177.00,
+    foto: null, tinta: true, oferta: false },
 
-  { id: 7, set: 'acessorios', marca: '—',
-    nome: 'Lona Plástica Preta', preco: 29.90,
-    foto: 'lona-preta', tinta: false, oferta: false }
+  { id: 7,  set: 'interna', marca: 'Qualyvinil',
+    nome: 'Acrílica Cor Econômico Interior 18L', preco: 197.00,
+    foto: null, tinta: true, oferta: false },
+
+  { id: 8,  set: 'interna', marca: 'Qualyvinil',
+    nome: 'Acrílica Cor Econômico Interior 3,6L', preco: 57.00,
+    foto: null, tinta: true, oferta: false },
+
+  /* ---- área externa: linhas de alto rendimento (servem dentro também) ---- */
+  { id: 9,  set: 'externa', marca: 'Coral',
+    nome: 'Rende Muito Tinta Concentrada Acrílico Fosco 18L', preco: 475.00,
+    foto: null, tinta: true, oferta: false },
+
+  { id: 10, set: 'externa', marca: 'Coral',
+    nome: 'Rende Muito Tinta Concentrada Acrílico Fosco 3,6L', preco: 125.00,
+    foto: null, tinta: true, oferta: false },
+
+  { id: 11, set: 'externa', marca: 'Qualyvinil',
+    nome: 'Rende Muito+ Acrílico Standard 18L', preco: 379.00,
+    foto: null, tinta: true, oferta: false },
+
+  { id: 12, set: 'externa', marca: 'Qualyvinil',
+    nome: 'Rende Muito+ Acrílico Standard 3,6L', preco: 99.00,
+    foto: null, tinta: true, oferta: false },
+
+  { id: 13, set: 'externa', marca: 'Qualyvinil',
+    nome: 'Fosco Completo Acrílico Premium 18L', preco: 490.00,
+    foto: null, tinta: true, oferta: false },
+
+  { id: 14, set: 'externa', marca: 'Qualyvinil',
+    nome: 'Fosco Completo Acrílico Premium 3,6L', preco: 130.00,
+    foto: null, tinta: true, oferta: false },
+
+  /* ---- madeira e metal: esmaltes ---- */
+  { id: 15, set: 'madeira', marca: 'Maza',
+    nome: 'Direto na Ferrugem Esmalte Sintético Premium 3,6L', preco: 235.00,
+    foto: null, tinta: true, oferta: false },
+
+  { id: 16, set: 'madeira', marca: 'Maza',
+    nome: 'Direto na Ferrugem Esmalte Sintético Premium 900ml', preco: 65.00,
+    foto: null, tinta: true, oferta: false },
+
+  { id: 17, set: 'madeira', marca: 'Lukscolor',
+    nome: 'Esmalte Premium Plus Base Água 3,6L', preco: 166.90,
+    foto: null, tinta: true, oferta: false },
+
+  { id: 18, set: 'madeira', marca: 'Lukscolor',
+    nome: 'Esmalte Premium Plus Base Água 900ml', preco: 49.90,
+    foto: null, tinta: true, oferta: false },
+
+  { id: 19, set: 'madeira', marca: 'Qualyvinil',
+    nome: 'Esmalte Sintético Standard 3,6L', preco: 135.00,
+    foto: null, tinta: true, oferta: false },
+
+  { id: 20, set: 'madeira', marca: 'Qualyvinil',
+    nome: 'Esmalte Sintético Standard 900ml', preco: 38.50,
+    foto: null, tinta: true, oferta: false },
+
+  /* ---- preparação: massas (não vão para a máquina de tingimento) ---- */
+  { id: 21, set: 'preparacao', marca: 'Qualyvinil',
+    nome: 'Massa Corrida 25kg', preco: 75.90,
+    foto: null, tinta: false, oferta: false },
+
+  { id: 22, set: 'preparacao', marca: 'Qualyvinil',
+    nome: 'Massa Corrida 3,6L', preco: 27.90,
+    foto: null, tinta: false, oferta: false },
+
+  { id: 23, set: 'preparacao', marca: 'Qualyvinil',
+    nome: 'Massa Corrida 900ml', preco: 16.70,
+    foto: null, tinta: false, oferta: false },
+
+  { id: 24, set: 'preparacao', marca: 'Qualyvinil',
+    nome: 'Klasse Massa Acrílica 18L', preco: 166.00,
+    foto: null, tinta: false, oferta: false },
+
+  { id: 25, set: 'preparacao', marca: 'Qualyvinil',
+    nome: 'Massa Acrílica 3,6L', preco: 46.00,
+    foto: null, tinta: false, oferta: false },
+
+  { id: 26, set: 'preparacao', marca: 'Qualyvinil',
+    nome: 'Massa Acrílica 900ml', preco: 18.90,
+    foto: null, tinta: false, oferta: false }
 ];

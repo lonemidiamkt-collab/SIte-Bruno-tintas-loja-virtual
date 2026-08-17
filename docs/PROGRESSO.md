@@ -8,6 +8,109 @@
 
 ---
 
+## 17/08/2026 — Preços confirmados como de venda; catálogo real publicado
+
+**O que:** o Roberto confirmou que os preços do cupom são **de venda** — a nota
+foi puxada só para trazer os produtos. Com isso a branch `catalogo-novo` foi
+para a `main` e publicada.
+
+**Aviso do topo corrigido junto.** A faixa dizia *"produtos e preços são de
+teste. Nada aqui foi confirmado com a loja"* — o que virou mentira no instante
+em que os preços reais entraram, e é a primeira linha que o cliente lê. Agora
+diz que os preços vêm do sistema da loja em 17/08/2026 e que as fotos ainda
+estão entrando. Continua marcada como versão para aprovação, porque o Bruno
+ainda não validou.
+
+**Segue em aberto** (BACKLOG P0): fotos dos produtos, escolha do Destaque da
+semana, e as dúvidas de desconto 5% × 10%, parcelamento sem juros, tingimento
+incluso e o volume da Coral Rende Muito.
+
+---
+
+## 17/08/2026 — Catálogo real cadastrado: 26 produtos
+
+**O que:** entraram os 26 produtos do cupom de 17/08/2026, com os preços reais.
+Marcas: Coral (8), Qualyvinil (14), Lukscolor (2), Maza (2).
+
+**Como a transcrição foi validada:** os 26 itens foram transcritos do cupom e
+a soma deu **R$ 6.054,70**, exatamente o total impresso. Cada preço também foi
+conferido um a um contra o cupom, com multiplicidade. Se algum valor tivesse
+sido lido errado, o total não fecharia.
+
+**Setor novo — `preparacao`.** O catálogo real tem 6 massas (corrida, acrílica,
+Klasse) e não havia setor para elas: "Acessórios" é rolo, pincel e lona. Sem
+isso as massas ficariam sem casa.
+
+**Distribuição:** interna 8 · externa 6 · madeira e metal 6 · preparação 6.
+Impermeabilizantes e Acessórios ficaram sem produto e por isso não aparecem.
+"Madeira" virou "Madeira e metal", já que os esmaltes Maza e Lukscolor são
+para portão e ferrugem.
+
+**Fallback de foto.** Nenhum produto tem foto: as imagens foram mandadas por
+chat e não existem em arquivo. Sem tratamento, `img(p.foto)` devolvia
+`undefined` e o card renderizava ícone de imagem quebrada — em 26 cards. Agora
+`fotoOu()` mostra a inicial da marca sobre o azul da marca, no catálogo, no
+upsell e no carrinho. Some sozinho quando a foto for cadastrada.
+
+**UPSELL refeito** com os ids novos. Detalhe técnico deliberado: massa corrida
+é só para interior, então a área externa sugere massa acrílica e a interna
+sugere as duas.
+
+**Nenhum produto foi marcado como oferta.** O card com `oferta:true` mostra o
+selo "Oferta" ao cliente, e não existe desconto real definido — seria promessa
+falsa (Constituição, princípio 6). Consequência: a seção "Destaque da semana"
+fica escondida até o Roberto escolher o produto.
+
+**Verificado** (headless, com DOM stub, porque o navegador passou a bloquear
+localhost): execução completa sem erro, 26 cards, 4 setores, 4 marcas, 5
+filtros, zero `src="undefined"`, zero "undefined" solto no HTML, 26 selos de
+foto ausente, destaque vazio. Integridade: ids únicos, todo setor existe em
+SETORES, toda marca existe em MARCAS, UPSELL sem id órfão.
+
+**Aberto — precisa de resposta:** ver a lista de pendências no BACKLOG (P0).
+As principais: se os preços são de venda ou de custo, se o preço vale para a
+base branca sem o tingimento, e o volume da Coral Rende Muito (lata diz 3,2L,
+cupom diz 3,6L).
+
+---
+
+## 17/08/2026 — Catálogo de exemplo removido (branch `catalogo-novo`)
+
+**O que:** os 7 produtos de exemplo saíram do `dados.js`, junto com as 7 fotos
+correspondentes no `imagens.js` e os ids do `UPSELL` que apontavam para eles.
+
+**Por quê:** a pedido do Roberto, para entrar o catálogo real (Coral, Lukscolor,
+Qualyvinil, Maza). Os preços que estavam no ar eram de exemplo — ver
+Constituição, princípio 4.
+
+**Em branch, não na main.** Com `PRODUTOS` vazio o site não mostra setor,
+marca, catálogo nem destaque — comportamento correto pela SPEC-001, mas
+significa loja vazia no ar. A `main` fica em `15dc6d3`, publicável, até o
+catálogo real entrar.
+
+**Correção que veio junto, e era obrigatória:** o card "Destaque da semana"
+estava **escrito à mão no index.html** — marca, nome, preço, preço no PIX e o
+`data-add="1"`. Com os produtos removidos ele viraria um produto fantasma com
+botão morto. Agora é montado por `renderDestaque()` a partir do primeiro
+produto com `oferta:true`, e a seção inteira some quando não há nenhum.
+
+Isso também mata um bug silencioso que já existia: mudar o preço no `dados.js`
+**não** mudava o preço mostrado nesse card.
+
+**Peso:** `imagens.js` de 768 KB para **661 KB**.
+
+**Verificado** (headless, invariantes do estado vazio): PRODUTOS vazio, nenhum
+setor/marca aparecendo, destaque escondido, UPSELL sem id órfão, e o que não
+podia sumir continua — 2 unidades, 4 formas de pagamento, 3 destinos, 5
+setores e 9 marcas prontos para receber produto, desconto de 5% intacto,
+nenhuma foto órfã no `imagens.js`. Sintaxe dos três arquivos validada.
+
+Não deu para conferir no navegador: o pane passou a bloquear localhost.
+
+**Aberto:** falta o catálogo real. Ver BACKLOG, P0.
+
+---
+
 ## 06/08/2026 — Topo do celular reconstruído (arte remontada resolvida)
 
 **O que:** o título do topo no celular deixou de ser imagem e virou texto de

@@ -12,6 +12,15 @@ const esc = s => String(s).replace(/[&<>"']/g,
   c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
 
 const img = nome => MAPA_IMG[nome];
+
+/* Produto sem foto cadastrada: devolve um selo com a inicial da marca em vez
+   de <img src="undefined">, que renderiza como imagem quebrada. Some sozinho
+   quando a foto entrar no MAPA_IMG. */
+const semFoto = p => `<span class="sem-foto" aria-hidden="true">${
+  esc((p.marca && p.marca !== '—' ? p.marca : p.nome).trim().charAt(0).toUpperCase())}</span>`;
+const fotoOu = (p, alt, extra = '') => img(p.foto)
+  ? `<img src="${img(p.foto)}" width="400" height="400" alt="${esc(alt)}" ${extra}>`
+  : semFoto(p);
 const imgMarca = nome => MAPA_IMG['marcas/' + nome];
 const unidade = id => UNIDADES.find(u => u.id === id) || UNIDADES[0];
 const linkWhatsUnidade = (id, txt) =>
@@ -27,6 +36,7 @@ const ICONES = {
   interna:'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>',
   externa:'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg>',
   madeira:'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="1.5"/><circle cx="15.5" cy="12" r="1"/></svg>',
+  preparacao:'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 16 14.5 4.5a2.1 2.1 0 0 1 3 3L6 19H3z"/><path d="M13 6l5 5"/></svg>',
   imper:'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 6.4 6 10a6 6 0 0 1-12 0c0-3.6 6-10 6-10"/></svg>',
   acessorios:'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="14" height="6" rx="2"/><path d="M10 10v4H7v7"/></svg>'
 };
@@ -119,7 +129,7 @@ function renderFiltros() {
 function cardProduto(p) {
   return `<article class="prod">
     <div class="prod__img">
-      <img src="${img(p.foto)}" width="400" height="400" alt="${esc(p.marca + ' ' + p.nome)}" loading="lazy">
+      ${fotoOu(p, p.marca + ' ' + p.nome, 'loading="lazy"')}
       ${p.marca !== '—' ? `<span class="prod__marca">${esc(p.marca)}</span>` : ''}
       ${p.oferta ? '<span class="prod__oferta">Oferta</span>' : ''}
     </div>
@@ -148,6 +158,34 @@ function renderGrade() {
   $('#grade').innerHTML = lista.length
     ? lista.map(cardProduto).join('')
     : '<p style="color:var(--texto-fraco);grid-column:1/-1">Nada encontrado aqui. Chame no WhatsApp que a gente procura pra você.</p>';
+}
+
+/* ---------------- destaque da semana ----------------
+   Mostra o primeiro produto com oferta:true. Sem nenhum produto em oferta
+   a seção inteira some, em vez de deixar um card vazio ou desatualizado. */
+function renderDestaque() {
+  const sec = $('#destaque'), alvo = $('#destaqueCard');
+  if (!sec || !alvo) return;
+  const p = PRODUTOS.find(x => x.oferta);
+  if (!p) { sec.hidden = true; alvo.innerHTML = ''; return; }
+  sec.hidden = false;
+  const foto = img(p.foto);
+  alvo.innerHTML = `
+    <div class="hero__card">
+      <div class="hero__card-topo"><span>Destaque da semana</span><b>${esc(p.nome)}</b></div>
+      <div class="hero__card-corpo">
+        <div class="hero__card-item">
+          <div class="hero__card-foto">${foto
+            ? `<img src="${foto}" width="400" height="400" alt="${esc(p.nome)}">` : ''}</div>
+          <div class="hero__card-info">
+            ${p.marca && p.marca !== '—' ? `<p class="hero__card-marca">${esc(p.marca)}</p>` : ''}
+            <p class="hero__card-preco">${brl(p.preco)}</p>
+            <p class="hero__card-avista">${brl(comDesconto(p.preco))} no PIX ou dinheiro</p>
+          </div>
+        </div>
+        <button class="btn btn--azul btn--bloco" data-add="${p.id}">Adicionar ao pedido</button>
+      </div>
+    </div>`;
 }
 
 /* ---------------- carrinho ---------------- */
@@ -226,7 +264,7 @@ function htmlSugestoes() {
       <p class="sugestoes__titulo">Vai precisar disso também?</p>
       ${lista.map(p => `
         <div class="sugestao">
-          <div class="sugestao__img"><img src="${img(p.foto)}" width="400" height="400" alt="" loading="lazy"></div>
+          <div class="sugestao__img">${fotoOu(p, "", `loading="lazy"`)}</div>
           <div class="sugestao__meio">
             <p class="sugestao__nome">${esc(p.marca !== '—' ? p.marca + ' ' + p.nome : p.nome)}</p>
             <p class="sugestao__preco">${brl(p.preco)}</p>
@@ -266,7 +304,7 @@ function renderCarrinho() {
 
   $('#itensCarrinho').innerHTML = carrinho.map(i => `
     <div class="item">
-      <div class="item__img"><img src="${img(i.foto)}" width="400" height="400" alt=""></div>
+      <div class="item__img">${fotoOu(i, "")}</div>
       <div class="item__meio">
         <p class="item__nome">${esc(i.nome)}</p>
         <p class="item__preco">${brl(i.preco * i.qtd)}</p>
@@ -721,6 +759,7 @@ renderMarcas();
 renderLojas();
 renderFiltros();
 renderGrade();
+renderDestaque();
 renderCarrinho();
 ligarTrilhos();
 

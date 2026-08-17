@@ -10,9 +10,35 @@ Prioridades: **P0** trava o projeto · **P1** próximo ciclo · **P2** depois ·
 
 ## P0 — travando
 
-### Tabela de preços real
-Os 7 produtos em `dados.js` são exemplo. O site não pode sair de MVP sem os
-números confirmados pelo Bruno. **Depende do cliente.**
+### Confirmar 6 pontos do catálogo novo
+Os 26 produtos estão cadastrados na branch `catalogo-novo` com os preços do
+cupom (soma confere no centavo). Falta confirmar, e cada um destes muda o que
+o cliente vê:
+
+1. **Os preços são de venda?** O cupom parece orçamento, mas se for nota de
+   compra, a loja estaria vendendo a preço de custo. É o risco mais caro
+   desta lista.
+2. **O preço vale para a base branca sem tingimento?** Todos os itens do cupom
+   são "BRANCO". Se tingir custa à parte, o preço no site engana quem quer cor.
+3. **Coral Rende Muito: 3,6L ou 3,2L?** A lata nova diz "NOVO VOLUME: DE 3,6L
+   PARA 3,2L" e "3,2L rende = branco 3,6L". O cupom ainda diz 3,6LTS. Está
+   cadastrado como 3,6L, seguindo o cupom.
+4. **Desconto: 5% ou 10%?** O `dados.js` diz 5% no PIX; o cabeçalho do cupom
+   parece dizer 10%. O site está mostrando 5%.
+5. **Parcelamento é sem juros?** O cupom parece dizer "12x sem juros". Hoje o
+   site não afirma nada (`semJuros: null`). Confirmando, dá para afirmar.
+6. **Qual produto é o Destaque da semana?** Nenhum foi marcado — o selo
+   "Oferta" sem desconto real seria promessa falsa. A seção está escondida.
+
+### Fotos dos produtos
+Os 26 produtos aparecem com a inicial da marca no lugar da foto. As imagens
+foram mandadas por chat e **precisam estar em arquivo no disco** para virar
+base64. Basta salvar numa pasta e passar o caminho.
+
+### Produtos mandados sem preço
+- **Qualyvinil Colorit Eco** (esmalte base água, 900ml) — não está no cupom
+- **Qualyvinil Complementos Premium** — provavelmente é a embalagem das massas
+  já cadastradas; se for produto separado, falta o preço
 
 ---
 

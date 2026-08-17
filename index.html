@@ -81,7 +81,7 @@
 <body>
 
 <a class="skip" href="#catalogo">Pular para o catálogo</a>
-<div class="mvp-bar"><b>v6 &middot; MVP para aprovação interna</b> — produtos e preços são de teste. Nada aqui foi confirmado com a loja.</div>
+<div class="mvp-bar"><b>v7 &middot; Versão para aprovação</b> — preços vindos do sistema da loja em 17/08/2026. As fotos dos produtos ainda estão entrando.</div>
 
 <header class="topo">
   <div class="topo__linha">
@@ -145,24 +145,11 @@
   </div>
 </section>
 
-<section class="destaque">
-  <div class="wrap">
-    <div class="hero__card">
-      <div class="hero__card-topo"><span>Destaque da semana</span><b>Rende Muito 20L</b></div>
-      <div class="hero__card-corpo">
-        <div class="hero__card-item">
-          <div class="hero__card-foto"><img src="" data-img="coral-rende-20l" width="400" height="400" alt="Coral Rende Muito Acrílico Fosco 20L"></div>
-          <div class="hero__card-info">
-            <p class="hero__card-marca">Coral</p>
-            <p class="hero__card-nome">Rende Muito Acrílico Fosco 20L</p>
-            <p class="hero__card-preco">R$ 279,90</p>
-            <p class="hero__card-avista">R$ 265,91 no PIX ou dinheiro</p>
-          </div>
-        </div>
-        <button class="btn btn--azul btn--bloco" data-add="1">Adicionar ao pedido</button>
-      </div>
-    </div>
-  </div>
+<!-- o card é montado por renderDestaque() a partir do produto marcado
+     com oferta:true em dados.js. Antes ficava escrito à mão aqui, então
+     mudar o preço no dados.js não mudava o preço deste card. -->
+<section class="destaque" id="destaque" hidden>
+  <div class="wrap" id="destaqueCard"></div>
 </section>
 
 <section class="secao" id="setores">
