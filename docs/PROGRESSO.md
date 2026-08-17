@@ -8,6 +8,53 @@
 
 ---
 
+## 17/08/2026 — Catálogo real cadastrado: 26 produtos
+
+**O que:** entraram os 26 produtos do cupom de 17/08/2026, com os preços reais.
+Marcas: Coral (8), Qualyvinil (14), Lukscolor (2), Maza (2).
+
+**Como a transcrição foi validada:** os 26 itens foram transcritos do cupom e
+a soma deu **R$ 6.054,70**, exatamente o total impresso. Cada preço também foi
+conferido um a um contra o cupom, com multiplicidade. Se algum valor tivesse
+sido lido errado, o total não fecharia.
+
+**Setor novo — `preparacao`.** O catálogo real tem 6 massas (corrida, acrílica,
+Klasse) e não havia setor para elas: "Acessórios" é rolo, pincel e lona. Sem
+isso as massas ficariam sem casa.
+
+**Distribuição:** interna 8 · externa 6 · madeira e metal 6 · preparação 6.
+Impermeabilizantes e Acessórios ficaram sem produto e por isso não aparecem.
+"Madeira" virou "Madeira e metal", já que os esmaltes Maza e Lukscolor são
+para portão e ferrugem.
+
+**Fallback de foto.** Nenhum produto tem foto: as imagens foram mandadas por
+chat e não existem em arquivo. Sem tratamento, `img(p.foto)` devolvia
+`undefined` e o card renderizava ícone de imagem quebrada — em 26 cards. Agora
+`fotoOu()` mostra a inicial da marca sobre o azul da marca, no catálogo, no
+upsell e no carrinho. Some sozinho quando a foto for cadastrada.
+
+**UPSELL refeito** com os ids novos. Detalhe técnico deliberado: massa corrida
+é só para interior, então a área externa sugere massa acrílica e a interna
+sugere as duas.
+
+**Nenhum produto foi marcado como oferta.** O card com `oferta:true` mostra o
+selo "Oferta" ao cliente, e não existe desconto real definido — seria promessa
+falsa (Constituição, princípio 6). Consequência: a seção "Destaque da semana"
+fica escondida até o Roberto escolher o produto.
+
+**Verificado** (headless, com DOM stub, porque o navegador passou a bloquear
+localhost): execução completa sem erro, 26 cards, 4 setores, 4 marcas, 5
+filtros, zero `src="undefined"`, zero "undefined" solto no HTML, 26 selos de
+foto ausente, destaque vazio. Integridade: ids únicos, todo setor existe em
+SETORES, toda marca existe em MARCAS, UPSELL sem id órfão.
+
+**Aberto — precisa de resposta:** ver a lista de pendências no BACKLOG (P0).
+As principais: se os preços são de venda ou de custo, se o preço vale para a
+base branca sem o tingimento, e o volume da Coral Rende Muito (lata diz 3,2L,
+cupom diz 3,6L).
+
+---
+
 ## 17/08/2026 — Catálogo de exemplo removido (branch `catalogo-novo`)
 
 **O que:** os 7 produtos de exemplo saíram do `dados.js`, junto com as 7 fotos
