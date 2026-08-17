@@ -10,6 +10,24 @@ Prioridades: **P0** trava o projeto · **P1** próximo ciclo · **P2** depois ·
 
 ## P0 — travando
 
+### Webhook da Vercel parou de disparar
+Dois commits estão no GitHub sem build correspondente: `7a851ac` (as 26 fotos)
+e `b4521fa`. Enquanto não destravar, **nada mais que for commitado chega ao
+site** — o deploy contínuo está morto.
+
+Como conferir se voltou, sem abrir a Vercel:
+
+```bash
+curl -sI https://s-ite-bruno-tintas-loja-virtual.vercel.app/dados.js | grep -i age
+```
+
+Se o `age` só cresce, nenhum deploy novo saiu. Deploy novo zera esse número.
+
+Caminho de correção, na ordem: **Settings → Git**, desconectar e reconectar o
+repositório; se não resolver, checar a permissão do GitHub App da Vercel no
+repo; e conferir se o projeto duplicado `-b1hj` está atrapalhando.
+**Depende do Roberto** — não há CLI da Vercel nem token nesta máquina.
+
 ### Confirmar 6 pontos do catálogo novo
 Os 26 produtos estão cadastrados na branch `catalogo-novo` com os preços do
 cupom (soma confere no centavo). Falta confirmar, e cada um destes muda o que

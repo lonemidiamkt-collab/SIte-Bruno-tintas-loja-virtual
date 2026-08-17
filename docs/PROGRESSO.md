@@ -8,6 +8,37 @@
 
 ---
 
+## 17/08/2026 — BLOQUEIO: webhook da Vercel parou de disparar
+
+**Sintoma:** dois commits chegaram ao GitHub e **nenhuma build foi criada** —
+`7a851ac` (as 26 fotos) e `b4521fa` (commit vazio para tentar acordar o
+webhook). Na lista de Deployments da Vercel o topo continua sendo o `fe61fcb`.
+
+**Não é build com erro** — é build que nunca existiu. Nenhum dos dois aparece
+na lista.
+
+**Como confirmar de fora, sem acesso à Vercel:** a Vercel invalida o cache de
+borda a cada deploy. O `dados.js` em produção volta com `x-vercel-cache: HIT`
+e `age` que só cresce (541s → 932s), e o conteúdo ainda é `foto: null`. Cache
+envelhecendo sem parar = nenhum deploy novo.
+
+**Efeito:** o catálogo de 26 produtos está no ar (foi com o `fe61fcb`), mas
+sem foto — os cards mostram o selo com a inicial da marca.
+
+**Possível relação:** pouco antes disso o projeto passou a responder 403 com
+"Vercel Security Checkpoint", o modo anti-bot, provavelmente disparado pelas
+checagens repetidas de produção durante a verificação de deploy. Se a Vercel
+sinalizou o projeto, pode ter mexido também na automação. Não dá para
+confirmar de fora.
+
+**Depende do Roberto** (não tem CLI da Vercel nem token nesta máquina):
+Settings → Git, desconectar e reconectar o repositório. Ver BACKLOG P0.
+
+**Lição registrada:** verificar deploy com curl em rajada tem custo. Espaçar,
+ou conferir pelo cabeçalho `age` em vez de repetir requisição.
+
+---
+
 ## 17/08/2026 — 26 fotos de produto entraram, como arquivo e não base64
 
 **O que:** as 26 fotos de `~/Desktop/Bruno tintas site versel` foram
