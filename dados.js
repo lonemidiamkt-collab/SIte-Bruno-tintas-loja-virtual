@@ -330,8 +330,7 @@ const PRODUTOS = [
 
   { id: 14, set: ['interna', 'externa'], marca: 'Qualyvinil',
     nome: 'Fosco Completo Acrílico Premium 3,6L', preco: 130.00,
-    /* foto retirada: foto era de Acrílica Cor Econômico, não Fosco Completo (+ marca d'água 'Loja das Tintas') */
-    foto: null, cor: 'maquina', oferta: false },
+    foto: 'qualy-fosco-completo-36l', cor: 'maquina', oferta: false },
 
   /* ---- madeira e metal: esmaltes ---- */
   { id: 15, set: 'madeira', marca: 'Maza',
@@ -348,8 +347,7 @@ const PRODUTOS = [
 
   { id: 18, set: 'madeira', marca: 'Lukscolor',
     nome: 'Esmalte Base Água Premium Plus 900ml', preco: 49.90,
-    /* foto retirada: foto era do Esmalte Premium Plus BASE SOLVENTE, não base água */
-    foto: null, cor: 'prontas', carta: 'esmalte', oferta: false },
+    foto: 'lukscolor-esmalte-900ml', cor: 'prontas', carta: 'esmalte', oferta: false },
 
   { id: 19, set: 'madeira', marca: 'Qualyvinil',
     nome: 'Esmalte Sintético Standard 3,6L', preco: 135.00,
