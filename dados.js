@@ -17,9 +17,11 @@ const UNIDADES = [
     endereco: 'RJ-106, Vila Capri',
     enderecoCurto: 'RJ-106, Vila Capri',
     cidade: 'Araruama / RJ',
+    cep: '28981-630',   // Rod. Amaral Peixoto (RJ-106), Vila Capri — ViaCEP/Correios
     whatsapp: '5522998224630',
     whatsappVisivel: '(22) 99822-4630',
     prontoEm: '15 min',
+    instagram: 'https://www.instagram.com/brunotintas/',
     maps: 'https://www.google.com/maps/search/?api=1&query=' +
           encodeURIComponent('Bruno das Tintas, RJ-106, Vila Capri, Araruama - RJ')
   },
@@ -29,9 +31,11 @@ const UNIDADES = [
     endereco: 'R. Capitão Jorge Soares, 102 — Loja A, Estação',
     enderecoCurto: 'R. Cap. Jorge Soares, 102',
     cidade: 'Iguaba Grande / RJ',
+    cep: '28960-514',   // R. Capitão Jorge Soares, Estação — ViaCEP/Correios
     whatsapp: '5522992272479',
     whatsappVisivel: '(22) 99227-2479',
     prontoEm: '15 min',
+    instagram: 'https://www.instagram.com/brunotintasiguaba/',
     maps: 'https://www.google.com/maps/search/?api=1&query=' +
           encodeURIComponent('Bruno das Tintas, Rua Capitão Jorge Soares, 102, Estação, Iguaba Grande - RJ')
   }
@@ -43,13 +47,21 @@ const LOJA = {
   anos: 10,
   parcelas: 12,           // máximo de vezes no crédito
   parcelaMinima: null,    // valor mínimo por parcela; null = sem mínimo
-  semJuros: null,         // true, false ou null (null = não afirma nada)
-  descontoAvista: 0.05,   // 5% no PIX e no dinheiro
+  semJuros: true,         // confirmado pelo Bruno em 17/08/2026
+  descontoAvista: 0.10,   // 10% no PIX, dinheiro e débito (Bruno, 17/08/2026)
 
   /* Horário de corte para entregar no mesmo dia.
      Deixe null enquanto o cliente não confirmar o horário real.
      Com um valor ('15:00'), o site mostra quanto falta para o corte. */
-  corteEntregaHoje: null
+  corteEntregaHoje: null,
+
+  /* Horário confirmado pelo Bruno em 17/08/2026. Domingo não foi citado —
+     está como fechado; confirmar se abre. */
+  horario: {
+    semana: 'Segunda a sexta, 7h30 às 18h',
+    sabado: 'Sábado, 8h às 14h',
+    domingo: 'Domingo fechado'
+  }
 };
 
 /* Para onde vai a entrega. frete: 0 = grátis, null = combinado no WhatsApp.
@@ -77,10 +89,10 @@ const UPSELL = {
 /* Formas de pagamento. desconto = aplica o desconto à vista.
    O pagamento é combinado no WhatsApp; o site só registra a escolha. */
 const PAGAMENTOS = [
-  { id: 'pix',      nome: 'PIX',              desconto: true,  nota: '5% de desconto' },
-  { id: 'dinheiro', nome: 'Dinheiro',         desconto: true,  nota: '5% de desconto' },
-  { id: 'debito',   nome: 'Cartão de débito', desconto: false, nota: 'Na retirada ou na entrega' },
-  { id: 'credito',  nome: 'Cartão de crédito',desconto: false, nota: 'Em até 12x, sem valor mínimo', parcelavel: true }
+  { id: 'pix',      nome: 'PIX',              desconto: true,  nota: 'Desconto à vista' },
+  { id: 'dinheiro', nome: 'Dinheiro',         desconto: true,  nota: 'Desconto à vista' },
+  { id: 'debito',   nome: 'Cartão de débito', desconto: true,  nota: 'Desconto à vista' },
+  { id: 'credito',  nome: 'Cartão de crédito',desconto: false, nota: 'Em até 12x sem juros', parcelavel: true }
 ];
 
 /* Setores. Setor sem produto não aparece no site. */

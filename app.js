@@ -168,7 +168,7 @@ function cardProduto(p) {
       ${avisoCor(p)}
       <div class="prod__preco">
         <b>${brl(p.preco)}</b>
-        <span class="prod__avista">${brl(comDesconto(p.preco))} no PIX ou dinheiro</span>
+        <span class="prod__avista">${brl(comDesconto(p.preco))} à vista</span>
         <span class="prod__parcela">ou ${LOJA.parcelas}x de ${brl(parcela(p.preco, LOJA.parcelas))}</span>
       </div>
       <button class="btn btn--azul btn--bloco" style="margin-top:12px" data-add="${p.id}">Adicionar</button>
@@ -222,7 +222,7 @@ function verProduto(id) {
       <div class="det__bloco">
         <h4 class="det__rotulo">Preço</h4>
         <p class="det__preco">${brl(p.preco)}</p>
-        <p class="det__avista">${brl(comDesconto(p.preco))} no PIX ou dinheiro</p>
+        <p class="det__avista">${brl(comDesconto(p.preco))} à vista</p>
         <p class="det__parcela">ou ${LOJA.parcelas}x de ${brl(parcela(p.preco, LOJA.parcelas))} no cartão</p>
       </div>
       <button class="btn btn--azul btn--bloco" data-add="${p.id}">Adicionar ao pedido</button>
@@ -281,7 +281,7 @@ function renderDestaque() {
       <div class="hero__card-info">
         ${p.marca && p.marca !== '—' ? `<p class="hero__card-marca">${esc(p.marca)}</p>` : ''}
         <p class="hero__card-preco">${brl(p.preco)}</p>
-        <p class="hero__card-avista">${brl(comDesconto(p.preco))} no PIX ou dinheiro</p>
+        <p class="hero__card-avista">${brl(comDesconto(p.preco))} à vista</p>
       </div>
       <button class="btn btn--azul hero__card-btn" data-add="${p.id}">Adicionar ao pedido</button>
     </article>`;
@@ -314,6 +314,11 @@ function mudarQtd(key, d) {
 
 const totalProdutos = () => carrinho.reduce((s, i) => s + i.preco * i.qtd, 0);
 const comDesconto   = v => v * (1 - LOJA.descontoAvista);
+/* A porcentagem NUNCA é escrita à mão: sai de LOJA.descontoAvista. Antes o
+   "5%" estava digitado em 6 lugares, então mudar a config não mudava o texto. */
+const pctDesconto   = () => (LOJA.descontoAvista * 100)
+  .toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + '%';
+const meiosComDesconto = () => PAGAMENTOS.filter(p => p.desconto).map(p => p.nome);
 const formaEscolhida = () => PAGAMENTOS.find(f => f.id === pedido.pagamento) || PAGAMENTOS[0];
 const temDesconto   = () => formaEscolhida().desconto;
 const valorDesconto = () => temDesconto() ? totalProdutos() * LOJA.descontoAvista : 0;
@@ -472,7 +477,7 @@ ${pedido.cor ? `*Cor pedida:* ${pedido.cor}  _(confirmar antes de tingir)_\n` : 
 ${linhas}
 ━━━━━━━━━━━━━━━━━━━
 Produtos: ${brl(totalProdutos())}
-${temDesconto() ? `Desconto ${formaEscolhida().nome} (5%): − ${brl(valorDesconto())}\n` : ''}Entrega: ${freteTexto()}
+${temDesconto() ? `Desconto ${formaEscolhida().nome} (${pctDesconto()}): − ${brl(valorDesconto())}\n` : ''}Entrega: ${freteTexto()}
 *TOTAL: ${brl(totalGeral())}*
 
 *Forma de pagamento:* ${formaEscolhida().nome}${eParcelado() && pedido.vezes > 1 ? ` — ${pedido.vezes}x de ${brl(parcela(totalGeral(), pedido.vezes))}${textoJuros()}` : ''}
@@ -524,7 +529,7 @@ const fecharModal = () => {
 function htmlResumo() {
   return `
     <div class="resumo__l"><span>Produtos (${totalItens()})</span><span>${brl(totalProdutos())}</span></div>
-    ${temDesconto() ? `<div class="resumo__l resumo__l--desconto"><span>Desconto ${formaEscolhida().nome} (5%)</span><span>− ${brl(valorDesconto())}</span></div>` : ''}
+    ${temDesconto() ? `<div class="resumo__l resumo__l--desconto"><span>Desconto ${formaEscolhida().nome} (${pctDesconto()})</span><span>− ${brl(valorDesconto())}</span></div>` : ''}
     <div class="resumo__l"><span>Entrega</span><span>${freteTexto()}</span></div>
     <div class="resumo__l resumo__l--total"><span>Total</span><span>${brl(totalGeral())}</span></div>
     ${eParcelado() && pedido.vezes > 1 ? `<div class="resumo__l" style="color:var(--texto-fraco);font-size:.85rem"><span>${pedido.vezes}x de</span><span>${brl(parcela(totalGeral(), pedido.vezes))}${textoJuros()}</span></div>` : ''}`;
@@ -658,7 +663,7 @@ function passo2() {
     </div>
     <div id="blocoParcelas"></div>
 
-    <p class="dica-desconto">PIX e dinheiro têm 5% de desconto. O pagamento é combinado direto com a loja no WhatsApp — nada é cobrado pelo site.</p>
+    <p class="dica-desconto">${meiosComDesconto().join(", ")} têm ${pctDesconto()} de desconto. O pagamento é combinado direto com a loja no WhatsApp — nada é cobrado pelo site.</p>
 
     <div class="resumo" id="resumo">${htmlResumo()}</div>
 
