@@ -124,7 +124,7 @@
   <picture>
     <source media="(min-width:900px)" srcset="artes/capa-desktop.webp" width="1912" height="823">
     <img class="capa__img" src="artes/capa-mobile.webp" width="1080" height="609" fetchpriority="high"
-         alt="Família pintando a parede de casa com tintas Bruno das Tintas">
+         alt="Latas de Tinta Premium Rende Muito da Bruno das Tintas, com rolo e pincel">
   </picture>
 
   <div class="capa__ctas">
@@ -167,11 +167,18 @@
     <div class="secao__cabeca so-mob">
       <span class="eyebrow">Catálogo</span>
       <h2 class="display">Monte seu pedido<em>sem sair de casa.</em></h2>
-      <p>Escolha o que precisa e mande. A cor a gente acerta com você no WhatsApp e tinge na hora, na máquina.</p>
+      <p>Escolha o que precisa e mande. A cor a gente acerta com você no WhatsApp — tem cor pronta e tem cor feita na máquina, depende da linha.</p>
     </div>
     <h2 class="sr-only so-desk">Monte seu pedido sem sair de casa</h2>
-    <img class="arte-secao so-desk" src="artes/secao-catalogo.webp" width="1600" height="689" loading="lazy"
-         alt="Monte o seu pedido sem sair de casa. Monte o pedido pelo site; a cor a gente acerta com você no WhatsApp.">
+    <!-- A arte existe nas duas telas, mas não é a mesma imagem: a versão de
+         desktop traz o título desenhado; a de celular é só a foto, porque ali
+         o título já é o <h2> em HTML logo acima e texto embutido em arte
+         larga fica ilegível em 375px. -->
+    <picture class="arte-secao">
+      <source media="(min-width:900px)" srcset="artes/secao-catalogo.webp" width="1600" height="689">
+      <img src="artes/secao-catalogo-mobile.webp" width="800" height="773" loading="lazy"
+           alt="Entregador da Bruno das Tintas de moto, com lata de Tinta Premium Rende Muito">
+    </picture>
     <div class="busca">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#55688A" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
       <input type="search" id="busca" placeholder="Buscar tinta, massa, rolo..." aria-label="Buscar produtos">
@@ -204,7 +211,7 @@
       <p>Nada é cobrado pelo site. O pedido cai no nosso WhatsApp com a nota item por item, a gente confere o estoque e combina o pagamento com você.</p>
     </div>
     <div class="passos so-mob">
-      <div class="passo"><div class="passo__n display">01</div><h3>Monte o pedido</h3><p>Escolha os produtos no catálogo e diga a cor que quer.</p></div>
+      <div class="passo"><div class="passo__n display">01</div><h3>Monte o pedido</h3><p>Escolha os produtos no catálogo. A cor a gente acerta na conversa.</p></div>
       <div class="passo"><div class="passo__n display">02</div><h3>Escolha como receber</h3><p>Retirar em Araruama, em Iguaba, ou receber em casa com frete grátis.</p></div>
       <div class="passo"><div class="passo__n display">03</div><h3>Diga como quer pagar</h3><p>PIX, dinheiro, débito ou crédito. PIX e dinheiro têm 5% de desconto.</p></div>
       <div class="passo"><div class="passo__n display">04</div><h3>A gente fecha no WhatsApp</h3><p>A nota cai na loja, confirmamos a cor e o valor, e combinamos o pagamento.</p></div>
