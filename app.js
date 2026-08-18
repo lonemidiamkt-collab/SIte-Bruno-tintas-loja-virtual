@@ -736,7 +736,10 @@ function passo3() {
   $('#btEnviar').onclick = () => {
     salvarP3();
     pedido.numero = gerarNumero();
-    const aba = window.open(linkWhatsUnidade(unidadeDoPedido(), notaPedido()), '_blank');
+    // 'noopener' explícito: window.open NÃO assume isso sozinho (só a tag <a> com
+    // target=_blank assume). Sem ele, a aba do WhatsApp recebe window.opener e
+    // poderia mexer na janela do site.
+    const aba = window.open(linkWhatsUnidade(unidadeDoPedido(), notaPedido()), '_blank', 'noopener');
     etapaFim(!aba);
   };
 }
