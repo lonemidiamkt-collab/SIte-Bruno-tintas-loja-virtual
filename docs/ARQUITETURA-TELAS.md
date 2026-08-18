@@ -9,7 +9,7 @@ Ponto de corte: **900px**.
 
 | # | Seção | Desktop (≥900px) | Celular (<900px) | Por quê |
 |---|---|---|---|---|
-| 1 | **Capa** | `capa.webp` inteira (1912×823) | A **mesma** `capa.webp` inteira, menor | Uma arte só, sem recorte. O título em HTML continua acima no celular, porque na arte reduzida ele fica pequeno demais para ler. |
+| 1 | **Capa** | `capa.webp` inteira (1912×823) | A **mesma** `capa.webp` inteira, menor | Uma arte só, sem recorte, e ela é a única coisa visível: o bloco de texto fica fora da tela nas duas, só para leitor de tela e busca. |
 | 2 | **Destaque da semana** | Faixa horizontal, foto de 300px à esquerda | Card, miniatura de 68px ao lado do preço | Mesmo DOM, grid recoloca. O desktop tem largura sobrando; o celular não. |
 | 3 | **Setores** | 4 cards | 4 cards em trilho rolável | Igual nas duas. |
 | 4 | **Catálogo** | `secao-catalogo.webp` inteira | A **mesma**, inteira, menor | Mesma regra da capa. |
@@ -34,12 +34,20 @@ Ponto de corte: **900px**.
 ## Custo assumido nessa escolha
 
 Arte de 2.32 numa tela de 375px fica com **161px de altura**, e o texto
-desenhado dentro dela fica pequeno. Por isso o título em HTML continua acima
-da arte no celular: ele é quem carrega a mensagem de forma legível, indexável
-e selecionável. A consequência é que a frase aparece duas vezes na mesma tela —
-uma em HTML, outra dentro da arte.
+desenhado dentro dela fica pequeno.
 
-Foi decisão do Roberto (17/08): arte inteira, sem corte, mesmo com esse custo.
+A primeira tentativa foi manter o título em HTML acima da arte no celular, para
+a mensagem ficar legível. O Roberto vetou (17/08): com a arte inteira, o texto
+acima virava repetição do que a própria arte já diz.
+
+**Decisão:** o bloco de texto sai da tela nas duas telas, mas continua no DOM
+com a técnica de só-leitor-de-tela. Assim a página mantém o `<h1>` para busca e
+acessibilidade — conferido: `display` não é `none`, `visibility` não é
+`hidden`, sem `aria-hidden`, então leitor de tela lê normalmente.
+
+O que se perde: no celular a mensagem só existe dentro da arte, em texto
+pequeno. Resolve de vez quando o designer fizer uma versão vertical das artes,
+composta de origem para 375px.
 
 ## Divergência conhecida, ainda aberta
 
