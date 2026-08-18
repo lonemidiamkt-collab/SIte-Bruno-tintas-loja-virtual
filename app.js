@@ -129,13 +129,13 @@ function renderLojas() {
       <div class="loja__l"><small>Retirada</small><p>Pedido pronto em ${esc(u.prontoEm)}</p></div>
       <div class="loja__acoes">
         <a class="btn btn--azul" href="${linkWhatsUnidade(u.id, 'Oi! Vim pelo site e queria falar com a loja de ' + u.nome + '.')}" target="_blank" rel="noopener">
-          ${ICO_WPP}<span class="txt-curto">WhatsApp</span><span class="txt-longo">Falar com ${esc(u.nome)}</span>
+          ${ICO_WPP}<span>Falar com a loja</span>
         </a>
         <a class="btn btn--linha" href="${u.maps}" target="_blank" rel="noopener">
-          ${ICO_PIN}<span class="txt-curto">Mapa</span><span class="txt-longo">Ver no mapa</span>
+          ${ICO_PIN}<span>Mapa</span>
         </a>
         ${u.instagram ? `<a class="btn btn--linha" href="${u.instagram}" target="_blank" rel="noopener">
-          ${ICO_IG}<span class="txt-curto">Insta</span><span class="txt-longo">Ver o Instagram</span>
+          ${ICO_IG}<span>Instagram</span>
         </a>` : ''}
       </div>
     </div>`).join('');
@@ -157,10 +157,18 @@ function renderFiltros() {
    tingido na máquina a cor é orçamento à parte, e nas cores prontas o
    volume da lata muda (Coral Rende Muito: branco 18L, cor 16L).
    Produto sem `cor` definida não afirma nada, de propósito. */
+/* O aviso de "outras cores podem ter volume diferente" só vale para a Coral
+   Rende Muito, onde o branco vem 18L e a cor vem 16L. Nos esmaltes e nas
+   demais linhas a litragem é a mesma em qualquer cor — repetir o aviso ali
+   assustava o cliente com um problema que não existe naquele produto. */
 const AVISO_COR = {
   maquina: 'Cor feita na máquina, na hora. O preço é o da base branca — a cor sai por orçamento.',
-  prontas: 'Tem cores prontas. O preço é o do branco; outras cores podem ter volume e preço diferentes.'
+  prontas: 'Tem cores prontas de fábrica, pelo mesmo preço do branco.'
 };
+const avisoVolume = p => VOLUME_POR_COR[p.id]
+  ? `Branco vem ${VOLUME_POR_COR[p.id].branco}; nas cores vem ${VOLUME_POR_COR[p.id].colorido}, `
+    + 'pelo mesmo preço — é tinta concentrada e rende igual.'
+  : '';
 const avisoCor = p => AVISO_COR[p.cor]
   ? `<span class="prod__tingir">${AVISO_COR[p.cor]}</span>` : '';
 
@@ -221,7 +229,6 @@ function renderGrade() {
      que é o card "quer uma cor personalizada". */
 function blocoCorDoProduto(p) {
   if (p.cor === 'prontas') {
-    const vol = VOLUME_POR_COR[p.id];
     const carta = CARTAS[p.carta] || CARTAS.parede;
     return `
       <div class="det__bloco">
@@ -232,8 +239,7 @@ function blocoCorDoProduto(p) {
                     role="radio" aria-checked="${i === 0}"
                     data-cor="${esc(c)}" data-prod="${p.id}">${esc(c)}</button>`).join('')}
         </div>
-        ${vol ? `<p class="det__cor-ajuda">Branco vem ${vol.branco}; nas cores vem
-          ${vol.colorido}, pelo mesmo preço — é tinta concentrada e rende igual.</p>` : ''}
+        ${avisoVolume(p) ? `<p class="det__cor-ajuda">${avisoVolume(p)}</p>` : ''}
         <p class="det__cor-ajuda">A loja confirma a cor com você no WhatsApp antes de separar.</p>
       </div>`;
   }

@@ -221,12 +221,16 @@ const FICHAS = {
         onde: 'Paredes de reboco, massa, textura e concreto, dentro e fora' },
   14: { rendimento: 'até 24 m² no total',  demaos: '2 a 3 demãos', secagem: '4h entre demãos',
         onde: 'Paredes de reboco, massa, textura e concreto, dentro e fora' },
+  /* "alvenaria" saiu do onde usar: um trecho do boletim lista alvenaria, outro
+     diz "não aplicar sobre reboco, concreto ou argamassa". Diante da dúvida,
+     fica só o uso que as duas fontes concordam — mandar o cliente esmaltar a
+     parede seria caro de desfazer. */
   19: { rendimento: 'até 50 m² por demão', demaos: '2 a 3 demãos', secagem: '8 a 10h entre demãos',
-        onde: 'Metal, madeira, cerâmica não vitrificada e alvenaria',
-        aviso: 'Dilua com aguarrás. Nunca use thinner.' },
+        onde: 'Metal e madeira',
+        aviso: 'Dilua com aguarrás, nunca thinner. Não use sobre reboco, concreto ou argamassa.' },
   20: { rendimento: 'até 12 m² por demão', demaos: '2 a 3 demãos', secagem: '8 a 10h entre demãos',
-        onde: 'Metal, madeira, cerâmica não vitrificada e alvenaria',
-        aviso: 'Dilua com aguarrás. Nunca use thinner.' },
+        onde: 'Metal e madeira',
+        aviso: 'Dilua com aguarrás, nunca thinner. Não use sobre reboco, concreto ou argamassa.' },
   21: { rendimento: 'até 60 m² por demão', demaos: '2 a 3 demãos', secagem: '3h entre demãos',
         onde: 'Nivelar paredes internas de reboco, massa fina, gesso e concreto' },
 
@@ -326,7 +330,8 @@ const PRODUTOS = [
 
   { id: 14, set: 'externa', marca: 'Qualyvinil',
     nome: 'Fosco Completo Acrílico Premium 3,6L', preco: 130.00,
-    foto: 'qualy-fosco-completo-36l', cor: 'maquina', oferta: false },
+    /* foto retirada: foto era de Acrílica Cor Econômico, não Fosco Completo (+ marca d'água 'Loja das Tintas') */
+    foto: null, cor: 'maquina', oferta: false },
 
   /* ---- madeira e metal: esmaltes ---- */
   { id: 15, set: 'madeira', marca: 'Maza',
@@ -343,7 +348,8 @@ const PRODUTOS = [
 
   { id: 18, set: 'madeira', marca: 'Lukscolor',
     nome: 'Esmalte Base Água Premium Plus 900ml', preco: 49.90,
-    foto: 'lukscolor-esmalte-900ml', cor: 'prontas', carta: 'esmalte', oferta: false },
+    /* foto retirada: foto era do Esmalte Premium Plus BASE SOLVENTE, não base água */
+    foto: null, cor: 'prontas', carta: 'esmalte', oferta: false },
 
   { id: 19, set: 'madeira', marca: 'Qualyvinil',
     nome: 'Esmalte Sintético Standard 3,6L', preco: 135.00,
@@ -351,7 +357,8 @@ const PRODUTOS = [
 
   { id: 20, set: 'madeira', marca: 'Qualyvinil',
     nome: 'Esmalte Sintético Standard 900ml', preco: 38.50,
-    foto: 'qualy-esmalte-900ml', cor: 'prontas', carta: 'esmalte', oferta: false },
+    /* foto retirada: foto era do Colorit Eco base água, não Esmalte Sintético (+ selo 'Pintura Artística') */
+    foto: null, cor: 'prontas', carta: 'esmalte', oferta: false },
 
   /* ---- preparação: massas (não vão para a máquina de tingimento) ---- */
   { id: 21, set: 'preparacao', marca: 'Qualyvinil',
@@ -372,7 +379,8 @@ const PRODUTOS = [
 
   { id: 25, set: 'preparacao', marca: 'Qualyvinil',
     nome: 'Massa Acrílica 3,6L', preco: 46.00,
-    foto: 'massa-acrilica-36l', cor: null, oferta: false },
+    /* foto retirada: foto era do balde Klasse, não da Massa Acrílica Qualyvinil (+ selo 'Terminação de Superfícies') */
+    foto: null, cor: null, oferta: false },
 
   { id: 26, set: 'preparacao', marca: 'Qualyvinil',
     nome: 'Massa Acrílica 900ml', preco: 18.90,

@@ -396,11 +396,26 @@ a{color:inherit;text-decoration:none}
 .loja__l small{display:block;font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--texto-fraco);margin-bottom:2px}
 .loja__l p{font-size:.8rem;font-weight:500;line-height:1.35}
 @media (min-width:560px){.loja__l p{font-size:.92rem}}
-.loja__acoes{display:grid;gap:6px;padding:var(--e3) var(--e4) var(--e4);margin-top:auto}
-@media (min-width:560px){.loja__acoes{gap:var(--e2);padding:var(--e4) var(--e6) var(--e6)}}
-.loja__acoes .btn{width:100%;padding:10px 8px;font-size:.8rem;min-height:42px;gap:5px}
-@media (min-width:560px){.loja__acoes .btn{padding:14px 24px;font-size:.94rem;min-height:48px;gap:9px}}
-@media (min-width:480px){.loja__acoes{grid-template-columns:1.4fr 1fr 1fr}}
+/* Três ações por loja: falar, mapa e Instagram. O problema anterior era pôr
+   as três lado a lado com larguras diferentes (1.4fr 1fr 1fr): o rótulo mais
+   longo quebrava em duas linhas e os botões ficavam com alturas desiguais.
+
+   Agora a hierarquia é explícita: "Falar com a loja" é a ação principal e
+   ocupa a linha inteira; mapa e Instagram são secundárias e dividem a linha de
+   baixo, em colunas iguais. Some a quebra de linha e some o desalinhamento. */
+.loja__acoes{
+  display:grid;gap:var(--e2);
+  grid-template-columns:1fr 1fr;
+  padding:var(--e3) var(--e4) var(--e4);margin-top:auto;
+}
+.loja__acoes .btn{width:100%;padding:12px 10px;font-size:.85rem;min-height:46px;gap:6px;
+  white-space:nowrap}
+/* a principal atravessa as duas colunas */
+.loja__acoes .btn--azul{grid-column:1 / -1}
+@media (min-width:560px){
+  .loja__acoes{padding:var(--e4) var(--e6) var(--e6);gap:var(--e3)}
+  .loja__acoes .btn{padding:14px 20px;font-size:.92rem;min-height:50px;gap:9px}
+}
 
 .escolha-loja{
   display:flex;align-items:center;gap:var(--e4);
