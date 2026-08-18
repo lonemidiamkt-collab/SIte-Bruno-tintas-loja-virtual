@@ -46,8 +46,17 @@ para 25 KB**. O que sempre desce agora são **124 KB** de HTML+CSS+JS; imagem é
 sob demanda.
 
 **Também:** alvo de toque do nome do produto de 17px para 44px; textos
-alternativos reescritos para as artes novas; media query vazia removida;
-assets versionados por hash na URL, que mata cache velho a cada deploy.
+alternativos reescritos para as artes novas; media query vazia removida.
+
+**Revertido no mesmo dia — versionamento por hash na URL.** Eu tinha posto
+`?v=<hash>` em CSS e JS para matar cache. Produção aceita bem, mas quebra ao
+abrir o `index.html` direto do disco, por duplo clique: o `file://` não resolve
+o caminho com query. O sintoma foi o site aparecendo sem CSS nem JS, com as
+imagens carregando normalmente — porque imagem não levava query.
+
+Removido. O `vercel.json` já manda `max-age=0, must-revalidate`, então o
+navegador revalida a cada visita e o versionamento era redundante. Não valia
+o custo de quebrar o jeito como o Roberto abre o arquivo para conferir.
 
 **Não mexi** na fonte Inter (identidade já estabelecida) nem na borda lateral
 do `.aviso` — o detector sinaliza os dois, mas são escolhas do projeto, fora
