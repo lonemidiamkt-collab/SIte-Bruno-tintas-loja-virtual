@@ -42,7 +42,12 @@ const unidade = id => UNIDADES.find(u => u.id === id) || UNIDADES[0];
 const linkWhatsUnidade = (id, txt) =>
   `https://wa.me/${unidade(id).whatsapp}` + (txt ? `?text=${encodeURIComponent(txt)}` : '');
 const nomeSetor = id => (SETORES.find(s => s.id === id) || {}).nome || '';
-const temProduto = setId => PRODUTOS.some(p => p.set === setId);
+/* `set` aceita string ou lista: tem produto que serve mais de um setor. A
+   Rende Muito, por exemplo, é de parede e teto (interna) e também de fachada
+   e muro (externa) — o Bruno confirmou que vale nos dois. */
+const setoresDe = p => Array.isArray(p.set) ? p.set : [p.set];
+const eDoSetor  = (p, id) => setoresDe(p).includes(id);
+const temProduto = setId => PRODUTOS.some(p => eDoSetor(p, setId));
 const itensDaMarca = m => PRODUTOS.filter(p => p.marca === m).length;
 
 const ICO_WPP = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2m0 1.8a8.2 8.2 0 1 1-4.2 15.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8m-2.5 4c-.2 0-.5 0-.7.4-.3.4-.9 1-.9 2.2s.9 2.5 1 2.7c.1.2 1.7 2.8 4.3 3.8 2.1.8 2.6.7 3 .6.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4l-.7-.4-1.5-.7c-.2-.1-.4-.1-.5.1l-.8 1c-.1.2-.3.2-.5.1-1.4-.6-2.3-1.9-2.6-2.3-.1-.2 0-.4.1-.5l.4-.5c.1-.2.2-.3.2-.5v-.4l-.8-1.9c-.2-.5-.4-.4-.6-.5z"/></svg>';
@@ -59,6 +64,8 @@ const ICONES = {
 
 /* ---------------- estado ---------------- */
 let carrinho = [];
+/* cor escolhida por produto, antes de ir para o carrinho */
+let corEscolhida = {};
 let filtro = 'todos';
 let termo = '';
 const pedidoVazio = () => ({
@@ -163,7 +170,7 @@ function cardProduto(p) {
       ${p.oferta ? '<span class="prod__oferta">Oferta</span>' : ''}
     </button>
     <div class="prod__corpo">
-      <span class="prod__cat">${esc(nomeSetor(p.set))}</span>
+      <span class="prod__cat">${esc(setoresDe(p).map(nomeSetor).join(" · "))}</span>
       <h3 class="prod__nome"><button class="prod__nome-btn" data-ver="${p.id}">${esc(p.nome)}</button></h3>
       ${avisoCor(p)}
       <div class="prod__preco">
@@ -179,10 +186,10 @@ function cardProduto(p) {
 function renderGrade() {
   const t = termo.trim().toLowerCase();
   const lista = PRODUTOS.filter(p =>
-    (filtro === 'todos' || p.set === filtro) &&
+    (filtro === 'todos' || eDoSetor(p, filtro)) &&
     (!t || p.nome.toLowerCase().includes(t) ||
           p.marca.toLowerCase().includes(t) ||
-          nomeSetor(p.set).toLowerCase().includes(t))
+          setoresDe(p).map(nomeSetor).join(' ').toLowerCase().includes(t))
   );
   $('#grade').innerHTML = lista.length
     ? lista.map(cardProduto).join('')
@@ -198,15 +205,62 @@ function renderGrade() {
    O bloco de cor está preparado mas desligado: só liga quando os preços por
    cor forem confirmados (ver SPEC-003). Melhor não mostrar cor nenhuma do que
    mostrar cor com preço errado. */
+/* Bloco de cor dentro do detalhe do produto.
+
+   Dois caminhos, porque a cor funciona de dois jeitos diferentes:
+
+   'prontas' → carta de cores para clicar. A escolha vai junto no pedido, e o
+     site avisa quando a cor muda a litragem (Coral Rende Muito: branco 18L,
+     colorida 16L, mesmo preço, porque é concentrada e rende igual).
+
+   'maquina' → NÃO tem carta. Cada cor tem um valor próprio, então listar
+     opção com preço na tela seria mentira. Vira um convite para orçamento,
+     que é o card "quer uma cor personalizada". */
 function blocoCorDoProduto(p) {
-  if (!AVISO_COR[p.cor]) return '';
-  const titulo = p.cor === 'maquina' ? 'Cor' : 'Cores';
-  return `
-    <div class="det__bloco">
-      <h4 class="det__rotulo">${titulo}</h4>
-      <p class="det__cor">${AVISO_COR[p.cor]}</p>
-      <p class="det__cor-ajuda">Fale com a loja para acertar a cor e fechar o valor.</p>
-    </div>`;
+  if (p.cor === 'prontas') {
+    const vol = VOLUME_POR_COR[p.id];
+    return `
+      <div class="det__bloco">
+        <h4 class="det__rotulo">Escolha a cor</h4>
+        <div class="cores" role="radiogroup" aria-label="Cores disponíveis">
+          ${CORES_PRONTAS.map((c, i) => `
+            <button type="button" class="cor${i === 0 ? ' on' : ''}"
+                    role="radio" aria-checked="${i === 0}"
+                    data-cor="${esc(c)}" data-prod="${p.id}">${esc(c)}</button>`).join('')}
+        </div>
+        ${vol ? `<p class="det__cor-ajuda">Branco vem ${vol.branco}; nas cores vem
+          ${vol.colorido}, pelo mesmo preço — é tinta concentrada e rende igual.</p>` : ''}
+        <p class="det__cor-ajuda">A loja confirma a cor com você no WhatsApp antes de separar.</p>
+      </div>`;
+  }
+  if (p.cor === 'maquina') {
+    return `
+      <div class="det__bloco">
+        <h4 class="det__rotulo">Cor</h4>
+        <div class="cor-sob-medida">
+          <b>Quer uma cor personalizada?</b>
+          <p>Esta linha é tingida na máquina, na hora. Dá para fazer
+             praticamente qualquer cor — e como cada uma tem um valor,
+             a gente monta o orçamento com você.</p>
+          <button type="button" class="btn btn--azul cor-sob-medida__btn"
+                  data-cor-medida="${p.id}">Pedir orçamento de cor</button>
+        </div>
+        <p class="det__cor-ajuda">O preço acima é o da base branca.</p>
+      </div>`;
+  }
+  return '';
+}
+
+/* Orçamento de cor: abre a conversa com a loja já dizendo qual produto é.
+   Não passa pelo carrinho porque não há preço a somar — é conversa. */
+function pedirCorPersonalizada(id) {
+  const p = PRODUTOS.find(x => x.id === id);
+  if (!p) return;
+  const texto = `Oi! Vim pelo site e queria um orçamento de cor personalizada para:\n\n`
+    + `*${p.marca !== '—' ? p.marca + ' ' : ''}${p.nome}*\n`
+    + `Base branca: ${brl(p.preco)}\n\n`
+    + `A cor que eu queria é: `;
+  escolherLoja(texto);
 }
 
 function verProduto(id) {
@@ -217,7 +271,7 @@ function verProduto(id) {
   $('#corpoModal').innerHTML = `
     <div class="det">
       <div class="det__foto">${fotoOu(p, (temMarca ? p.marca + ' ' : '') + p.nome)}</div>
-      <p class="det__setor">${esc(nomeSetor(p.set))}</p>
+      <p class="det__setor">${esc(setoresDe(p).map(nomeSetor).join(" · "))}</p>
       ${blocoCorDoProduto(p)}
       <div class="det__bloco">
         <h4 class="det__rotulo">Preço</h4>
@@ -258,7 +312,7 @@ function produtoDestaque() {
   const setores = SETORES.filter(s => temProduto(s.id));
   if (!setores.length) return null;
   const w = semanaAtual();
-  const doSetor = PRODUTOS.filter(p => p.set === setores[w % setores.length].id);
+  const doSetor = PRODUTOS.filter(p => eDoSetor(p, setores[w % setores.length].id));
   return doSetor[Math.floor(w / setores.length) % doSetor.length];
 }
 
@@ -292,11 +346,14 @@ function renderDestaque() {
 function adicionar(id) {
   const p = PRODUTOS.find(x => x.id === id);
   if (!p) return;
-  const key = String(p.id);
+  /* A cor faz parte da identidade do item: a mesma tinta em duas cores são
+     duas linhas no carrinho, não uma com quantidade 2. */
+  const cor = p.cor === 'prontas' ? (corEscolhida[p.id] || CORES_PRONTAS[0]) : '';
+  const key = cor ? `${p.id}|${cor}` : String(p.id);
   const ja = carrinho.find(i => i.key === key);
   if (ja) ja.qtd++;
   else carrinho.push({
-    key, id: p.id, foto: p.foto, preco: p.preco, qtd: 1,
+    key, id: p.id, foto: p.foto, preco: p.preco, qtd: 1, cor,
     nome: p.marca !== '—' ? p.marca + ' ' + p.nome : p.nome
   });
   renderCarrinho();
@@ -350,8 +407,13 @@ const totalGeral    = () => totalProdutos() - valorDesconto() + freteValor();
    Nunca sugere o que já está no carrinho. */
 function sugestoes() {
   const noCarrinho = carrinho.map(i => i.id);
+  /* achatado porque `set` pode ser lista desde que produto passou a servir
+     mais de um setor */
   const setoresNoCarrinho = [...new Set(
-    carrinho.map(i => (PRODUTOS.find(p => p.id === i.id) || {}).set).filter(Boolean)
+    carrinho.flatMap(i => {
+      const p = PRODUTOS.find(x => x.id === i.id);
+      return p ? setoresDe(p) : [];
+    })
   )];
   const ids = [];
   setoresNoCarrinho.forEach(set => (UPSELL[set] || []).forEach(id => {
@@ -411,6 +473,7 @@ function renderCarrinho() {
       <div class="item__img">${fotoOu(i, "")}</div>
       <div class="item__meio">
         <p class="item__nome">${esc(i.nome)}</p>
+        ${i.cor ? `<p class="item__cor">Cor: ${esc(i.cor)}</p>` : ''}
         <p class="item__preco">${brl(i.preco * i.qtd)}</p>
         <div class="qtd">
           <button data-q="-1" data-k="${esc(i.key)}" aria-label="Diminuir">−</button>
@@ -463,8 +526,10 @@ function textoRecebimento() {
 }
 
 function notaPedido() {
+  /* a cor escolhida vai item a item: é o que a loja precisa para separar */
   const linhas = carrinho.map(i =>
-    `• ${i.qtd}x ${i.nome}\n   ${brl(i.preco)} un — ${brl(i.preco * i.qtd)}`
+    `• ${i.qtd}x ${i.nome}${i.cor ? ` — cor ${i.cor}` : ''}`
+    + `\n   ${brl(i.preco)} un — ${brl(i.preco * i.qtd)}`
   ).join('\n');
 
   return `*PEDIDO ${pedido.numero} — BRUNO DAS TINTAS*
@@ -805,6 +870,17 @@ function etapaFim(precisaEnvioManual) {
 /* ---------------- ligações ---------------- */
 
 document.addEventListener('click', e => {
+  const cor = e.target.closest('[data-cor]');
+  if (cor) {
+    corEscolhida[+cor.dataset.prod] = cor.dataset.cor;
+    cor.parentElement.querySelectorAll('.cor').forEach(b => {
+      b.classList.toggle('on', b === cor);
+      b.setAttribute('aria-checked', b === cor);
+    });
+    return;
+  }
+  const medida = e.target.closest('[data-cor-medida]');
+  if (medida) { pedirCorPersonalizada(+medida.dataset.corMedida); return; }
   const ver = e.target.closest('[data-ver]');
   if (ver) { verProduto(+ver.dataset.ver); return; }
   const add = e.target.closest('[data-add]');

@@ -8,7 +8,7 @@
 | fase | o que é | estado |
 |---|---|---|
 | **1 — box de detalhe** | clicar no produto abre um box com foto grande, preço e as condições | **Implementada** (17/08) |
-| **2 — escolha de cor** | escolher a cor dentro do box, com preço por cor | **Proposta** — bloqueada, falta preço |
+| **2 — escolha de cor** | escolher a cor dentro do box | **Implementada** (17/08) |
 
 A fase 1 foi separada porque não depende de nenhum dado que falta, e entrega
 sozinha o ganho da foto grande. A fase 2 mora dentro dela.
@@ -33,7 +33,26 @@ em texto, e é ali que entram as cores para escolher.
 
 ---
 
-## Fase 2 — escolha de cor (proposta)
+## Fase 2 — escolha de cor (feita)
+
+Dois caminhos, porque a cor funciona de dois jeitos:
+
+**Cores prontas** (Coral Rende Muito, Qualy Econômica) → carta de 27 cores para
+clicar dentro do box. A escolha vira parte da identidade do item: a mesma tinta
+em duas cores são **duas linhas** no carrinho, e a cor vai item a item na nota
+do WhatsApp. Na Coral Rende Muito o box avisa que o branco vem 18L e a cor vem
+16L **pelo mesmo preço** — é concentrada e rende igual.
+
+**Tingido na máquina** (linha Decora) → **não tem carta**. Cada cor tem um valor
+próprio, então listar opção com preço seria mentira. Vira o card "Quer uma cor
+personalizada?", que abre a conversa com a loja já dizendo o produto e o preço
+da base branca. Não passa pelo carrinho porque não há preço a somar.
+
+A carta é a **padrão da linha**, não lista de estoque. Isso é seguro aqui porque
+nada é cobrado pelo site: a loja confirma a cor no WhatsApp antes de separar,
+então existe sempre uma conferência humana antes da venda.
+
+## Fase 2 — desenho original (histórico)
 
 ---
 

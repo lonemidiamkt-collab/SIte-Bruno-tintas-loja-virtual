@@ -585,3 +585,29 @@ body.com-barra{padding-bottom:84px}
    vertical no celular, horizontal no desktop */
 
 
+
+/* ---------- escolha de cor no detalhe do produto ---------- */
+.cores{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:var(--e3)}
+.cor{
+  border:1px solid var(--borda);background:var(--branco);color:var(--texto);
+  padding:9px 12px;border-radius:999px;font-size:.82rem;font-weight:500;
+  min-height:38px;transition:border-color .15s,background .15s,color .15s;
+}
+.cor:hover{border-color:var(--azul-claro)}
+.cor.on{background:var(--azul);border-color:var(--azul);color:#fff;font-weight:600}
+.cor:focus-visible{outline:2px solid var(--azul-claro);outline-offset:2px}
+
+/* convite de cor sob medida: é conversa, não item de tabela — por isso não
+   parece um card de produto */
+.cor-sob-medida{
+  background:linear-gradient(150deg,var(--azul-profundo),var(--azul));
+  color:#fff;border-radius:var(--raio-g);padding:var(--e4);
+}
+.cor-sob-medida b{display:block;font-family:var(--display);font-size:1.35rem;
+  font-weight:800;text-transform:uppercase;line-height:1.05;margin-bottom:6px}
+.cor-sob-medida p{font-size:.86rem;line-height:1.45;color:#CFE0FB;margin-bottom:var(--e3)}
+.cor-sob-medida__btn{width:100%;background:var(--branco);color:var(--azul-profundo)}
+.cor-sob-medida__btn:hover{background:#E9F0FC}
+
+/* cor do item no carrinho */
+.item__cor{font-size:.78rem;color:var(--azul);font-weight:600}

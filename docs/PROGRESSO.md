@@ -8,6 +8,41 @@
 
 ---
 
+## 17/08/2026 — Escolha de cor, cor sob medida e produto em dois setores
+
+Lote de respostas do Bruno aplicado.
+
+**Escolha de cor (SPEC-003 fase 2).** Produto com cores prontas mostra a carta
+de 27 cores dentro do box. Produto tingido na máquina mostra o card **"Quer uma
+cor personalizada?"**, que abre a conversa com a loja em vez de listar preço —
+cada cor tem um valor, então tabela ali seria mentira. Ideia do Roberto.
+
+**A cor faz parte da identidade do item.** Mesma tinta em duas cores são duas
+linhas no carrinho, não uma com quantidade 2, e a cor vai item a item na nota
+do WhatsApp — é o que a loja precisa para separar.
+
+**Preço da colorida resolvido.** Branco 18L e colorida 16L custam o **mesmo**,
+e isso não é erro: é tinta concentrada, a colorida rende igual com menos litro.
+O aviso no box explica isso para o cliente não achar que está levando menos.
+
+**`set` passou a aceitar lista.** O Bruno confirmou que Rende Muito serve
+parede e teto **e** fachada e muro. O modelo só permitia um setor por produto;
+agora aceita vários. Área interna foi de 6 para 12 produtos.
+
+Isso quebrou o `sugestoes()`, que lia `.set` como string — corrigido para achatar
+a lista. Bug que só apareceu porque o teste cobriu o upsell depois da mudança.
+
+**Também:** desconto 10% (era 5%) valendo também no débito, 12x sem juros,
+horário, Instagram das duas lojas e CEP das duas unidades.
+
+**Verificado no navegador:** 27 cores clicáveis, Marfim e Palha gerando duas
+linhas separadas, nota com "cor Marfim" e "cor Palha", card de orçamento
+abrindo a escolha de loja com o texto certo, filtro de Área interna com 12 e
+Área externa com 6, e o card do Rende Muito exibindo "Área interna · Área
+externa".
+
+---
+
 ## 17/08/2026 — Rodízio do destaque passa a virar na segunda
 
 **O que:** o "Destaque da semana" trocava de produto na **quinta-feira**. Agora

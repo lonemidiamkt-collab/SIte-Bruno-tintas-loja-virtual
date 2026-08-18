@@ -122,6 +122,31 @@ const MARCAS = [
   { nome: 'IF',               logo: null }
 ];
 
+/* -------- cores prontas --------
+   Carta padrão da linha, para o cliente escolher no site. Não é lista de
+   estoque: a loja confirma a cor no WhatsApp antes de fechar — nenhum pedido
+   é cobrado pelo site, então há sempre uma conferência humana antes da venda.
+
+   Vale para os produtos com cor:'prontas'. Nos de cor:'maquina' (linha Decora)
+   não existe carta: a cor é feita na hora e cada uma tem um valor, por isso
+   o site abre um convite para orçamento em vez de listar opções. */
+const CORES_PRONTAS = [
+  'Branco', 'Branco Gelo', 'Palha', 'Areia', 'Pérola', 'Marfim', 'Vanilla',
+  'Cromo Suave', 'Camurça', 'Concreto', 'Amarelo Canário', 'Amarelo Frevo',
+  'Laranja Cítrico', 'Laranja Imperial', 'Laranja Maracatu', 'Pêssego',
+  'Flamingo', 'Rosa Açaí', 'Vermelho Cardinal', 'Lilás', 'Verde Primavera',
+  'Verde Limão', 'Verde Kiwi', 'Verde Angra', 'Azul Sereno', 'Oceano',
+  'Azul Profundo'
+];
+
+/* Coral Rende Muito: o branco vem 18L (galão 3,6L) e as cores vêm 16L
+   (galão 3,2L). O PREÇO É O MESMO — é tinta concentrada, então a colorida
+   rende igual com menos litro. Confirmado pelo Bruno em 17/08/2026. */
+const VOLUME_POR_COR = {
+  9:  { branco: '18L',  colorido: '16L'  },
+  10: { branco: '3,6L', colorido: '3,2L' }
+};
+
 /* Produtos.
    foto = chave da foto em fotos/<chave>.webp
 
@@ -180,20 +205,22 @@ const PRODUTOS = [
     nome: 'Acrílica Cor Econômico Interior 3,6L', preco: 57.00,
     foto: 'qualy-economica-36l', cor: 'prontas', oferta: false },
 
-  /* ---- área externa: linhas de alto rendimento (servem dentro também) ---- */
-  { id: 9,  set: 'externa', marca: 'Coral',
+  /* ---- alto rendimento: Rende Muito serve parede e teto (interna) E
+       fachada e muro (externa). O Bruno confirmou que vale nos dois, então
+       `set` é lista. O Fosco Completo segue só externa até ele confirmar. ---- */
+  { id: 9,  set: ['interna', 'externa'], marca: 'Coral',
     nome: 'Rende Muito Tinta Concentrada Acrílico Fosco Branco 18L', preco: 475.00,
     foto: 'coral-rende-muito-18l', cor: 'prontas', oferta: false },
 
-  { id: 10, set: 'externa', marca: 'Coral',
+  { id: 10, set: ['interna', 'externa'], marca: 'Coral',
     nome: 'Rende Muito Tinta Concentrada Acrílico Fosco Branco 3,6L', preco: 125.00,
     foto: 'coral-rende-muito-36l', cor: 'prontas', oferta: false },
 
-  { id: 11, set: 'externa', marca: 'Qualyvinil',
+  { id: 11, set: ['interna', 'externa'], marca: 'Qualyvinil',
     nome: 'Rende Muito+ Acrílico Standard 18L', preco: 379.00,
     foto: 'qualy-rende-muito-18l', cor: null, oferta: false },
 
-  { id: 12, set: 'externa', marca: 'Qualyvinil',
+  { id: 12, set: ['interna', 'externa'], marca: 'Qualyvinil',
     nome: 'Rende Muito+ Acrílico Standard 3,6L', preco: 99.00,
     foto: 'qualy-rende-muito-36l', cor: null, oferta: false },
 
