@@ -130,14 +130,26 @@ const MARCAS = [
    Vale para os produtos com cor:'prontas'. Nos de cor:'maquina' (linha Decora)
    não existe carta: a cor é feita na hora e cada uma tem um valor, por isso
    o site abre um convite para orçamento em vez de listar opções. */
-const CORES_PRONTAS = [
-  'Branco', 'Branco Gelo', 'Palha', 'Areia', 'Pérola', 'Marfim', 'Vanilla',
-  'Cromo Suave', 'Camurça', 'Concreto', 'Amarelo Canário', 'Amarelo Frevo',
-  'Laranja Cítrico', 'Laranja Imperial', 'Laranja Maracatu', 'Pêssego',
-  'Flamingo', 'Rosa Açaí', 'Vermelho Cardinal', 'Lilás', 'Verde Primavera',
-  'Verde Limão', 'Verde Kiwi', 'Verde Angra', 'Azul Sereno', 'Oceano',
-  'Azul Profundo'
-];
+const CARTAS = {
+  /* carta de parede — linha Rende Muito e acrílicas econômicas */
+  parede: [
+    'Branco', 'Branco Gelo', 'Palha', 'Areia', 'Pérola', 'Marfim', 'Vanilla',
+    'Cromo Suave', 'Camurça', 'Concreto', 'Amarelo Canário', 'Amarelo Frevo',
+    'Laranja Cítrico', 'Laranja Imperial', 'Laranja Maracatu', 'Pêssego',
+    'Flamingo', 'Rosa Açaí', 'Vermelho Cardinal', 'Lilás', 'Verde Primavera',
+    'Verde Limão', 'Verde Kiwi', 'Verde Angra', 'Azul Sereno', 'Oceano',
+    'Azul Profundo'
+  ],
+
+  /* carta de esmalte — cores padrão de esmalte sintético e base água.
+     Confirmar com o Bruno o que ele mantém na prateleira. */
+  esmalte: [
+    'Branco', 'Gelo', 'Creme', 'Areia', 'Amarelo', 'Laranja',
+    'Vermelho', 'Marrom Conhaque', 'Tabaco', 'Preto',
+    'Cinza Médio', 'Cinza Escuro', 'Platina', 'Alumínio',
+    'Azul França', 'Azul Del Rey', 'Verde Folha'
+  ]
+};
 
 /* Coral Rende Muito: o branco vem 18L (galão 3,6L) e as cores vêm 16L
    (galão 3,2L). O PREÇO É O MESMO — é tinta concentrada, então a colorida
@@ -199,63 +211,63 @@ const PRODUTOS = [
 
   { id: 7,  set: 'interna', marca: 'Qualyvinil',
     nome: 'Acrílica Cor Econômico Interior 18L', preco: 197.00,
-    foto: 'qualy-economica-18l', cor: 'prontas', oferta: false },
+    foto: 'qualy-economica-18l', cor: 'prontas', carta: 'parede', oferta: false },
 
   { id: 8,  set: 'interna', marca: 'Qualyvinil',
     nome: 'Acrílica Cor Econômico Interior 3,6L', preco: 57.00,
-    foto: 'qualy-economica-36l', cor: 'prontas', oferta: false },
+    foto: 'qualy-economica-36l', cor: 'prontas', carta: 'parede', oferta: false },
 
   /* ---- alto rendimento: Rende Muito serve parede e teto (interna) E
        fachada e muro (externa). O Bruno confirmou que vale nos dois, então
        `set` é lista. O Fosco Completo segue só externa até ele confirmar. ---- */
   { id: 9,  set: ['interna', 'externa'], marca: 'Coral',
     nome: 'Rende Muito Tinta Concentrada Acrílico Fosco Branco 18L', preco: 475.00,
-    foto: 'coral-rende-muito-18l', cor: 'prontas', oferta: false },
+    foto: 'coral-rende-muito-18l', cor: 'prontas', carta: 'parede', oferta: false },
 
   { id: 10, set: ['interna', 'externa'], marca: 'Coral',
     nome: 'Rende Muito Tinta Concentrada Acrílico Fosco Branco 3,6L', preco: 125.00,
-    foto: 'coral-rende-muito-36l', cor: 'prontas', oferta: false },
+    foto: 'coral-rende-muito-36l', cor: 'prontas', carta: 'parede', oferta: false },
 
   { id: 11, set: ['interna', 'externa'], marca: 'Qualyvinil',
     nome: 'Rende Muito+ Acrílico Standard 18L', preco: 379.00,
-    foto: 'qualy-rende-muito-18l', cor: null, oferta: false },
+    foto: 'qualy-rende-muito-18l', cor: 'prontas', carta: 'parede', oferta: false },
 
   { id: 12, set: ['interna', 'externa'], marca: 'Qualyvinil',
     nome: 'Rende Muito+ Acrílico Standard 3,6L', preco: 99.00,
-    foto: 'qualy-rende-muito-36l', cor: null, oferta: false },
+    foto: 'qualy-rende-muito-36l', cor: 'prontas', carta: 'parede', oferta: false },
 
   { id: 13, set: 'externa', marca: 'Qualyvinil',
     nome: 'Fosco Completo Acrílico Premium 18L', preco: 490.00,
-    foto: 'qualy-fosco-completo-18l', cor: null, oferta: false },
+    foto: 'qualy-fosco-completo-18l', cor: 'maquina', oferta: false },
 
   { id: 14, set: 'externa', marca: 'Qualyvinil',
     nome: 'Fosco Completo Acrílico Premium 3,6L', preco: 130.00,
-    foto: 'qualy-fosco-completo-36l', cor: null, oferta: false },
+    foto: 'qualy-fosco-completo-36l', cor: 'maquina', oferta: false },
 
   /* ---- madeira e metal: esmaltes ---- */
   { id: 15, set: 'madeira', marca: 'Maza',
     nome: 'Direto na Ferrugem Esmalte Sintético Premium 3,6L', preco: 235.00,
-    foto: 'maza-ferrugem-36l', cor: null, oferta: false },
+    foto: 'maza-ferrugem-36l', cor: 'prontas', carta: 'esmalte', oferta: false },
 
   { id: 16, set: 'madeira', marca: 'Maza',
     nome: 'Direto na Ferrugem Esmalte Sintético Premium 900ml', preco: 65.00,
-    foto: 'maza-ferrugem-900ml', cor: null, oferta: false },
+    foto: 'maza-ferrugem-900ml', cor: 'prontas', carta: 'esmalte', oferta: false },
 
   { id: 17, set: 'madeira', marca: 'Lukscolor',
     nome: 'Esmalte Premium Plus Base Água 3,6L', preco: 166.90,
-    foto: 'lukscolor-esmalte-36l', cor: null, oferta: false },
+    foto: 'lukscolor-esmalte-36l', cor: 'prontas', carta: 'esmalte', oferta: false },
 
   { id: 18, set: 'madeira', marca: 'Lukscolor',
     nome: 'Esmalte Premium Plus Base Água 900ml', preco: 49.90,
-    foto: 'lukscolor-esmalte-900ml', cor: null, oferta: false },
+    foto: 'lukscolor-esmalte-900ml', cor: 'prontas', carta: 'esmalte', oferta: false },
 
   { id: 19, set: 'madeira', marca: 'Qualyvinil',
     nome: 'Esmalte Sintético Standard 3,6L', preco: 135.00,
-    foto: 'qualy-esmalte-36l', cor: null, oferta: false },
+    foto: 'qualy-esmalte-36l', cor: 'prontas', carta: 'esmalte', oferta: false },
 
   { id: 20, set: 'madeira', marca: 'Qualyvinil',
     nome: 'Esmalte Sintético Standard 900ml', preco: 38.50,
-    foto: 'qualy-esmalte-900ml', cor: null, oferta: false },
+    foto: 'qualy-esmalte-900ml', cor: 'prontas', carta: 'esmalte', oferta: false },
 
   /* ---- preparação: massas (não vão para a máquina de tingimento) ---- */
   { id: 21, set: 'preparacao', marca: 'Qualyvinil',

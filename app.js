@@ -134,6 +134,9 @@ function renderLojas() {
         <a class="btn btn--linha" href="${u.maps}" target="_blank" rel="noopener">
           ${ICO_PIN}<span class="txt-curto">Mapa</span><span class="txt-longo">Ver no mapa</span>
         </a>
+        ${u.instagram ? `<a class="btn btn--linha" href="${u.instagram}" target="_blank" rel="noopener">
+          ${ICO_IG}<span class="txt-curto">Insta</span><span class="txt-longo">Ver o Instagram</span>
+        </a>` : ''}
       </div>
     </div>`).join('');
 }
@@ -219,11 +222,12 @@ function renderGrade() {
 function blocoCorDoProduto(p) {
   if (p.cor === 'prontas') {
     const vol = VOLUME_POR_COR[p.id];
+    const carta = CARTAS[p.carta] || CARTAS.parede;
     return `
       <div class="det__bloco">
         <h4 class="det__rotulo">Escolha a cor</h4>
         <div class="cores" role="radiogroup" aria-label="Cores disponíveis">
-          ${CORES_PRONTAS.map((c, i) => `
+          ${carta.map((c, i) => `
             <button type="button" class="cor${i === 0 ? ' on' : ''}"
                     role="radio" aria-checked="${i === 0}"
                     data-cor="${esc(c)}" data-prod="${p.id}">${esc(c)}</button>`).join('')}
@@ -348,7 +352,8 @@ function adicionar(id) {
   if (!p) return;
   /* A cor faz parte da identidade do item: a mesma tinta em duas cores são
      duas linhas no carrinho, não uma com quantidade 2. */
-  const cor = p.cor === 'prontas' ? (corEscolhida[p.id] || CORES_PRONTAS[0]) : '';
+  const cor = p.cor === 'prontas'
+    ? (corEscolhida[p.id] || (CARTAS[p.carta] || CARTAS.parede)[0]) : '';
   const key = cor ? `${p.id}|${cor}` : String(p.id);
   const ja = carrinho.find(i => i.key === key);
   if (ja) ja.qtd++;
@@ -548,6 +553,28 @@ ${temDesconto() ? `Desconto ${formaEscolhida().nome} (${pctDesconto()}): − ${b
 *Forma de pagamento:* ${formaEscolhida().nome}${eParcelado() && pedido.vezes > 1 ? ` — ${pedido.vezes}x de ${brl(parcela(totalGeral(), pedido.vezes))}${textoJuros()}` : ''}
 
 Pedido feito pelo site. Aguardando a loja confirmar.`;
+}
+
+const ICO_IG = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>';
+
+/* Cada loja tem o seu Instagram, então o botão do topo pergunta qual — mesma
+   lógica do WhatsApp. Mandar todo mundo para um perfil só faria o cliente de
+   Iguaba ver o conteúdo de Araruama. */
+function escolherInstagram() {
+  $('#tituloModal').textContent = 'Instagram de qual loja?';
+  $('#corpoModal').innerHTML = `
+    <p style="color:var(--texto-fraco);font-size:.92rem;margin-bottom:18px">
+      Cada loja tem o seu perfil, com as novidades e as promoções dela.
+    </p>
+    ${UNIDADES.filter(u => u.instagram).map(u => `
+      <a class="escolha-loja" href="${u.instagram}" target="_blank" rel="noopener">
+        <span class="escolha-loja__ico">${ICO_IG}</span>
+        <span class="escolha-loja__txt">
+          <b>${esc(u.nome)}</b>
+          <small>${esc(u.instagram.replace(/https?:\/\/(www\.)?instagram\.com\//, '@').replace(/\/$/, ''))}</small>
+        </span>
+      </a>`).join('')}`;
+  abrirModal();
 }
 
 /* -------- escolher com qual loja falar -------- */
@@ -890,6 +917,7 @@ document.addEventListener('click', e => {
 $('#busca').addEventListener('input', e => { termo = e.target.value; renderGrade(); });
 $('#abrirCarrinho').onclick = abrirCarrinho;
 $('#barraPedido').onclick = abrirCarrinho;
+$$('[data-insta]').forEach(b => b.onclick = e => { e.preventDefault(); escolherInstagram(); });
 $$('[data-falar]').forEach(b => b.onclick = e => {
   e.preventDefault();
   escolherLoja(b.dataset.falar || null);
