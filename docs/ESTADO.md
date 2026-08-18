@@ -50,8 +50,8 @@ Coisas que não dependem de código, e sim de informação que a loja precisa ma
 - **26 fotos**, uma por produto, em `fotos/<chave>.webp` (382 KB, lazy)
 - 6 setores e 11 marcas cadastrados, 2 unidades
 - 4 formas de pagamento, 3 destinos de entrega
-- Banner, logo e capa seguem em base64 no `imagens.js` (661 KB)
-- Peso do primeiro acesso: **753 KB fixos** + foto só do que o cliente rolar
+- Artes e logo em `artes/*.webp`; `imagens.js` tem só os 4 logos de marca (25 KB)
+- Peso do primeiro acesso: **124 KB fixos** + imagem só do que o cliente rolar
 
 ## Riscos conhecidos
 

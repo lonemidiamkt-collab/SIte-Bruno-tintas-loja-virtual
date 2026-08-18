@@ -8,6 +8,53 @@
 
 ---
 
+## 17/08/2026 — 3 artes novas + faxina estrutural (desktop e mobile)
+
+**Artes novas** entraram nos três lugares: capa do desktop, cabeçalho do
+Catálogo e cabeçalho do Como comprar. Convertidas para WebP.
+
+**Quatro bugs de estrutura encontrados no caminho, três deles antigos:**
+
+1. **Card do destaque com 784px de vazio ao lado (desktop).** Era o que o
+   Roberto viu. `.hero__card` herdava `margin-left:auto` do hero de duas
+   colunas que foi removido semanas atrás — o texto saiu, a margem ficou, e o
+   card de 380px ia parar encostado na direita. Virou faixa horizontal.
+
+2. **As artes de seção apareciam no celular.** `.arte-secao{display:block}`
+   vinha depois de `.so-desk{display:none}` e anulava o esconde. O celular
+   mostrava a versão em texto E a arte de desktop, e baixava as duas.
+
+3. **O bloco de CTAs e estatísticas estava duplicado literalmente** nas duas
+   capas (mobile e desktop), e as duas imagens tinham `fetchpriority="high"` —
+   o navegador baixava as duas em toda visita e descartava uma. Virou uma
+   seção só com `<picture>`: agora baixa exatamente uma.
+
+4. **A página ficava sem `<h1>` no desktop.** A capa de desktop era só a arte.
+   Agora o texto continua no DOM e vira só-leitor-de-tela acima de 900px.
+
+**Correção minha durante o trabalho:** ao reescrever o CSS do card sobrou uma
+chave `}` a mais, que quebrou o parser dali para baixo e derrubou `.btn` —
+os botões ficaram com 16px de altura. Achado contando chaves, não no olho.
+
+**Estrutura do card do destaque refeita.** A foto era neta do card, então o
+grid não a alcançava. O DOM ficou achatado (foto, topo, info e botão como
+irmãos) e cada tela os recoloca: miniatura de 68px ao lado do preço no celular,
+coluna de 300px no desktop.
+
+**Peso.** Com banners e logo saindo do base64, `imagens.js` caiu de **661 KB
+para 25 KB**. O que sempre desce agora são **124 KB** de HTML+CSS+JS; imagem é
+sob demanda.
+
+**Também:** alvo de toque do nome do produto de 17px para 44px; textos
+alternativos reescritos para as artes novas; media query vazia removida;
+assets versionados por hash na URL, que mata cache velho a cada deploy.
+
+**Não mexi** na fonte Inter (identidade já estabelecida) nem na borda lateral
+do `.aviso` — o detector sinaliza os dois, mas são escolhas do projeto, fora
+do que foi pedido.
+
+---
+
 ## 17/08/2026 — Box de detalhe do produto (fase 1 da SPEC-003)
 
 **O que:** clicar na foto ou no nome de um produto abre um box com foto

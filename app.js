@@ -265,22 +265,22 @@ function renderDestaque() {
   if (!p) { sec.hidden = true; alvo.innerHTML = ''; return; }
   sec.hidden = false;
   const foto = img(p.foto);
+  /* DOM achatado de propósito: foto, topo, info e botão são filhos diretos do
+     card, para o grid poder recolocá-los. No celular a foto é uma miniatura ao
+     lado do preço; no desktop ela vira a coluna da esquerda inteira. Com a foto
+     aninhada dentro do corpo, como era antes, o grid não a alcançava. */
   alvo.innerHTML = `
-    <div class="hero__card">
+    <article class="hero__card">
       <div class="hero__card-topo"><span>Destaque da semana</span><b>${esc(p.nome)}</b></div>
-      <div class="hero__card-corpo">
-        <div class="hero__card-item">
-          <div class="hero__card-foto">${foto
-            ? `<img src="${foto}" width="400" height="400" alt="${esc(p.nome)}">` : ''}</div>
-          <div class="hero__card-info">
-            ${p.marca && p.marca !== '—' ? `<p class="hero__card-marca">${esc(p.marca)}</p>` : ''}
-            <p class="hero__card-preco">${brl(p.preco)}</p>
-            <p class="hero__card-avista">${brl(comDesconto(p.preco))} no PIX ou dinheiro</p>
-          </div>
-        </div>
-        <button class="btn btn--azul btn--bloco" data-add="${p.id}">Adicionar ao pedido</button>
+      <div class="hero__card-foto">${foto
+        ? `<img src="${foto}" width="400" height="400" alt="${esc(p.nome)}">` : ''}</div>
+      <div class="hero__card-info">
+        ${p.marca && p.marca !== '—' ? `<p class="hero__card-marca">${esc(p.marca)}</p>` : ''}
+        <p class="hero__card-preco">${brl(p.preco)}</p>
+        <p class="hero__card-avista">${brl(comDesconto(p.preco))} no PIX ou dinheiro</p>
       </div>
-    </div>`;
+      <button class="btn btn--azul hero__card-btn" data-add="${p.id}">Adicionar ao pedido</button>
+    </article>`;
 }
 
 /* ---------------- carrinho ---------------- */
@@ -860,5 +860,5 @@ renderDestaque();
 renderCarrinho();
 ligarTrilhos();
 
-/* imagens fixas do HTML */
-$$('[data-img]').forEach(el => { const m = MAPA_IMG[el.dataset.img]; if (m) el.src = m; });
+/* O logo e as artes vêm direto no src do HTML. O MAPA_IMG guarda só os logos
+   de marca, que o renderMarcas() resolve. */

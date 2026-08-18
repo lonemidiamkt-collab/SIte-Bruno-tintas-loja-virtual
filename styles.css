@@ -115,7 +115,6 @@ a{color:inherit;text-decoration:none}
 .carrinho-badge.on{display:grid}
 
 /* ---------- hero ---------- */
-@media (min-width:560px){}
 .stat b{display:block;font-family:var(--display);font-size:1.5rem;font-weight:800;color:#fff;line-height:1}
 .stat span{font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:var(--azul-sol);line-height:1.25;display:block;margin-top:3px}
 @media (min-width:560px){.stat span{font-size:.7rem;letter-spacing:.12em}.stat b{font-size:1.7rem}}
@@ -124,24 +123,56 @@ a{color:inherit;text-decoration:none}
    topo o card encostava na faixa de cima e a troca de azul caía exatamente
    na borda dele, fazendo o produto parecer solto na página. */
 .destaque{background:var(--azul-profundo);padding:var(--e6) 0 var(--e8)}
-.hero__card{background:var(--branco);color:var(--texto);border-radius:var(--raio-g);overflow:hidden;box-shadow:var(--sombra-alta);max-width:380px;width:100%}
-@media (min-width:900px){.destaque{padding:var(--e8) 0}.hero__card{margin-left:auto}}
-.hero__card-topo{background:var(--azul-noite);color:#fff;padding:var(--e3) var(--e4)}
-.hero__card-topo b{font-family:var(--display);font-size:1.3rem;display:block;line-height:1;text-transform:uppercase}
-.hero__card-topo span{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--azul-sol)}
-.hero__card-corpo{padding:var(--e4)}
-.hero__card-item{display:flex;gap:var(--e3);align-items:center;margin-bottom:var(--e3)}
-/* min-width:0 é o que impede o item flex de crescer até o tamanho da foto */
-.hero__card-foto{
-  flex:0 0 68px;width:68px;height:68px;min-width:0;
-  border-radius:10px;overflow:hidden;background:var(--azul);
+/* Card do destaque — grid achatado: foto, topo, info e botão são irmãos,
+   e cada tela os recoloca. No celular a foto é miniatura ao lado do preço;
+   no desktop vira a coluna esquerda inteira. */
+.hero__card{
+  background:var(--branco);color:var(--texto);
+  border-radius:var(--raio-g);overflow:hidden;box-shadow:var(--sombra-alta);
+  max-width:380px;width:100%;
+  display:grid;align-items:center;
+  grid-template-columns:68px 1fr;
+  grid-template-areas:
+    "topo topo"
+    "foto info"
+    "btn  btn";
+  column-gap:var(--e3);row-gap:var(--e4);
 }
+.hero__card-topo{grid-area:topo;align-self:stretch;background:var(--azul-noite);color:#fff;padding:var(--e3) var(--e4)}
+.hero__card-topo b{font-family:var(--display);font-size:1.3rem;display:block;line-height:1.05;text-transform:uppercase}
+.hero__card-topo span{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--azul-sol)}
+.hero__card-foto{grid-area:foto;width:68px;height:68px;margin-left:var(--e4);
+  border-radius:10px;overflow:hidden;background:var(--azul);display:grid;place-items:center}
 .hero__card-foto img{width:100%;height:100%;object-fit:contain;display:block}
-.hero__card-info{flex:1;min-width:0}
+.hero__card-info{grid-area:info;min-width:0;margin-right:var(--e4)}
 .hero__card-marca{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--texto-fraco)}
-.hero__card-nome{font-size:.88rem;font-weight:600;line-height:1.25;margin:2px 0 4px}
 .hero__card-preco{font-family:var(--display);font-size:1.6rem;font-weight:800;color:var(--azul-profundo);line-height:1}
 .hero__card-avista{font-size:.72rem;font-weight:600;color:var(--azul);line-height:1.3}
+.hero__card-btn{grid-area:btn;margin:0 var(--e4) var(--e4);justify-content:center}
+
+@media (min-width:900px){
+  .destaque{padding:var(--e12) 0}
+  /* Faixa horizontal. Antes o card herdava margin-left:auto do hero de duas
+     colunas que não existe mais e ficava colado na direita, com ~780px de
+     vazio ao lado — era o buraco que aparecia na tela. */
+  .hero__card{
+    max-width:none;
+    grid-template-columns:300px 1fr auto;
+    grid-template-areas:
+      "foto topo topo"
+      "foto info btn";
+    column-gap:var(--e8);row-gap:var(--e3);
+  }
+  .hero__card-foto{width:100%;height:100%;min-height:230px;margin:0;border-radius:0;background:var(--gelo)}
+  .hero__card-foto img{padding:var(--e6)}
+  .hero__card-topo{background:transparent;color:var(--texto);padding:var(--e8) var(--e8) 0 0}
+  .hero__card-topo span{color:var(--azul)}
+  .hero__card-topo b{font-size:1.9rem}
+  .hero__card-info{margin:0}
+  .hero__card-preco{font-size:2.2rem}
+  .hero__card-avista{font-size:.85rem}
+  .hero__card-btn{margin:0 var(--e8) var(--e8) 0;align-self:center;padding-inline:var(--e8)}
+}
 
 /* ---------- botões ---------- */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:14px 24px;border-radius:var(--raio);font-size:.94rem;font-weight:600;min-height:48px;transition:background .15s,transform .1s,border-color .15s,color .15s;text-align:center}
@@ -176,11 +207,10 @@ a{color:inherit;text-decoration:none}
    No celular o título é TEXTO, não imagem: a arte vertical que existia aqui
    tinha sido remontada recortando pedaços do banner horizontal, e as emendas
    apareciam na tela. Só a foto vem como imagem. */
-.capa{background:var(--azul-noite)}
-.capa--mob{display:block;background:
+.capa{background:
   radial-gradient(900px 440px at 80% 6%,rgba(46,123,246,.4),transparent 62%),
   linear-gradient(160deg,var(--azul-noite) 0%,var(--azul-profundo) 62%,var(--azul-noite) 100%)}
-.capa--desk{display:none}
+.capa picture{display:block}
 .capa img,.capa__img{width:100%;height:auto;display:block}
 
 .capa__texto{padding-top:var(--e6);padding-bottom:var(--e4);color:var(--branco)}
@@ -190,10 +220,9 @@ a{color:inherit;text-decoration:none}
 .capa__texto h1{font-size:clamp(1.9rem,8.4vw,3.2rem);line-height:.98;margin-bottom:var(--e3);text-wrap:balance}
 .capa__texto h1 em{font-style:normal;color:var(--azul-sol);display:block}
 .capa__sub{font-size:.98rem;line-height:1.5;color:#CFE0FB;max-width:42ch;margin-bottom:var(--e4)}
-.capa__ctas{background:var(--azul-noite);padding:0 var(--e4) var(--e6)}
-/* no celular o fundo é o gradiente da seção, então os CTAs não podem
-   pintar por cima com cor chapada — senão aparece emenda embaixo da foto */
-.capa--mob .capa__ctas{background:transparent}
+/* fundo transparente: quem pinta é o gradiente da seção. Cor chapada aqui
+   criava uma emenda visível logo abaixo da arte. */
+.capa__ctas{background:transparent;padding:0 var(--e4) var(--e6)}
 .capa__ctas .wrap{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-top:var(--e4)}
 .capa__ctas .btn{padding:14px 10px;font-size:.86rem;white-space:nowrap}
 @media (min-width:560px){
@@ -208,8 +237,11 @@ a{color:inherit;text-decoration:none}
   position:absolute;width:1px;height:1px;padding:0;margin:-1px;
   overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;
 }
+/* sem display:block aqui — esta regra vem DEPOIS de .so-desk{display:none} e
+   estava anulando o esconde-no-celular, fazendo o mobile mostrar a versão em
+   texto E a arte de desktop, e ainda baixar as duas. O <img> global já é block. */
 .arte-secao{
-  width:100%;height:auto;display:block;
+  width:100%;height:auto;
   border-radius:var(--raio-g);
   border:1px solid var(--borda);
   box-shadow:var(--sombra);
@@ -279,8 +311,10 @@ a{color:inherit;text-decoration:none}
 
 /* foto e nome abrem o detalhe; o botao nao pode herdar visual de botao */
 .prod__abrir{display:block;width:100%;padding:0;border:0;cursor:pointer;font:inherit;color:inherit}
-.prod__nome-btn{background:none;border:0;padding:0;margin:0;font:inherit;color:inherit;
-  text-align:left;cursor:pointer}
+/* alvo de toque: o texto tem 17px de altura, entao a area clicavel cresce por
+   padding sem deslocar o texto (margin negativa compensa) */
+.prod__nome-btn{background:none;border:0;margin:-8px -8px -6px;padding:8px 8px 6px;
+  font:inherit;color:inherit;text-align:left;cursor:pointer;min-height:44px}
 .prod__nome-btn:hover{text-decoration:underline}
 .prod__abrir:focus-visible,.prod__nome-btn:focus-visible{outline:2px solid var(--azul-claro);outline-offset:2px}
 
@@ -546,8 +580,12 @@ body.com-barra{padding-bottom:84px}
 }
 /* cada tela recebe a versão da arte feita para ela:
    vertical no celular, horizontal no desktop */
+/* No desktop a arte já traz título e subtítulo desenhados. O bloco de texto
+   sai da tela mas continua no DOM: sem ele a página ficaria sem <h1>. */
 @media (min-width:900px){
-  .capa--mob{display:none}
-  .capa--desk{display:block}
+  .capa__texto{
+    position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+    overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;
+  }
 }
 

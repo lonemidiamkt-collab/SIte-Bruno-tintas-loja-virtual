@@ -29,7 +29,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=4603fbd7">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -85,7 +85,7 @@
 
 <header class="topo">
   <div class="topo__linha">
-    <a href="#" aria-label="Bruno das Tintas, início"><img class="logo" src="" data-img="logo" width="900" height="138" alt="Bruno das Tintas"></a>
+    <a href="#" aria-label="Bruno das Tintas, início"><img class="logo" src="artes/logo.webp" width="900" height="138" alt="Bruno das Tintas"></a>
     <nav class="nav" aria-label="Principal">
       <a href="#setores">Setores</a><a href="#catalogo">Catálogo</a>
       <a href="#como">Como comprar</a><a href="#lojas">Lojas</a>
@@ -109,29 +109,24 @@
   </nav>
 </header>
 
-<section class="capa capa--mob">
+<section class="capa">
+  <!-- O texto fica no DOM nas duas telas: no celular ele é o hero visível;
+       no desktop a arte já traz a mensagem, então o bloco vira só-leitor-de-tela
+       para a página não ficar sem <h1>. -->
   <div class="wrap capa__texto">
     <span class="capa__selo">★ 10 anos em Araruama e Iguaba</span>
     <h1 class="display">Às vezes, sua casa não precisa de obra.<em>Precisa de uma pintura nova.</em></h1>
     <p class="capa__sub">Confira nossa ampla variedade de tintas e acessórios e deixe sua casa nova.</p>
   </div>
-  <img class="capa__img" src="" data-img="capa-foto-mobile@2x" width="1080" height="609" fetchpriority="high"
-       alt="Família pintando a parede de casa com tintas Bruno das Tintas">
-  <div class="capa__ctas">
-    <div class="wrap">
-      <a href="#catalogo" class="btn btn--branco">Ver catálogo →</a>
-      <button data-falar="" class="btn btn--vidro">Falar com a loja</button>
-      <div class="capa__stats">
-        <div class="stat"><b>10</b><span>Anos na região</span></div>
-        <div class="stat"><b>12x</b><span>No cartão</span></div>
-        <div class="stat"><b>5%</b><span>Off no PIX</span></div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section class="capa capa--desk">
-  <img class="capa__img" src="" data-img="banner@2x" width="1024" height="434" fetchpriority="high" alt="Às vezes sua casa não precisa de obra, precisa de uma pintura nova. Bruno das Tintas.">
+  <!-- picture em vez de duas <img> com display:none: assim o navegador baixa
+       exatamente uma arte, em vez de baixar as duas e descartar uma. -->
+  <picture>
+    <source media="(min-width:900px)" srcset="artes/capa-desktop.webp" width="1912" height="823">
+    <img class="capa__img" src="artes/capa-mobile.webp" width="1080" height="609" fetchpriority="high"
+         alt="Família pintando a parede de casa com tintas Bruno das Tintas">
+  </picture>
+
   <div class="capa__ctas">
     <div class="wrap">
       <a href="#catalogo" class="btn btn--branco">Ver catálogo →</a>
@@ -175,8 +170,8 @@
       <p>Escolha o que precisa e mande. A cor a gente acerta com você no WhatsApp e tinge na hora, na máquina.</p>
     </div>
     <h2 class="sr-only so-desk">Monte seu pedido sem sair de casa</h2>
-    <img class="arte-secao so-desk" src="" data-img="banner-pedido@2x" width="1024" height="228" loading="lazy"
-         alt="Monte seu pedido sem sair de casa. Monte o pedido pelo site — a cor a gente acerta com você no WhatsApp e tinge na hora, na máquina.">
+    <img class="arte-secao so-desk" src="artes/secao-catalogo.webp" width="1600" height="689" loading="lazy"
+         alt="Monte o seu pedido sem sair de casa. Monte o pedido pelo site; a cor a gente acerta com você no WhatsApp.">
     <div class="busca">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#55688A" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
       <input type="search" id="busca" placeholder="Buscar tinta, massa, rolo..." aria-label="Buscar produtos">
@@ -215,8 +210,8 @@
       <div class="passo"><div class="passo__n display">04</div><h3>A gente fecha no WhatsApp</h3><p>A nota cai na loja, confirmamos a cor e o valor, e combinamos o pagamento.</p></div>
     </div>
     <h2 class="sr-only so-desk">Pedido pelo site, direto no nosso balcão</h2>
-    <img class="arte-secao arte-secao--solta so-desk" src="" data-img="banner-comprar@2x" width="1024" height="228" loading="lazy"
-         alt="Como comprar: pedido pelo site, direto no nosso balcão. Você monta o pedido no site e ele chega na hora no WhatsApp da loja, com a nota separada item por item. Escolha como receber: retirar em Araruama, em Iguaba, ou receber em casa com frete grátis. Diga como quer pagar: PIX, dinheiro, débito ou crédito, com 5% de desconto no PIX e no dinheiro. A gente fecha no WhatsApp: a nota cai na loja, confirmamos a cor e o valor, e combinamos o pagamento.">
+    <img class="arte-secao arte-secao--solta so-desk" src="artes/secao-como-comprar.webp" width="1600" height="689" loading="lazy"
+         alt="Pedido pelo site, direto no nosso balcão. Passo 1: escolha como receber — retirar em Araruama, em Iguaba, ou receber em casa com frete grátis. Passo 2: escolha como pagar — PIX, dinheiro, débito ou crédito, com 5% de desconto no PIX e no dinheiro. Passo 3: finalizamos pelo WhatsApp — a nota cai na loja, confirmamos a cor e o valor e combinamos o pagamento.">
   </div>
 </section>
 
@@ -235,7 +230,7 @@
   <div class="wrap">
     <div class="rodape__topo">
       <div class="rodape__marca">
-        <img class="logo" src="" data-img="logo" width="900" height="138" alt="Bruno das Tintas">
+        <img class="logo" src="artes/logo.webp" width="900" height="138" alt="Bruno das Tintas">
         <p>Tintas, ferramentas e acessórios para pintura. 10 anos atendendo Araruama, Iguaba e a Região dos Lagos.</p>
       </div>
     </div>
@@ -306,8 +301,8 @@
     <div class="modal__corpo" id="corpoModal"></div>
   </div>
 </div>
-<script src="imagens.js"></script>
-<script src="dados.js"></script>
-<script src="app.js"></script>
+<script src="imagens.js?v=5c9f7a86"></script>
+<script src="dados.js?v=d3fcad18"></script>
+<script src="app.js?v=aedb1dff"></script>
 </body>
 </html>
