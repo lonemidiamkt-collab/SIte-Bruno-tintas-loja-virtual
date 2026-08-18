@@ -611,3 +611,9 @@ body.com-barra{padding-bottom:84px}
 
 /* cor do item no carrinho */
 .item__cor{font-size:.78rem;color:var(--azul);font-weight:600}
+
+/* ---------- ficha técnica no detalhe ---------- */
+.ficha{display:grid;grid-template-columns:auto 1fr;gap:6px var(--e4);font-size:.88rem}
+.ficha dt{color:var(--texto-fraco);font-weight:600;white-space:nowrap}
+.ficha dd{color:var(--texto);line-height:1.4}
+.ficha__aviso{margin-top:var(--e3);font-size:.82rem;color:var(--azul);font-weight:600}

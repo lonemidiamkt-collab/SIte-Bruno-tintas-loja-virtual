@@ -159,6 +159,90 @@ const VOLUME_POR_COR = {
   10: { branco: '3,6L', colorido: '3,2L' }
 };
 
+/* -------- fichas técnicas --------
+   Rendimento, demãos e secagem vindos do BOLETIM TÉCNICO DO FABRICANTE.
+   Regra: campo sem fonte confiável fica de fora. Rendimento errado faz o
+   cliente comprar lata a menos e voltar irritado — melhor não afirmar.
+
+   O rendimento é POR EMBALAGEM, então cada tamanho tem o seu número: não dá
+   para dividir o da lata pelo galão. Onde o boletim não traz a embalagem que
+   a loja vende, o campo fica vazio de propósito.
+
+   ATENÇÃO à unidade — os fabricantes usam DUAS métricas diferentes:
+     "no total"   = área já pintada com todas as demãos (tintas de parede)
+     "por demão"  = área de UMA demão (esmaltes e massas)
+   Trocar uma pela outra infla o número em 2 a 3 vezes e faz o cliente comprar
+   tinta a menos. O texto de cada ficha diz qual é. */
+const FICHAS = {
+  /* --- Coral, BT AkzoNobel --- */
+  1:  { rendimento: 'até 110 m² no total', demaos: '2 a 3 demãos', secagem: '4h entre demãos',
+        onde: 'Feita para ambiente interno; também serve em área externa' },
+  2:  { rendimento: 'até 22 m² no total',  demaos: '2 a 3 demãos', secagem: '4h entre demãos',
+        onde: 'Feita para ambiente interno; também serve em área externa' },
+  3:  { rendimento: 'até 105 m² no total', demaos: '2 a 3 demãos', secagem: '4h entre demãos',
+        onde: 'Feita para ambiente interno; também serve em área externa' },
+  4:  { rendimento: 'até 21 m² no total',  demaos: '2 a 3 demãos', secagem: '4h entre demãos',
+        onde: 'Feita para ambiente interno; também serve em área externa' },
+  5:  { rendimento: 'até 150 m² no total', demaos: '2 a 3 demãos', secagem: '4h entre demãos',
+        onde: 'Feita para ambiente interno; também serve em área externa' },
+  6:  { rendimento: 'até 30 m² no total',  demaos: '2 a 3 demãos', secagem: '4h entre demãos',
+        onde: 'Feita para ambiente interno; também serve em área externa' },
+  9:  { rendimento: 'até 170 m² no total', demaos: '2 a 3 demãos', secagem: '4h entre demãos',
+        onde: 'Paredes e tetos, dentro e fora',
+        aviso: 'É concentrada: dilua de 50% a 80% com água. O rendimento acima já conta a diluição.' },
+  10: { rendimento: 'até 34 m² no total',  demaos: '2 a 3 demãos', secagem: '4h entre demãos',
+        onde: 'Paredes e tetos, dentro e fora',
+        aviso: 'É concentrada: dilua de 50% a 80% com água. O rendimento acima já conta a diluição.' },
+
+  /* --- Maza, BT do fabricante --- */
+  15: { rendimento: 'até 36 m² por demão', demaos: '2 a 3 demãos', secagem: '4 a 6h entre demãos',
+        onde: 'Portas, portões e estruturas de metal, dentro e fora',
+        aviso: 'Vai direto sobre o metal, mesmo enferrujado — dispensa fundo anticorrosivo.' },
+  16: { demaos: '2 a 3 demãos', secagem: '4 a 6h entre demãos',
+        onde: 'Portas, portões e estruturas de metal, dentro e fora',
+        aviso: 'Vai direto sobre o metal, mesmo enferrujado — dispensa fundo anticorrosivo.' },
+
+  /* --- Lukscolor, BT rev. 07 --- */
+  17: { rendimento: 'até 75 m² por demão', demaos: '2 demãos, ou mais se precisar', secagem: '2h entre demãos',
+        onde: 'Madeira, metal, alumínio, azulejo, PVC e alvenaria, dentro e fora' },
+  18: { rendimento: 'até 20 m² por demão', demaos: '2 demãos, ou mais se precisar', secagem: '2h entre demãos',
+        onde: 'Madeira, metal, alumínio, azulejo, PVC e alvenaria, dentro e fora' },
+
+  /* --- Qualyvinil, BT do fabricante --- */
+  7:  { rendimento: 'até 70 m² no total',  demaos: '2 a 3 demãos', secagem: '3 a 4h entre demãos',
+        onde: 'Paredes internas de reboco, massa, gesso e concreto' },
+  8:  { rendimento: 'até 14 m² no total',  demaos: '2 a 3 demãos', secagem: '3 a 4h entre demãos',
+        onde: 'Paredes internas de reboco, massa, gesso e concreto' },
+  11: { rendimento: 'até 140 m² no total', demaos: '2 a 3 demãos', secagem: '4h entre demãos',
+        onde: 'Paredes de reboco, massa, textura e concreto, dentro e fora' },
+  12: { rendimento: 'até 28 m² no total',  demaos: '2 a 3 demãos', secagem: '4h entre demãos',
+        onde: 'Paredes de reboco, massa, textura e concreto, dentro e fora' },
+  13: { rendimento: 'até 120 m² no total', demaos: '2 a 3 demãos', secagem: '4h entre demãos',
+        onde: 'Paredes de reboco, massa, textura e concreto, dentro e fora' },
+  14: { rendimento: 'até 24 m² no total',  demaos: '2 a 3 demãos', secagem: '4h entre demãos',
+        onde: 'Paredes de reboco, massa, textura e concreto, dentro e fora' },
+  19: { rendimento: 'até 50 m² por demão', demaos: '2 a 3 demãos', secagem: '8 a 10h entre demãos',
+        onde: 'Metal, madeira, cerâmica não vitrificada e alvenaria',
+        aviso: 'Dilua com aguarrás. Nunca use thinner.' },
+  20: { rendimento: 'até 12 m² por demão', demaos: '2 a 3 demãos', secagem: '8 a 10h entre demãos',
+        onde: 'Metal, madeira, cerâmica não vitrificada e alvenaria',
+        aviso: 'Dilua com aguarrás. Nunca use thinner.' },
+  21: { rendimento: 'até 60 m² por demão', demaos: '2 a 3 demãos', secagem: '3h entre demãos',
+        onde: 'Nivelar paredes internas de reboco, massa fina, gesso e concreto' },
+
+  /* Massa corrida 3,6L e 900ml, massa acrílica e a linha Klasse: o boletim dá
+     rendimento por QUILO (6 kg, 25 kg) e a loja vende por litro. Sem
+     equivalência confiável, o rendimento fica de fora em vez de estimado. */
+  22: { demaos: '2 a 3 demãos', secagem: '3h entre demãos',
+        onde: 'Nivelar paredes internas de reboco, massa fina, gesso e concreto' },
+  23: { demaos: '2 a 3 demãos', secagem: '3h entre demãos',
+        onde: 'Nivelar paredes internas de reboco, massa fina, gesso e concreto' },
+  25: { demaos: '2 a 3 demãos', secagem: '3h entre demãos',
+        onde: 'Nivelar paredes internas e externas, inclusive área molhável' },
+  26: { demaos: '2 a 3 demãos', secagem: '3h entre demãos',
+        onde: 'Nivelar paredes internas e externas, inclusive área molhável' }
+};
+
 /* Produtos.
    foto = chave da foto em fotos/<chave>.webp
 

@@ -267,6 +267,28 @@ function pedirCorPersonalizada(id) {
   escolherLoja(texto);
 }
 
+/* Ficha técnica: só mostra o que tem fonte. Produto sem ficha não abre bloco
+   vazio, e campo sem dado simplesmente não aparece. */
+function blocoFicha(p) {
+  const f = (typeof FICHAS !== 'undefined' && FICHAS[p.id]) || null;
+  if (!f) return '';
+  const linhas = [
+    f.rendimento && ['Rende', f.rendimento],
+    f.demaos     && ['Demãos', f.demaos],
+    f.secagem    && ['Secagem', f.secagem],
+    f.onde       && ['Onde usar', f.onde]
+  ].filter(Boolean);
+  if (!linhas.length) return '';
+  return `
+    <div class="det__bloco">
+      <h4 class="det__rotulo">Ficha técnica</h4>
+      <dl class="ficha">
+        ${linhas.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}
+      </dl>
+      ${f.aviso ? `<p class="ficha__aviso">${esc(f.aviso)}</p>` : ''}
+    </div>`;
+}
+
 function verProduto(id) {
   const p = PRODUTOS.find(x => x.id === id);
   if (!p) return;
@@ -277,6 +299,7 @@ function verProduto(id) {
       <div class="det__foto">${fotoOu(p, (temMarca ? p.marca + ' ' : '') + p.nome)}</div>
       <p class="det__setor">${esc(setoresDe(p).map(nomeSetor).join(" · "))}</p>
       ${blocoCorDoProduto(p)}
+      ${blocoFicha(p)}
       <div class="det__bloco">
         <h4 class="det__rotulo">Preço</h4>
         <p class="det__preco">${brl(p.preco)}</p>
