@@ -8,6 +8,25 @@
 
 ---
 
+## 17/08/2026 — Rodízio do destaque passa a virar na segunda
+
+**O que:** o "Destaque da semana" trocava de produto na **quinta-feira**. Agora
+troca na **segunda**.
+
+**Por que estava na quinta:** a conta era dias desde 1970 divididos por 7, e
+01/01/1970 caiu numa quinta — a divisão herdava esse começo. Um `-4` no cálculo
+alinha a virada com a segunda.
+
+**Por que importa:** a semana comercial da loja começa na segunda, e é quando
+saem os relatórios e as mensagens nos grupos dos clientes. Um destaque que
+troca no meio da quinta não conversa com nada.
+
+**Verificado simulando o relógio** com o mesmo código: sexta, sábado e domingo
+mantêm o produto; na segunda ele troca. Sem deploy, sem cron — a escolha é
+calculada no navegador de quem abre o site.
+
+---
+
 ## 17/08/2026 — 3 artes novas + faxina estrutural (desktop e mobile)
 
 **Artes novas** entraram nos três lugares: capa do desktop, cabeçalho do

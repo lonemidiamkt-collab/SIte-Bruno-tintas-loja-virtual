@@ -243,9 +243,13 @@ function verProduto(id) {
    isso ganha do rodízio. Note que NÃO é o mesmo que oferta:true — oferta
    mostra o selo "Oferta" ao cliente e só deve ser usado com desconto real. */
 const semanaAtual = () => {
-  // ancorado em São Paulo para todo cliente ver o mesmo destaque na mesma semana
+  // Ancorado em São Paulo: todo cliente vê o mesmo destaque na mesma semana,
+  // independente do fuso do aparelho dele.
   const hoje = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Sao_Paulo' });
-  return Math.floor(Date.parse(hoje + 'T00:00:00Z') / 86400000 / 7);
+  const dias = Date.parse(hoje + 'T00:00:00Z') / 86400000;
+  // O -4 põe a virada na SEGUNDA. Sem ele a conta cai na quinta, porque
+  // 01/01/1970 foi quinta e a divisão por 7 herda esse começo.
+  return Math.floor((dias - 4) / 7);
 };
 
 function produtoDestaque() {
