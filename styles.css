@@ -248,14 +248,10 @@ a{color:inherit;text-decoration:none}
 }
 /* dentro de seção azul a arte já tem o próprio fundo: sem borda clara */
 .arte-secao--solta{border:none;box-shadow:none;margin-bottom:0}
-/* quando a arte é um <picture>, ele é o container arredondado e a <img> preenche */
-picture.arte-secao{display:block;overflow:hidden}
-picture.arte-secao img{width:100%;height:auto;display:block;border-radius:inherit}
-/* no celular a foto entra como faixa: altura controlada para não empurrar o
-   catálogo para baixo da dobra */
-@media (max-width:899px){
-  picture.arte-secao img{aspect-ratio:16/10;object-fit:cover;object-position:center 40%}
-}
+/* As artes entram INTEIRAS, na proporção original de 1912x823. Nada de
+   aspect-ratio forçado nem object-fit:cover aqui: qualquer um dos dois
+   recortaria a arte, e a composição é do designer, não minha. No celular ela
+   aparece menor, nunca cortada. */
 .secao--arte{padding:var(--e12) 0}
 
 .faixa-arte{display:block;line-height:0;border-radius:var(--raio-g);overflow:hidden;box-shadow:var(--sombra-alta)}
