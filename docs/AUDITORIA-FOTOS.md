@@ -30,15 +30,22 @@ vez do branco das outras 22. Não é produto errado, é inconsistência visual.
 "Complementos Premium", que é a embalagem comum da linha. Massa corrida e massa
 acrílica ficam indistinguíveis na foto — o rótulo não diz qual é.
 
-## Fotos que faltam pedir ao Bruno
+## Resolvido em 18/08/2026
 
-1. Qualyvinil Fosco Completo **3,6L**
-2. Lukscolor Esmalte **Base Água** 900ml (conferir se é a lata base água)
-3. Qualyvinil Esmalte Sintético Standard **900ml**
-4. Qualyvinil Massa Acrílica **3,6L**
+As quatro fotos chegaram e **os 26 produtos estão com foto**. Nenhum card
+mostra mais o selo de marca.
 
-Ideal: fundo branco, produto centralizado, sem marca d'água nem selo de
-campanha.
+Duas vieram no tamanho errado na primeira tentativa (galão no lugar da lata de
+900ml, balde de 25 kg no lugar do 3,6L) e foram substituídas na segunda.
+
+**Um ponto em aberto:** a foto do "Qualyvinil Massa Acrílica 3,6L" é o balde
+**KLASSE**. O cupom lista "MASSA ACRILICA QUALY. 3,6LTS" e "MASSA ACRILICA
+KLASSE 18LTS" como itens diferentes, o que sugere duas linhas. Se o 3,6L que a
+loja vende for mesmo o Klasse, o nome do produto no site deve mudar para
+incluir "Klasse", como já acontece no de 18L. **Confirmar com o Bruno.**
+
+Detalhe menor: a lata de 900ml do Esmalte Sintético tem rótulo de geração
+anterior à do galão de 3,6L. É o mesmo produto, embalagem antiga.
 
 ## Como refazer esta conferência
 

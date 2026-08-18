@@ -355,8 +355,7 @@ const PRODUTOS = [
 
   { id: 20, set: 'madeira', marca: 'Qualyvinil',
     nome: 'Esmalte Sintético Standard 900ml', preco: 38.50,
-    /* foto retirada: foto era do Colorit Eco base água, não Esmalte Sintético (+ selo 'Pintura Artística') */
-    foto: null, cor: 'prontas', carta: 'esmalte', oferta: false },
+    foto: 'qualy-esmalte-900ml', cor: 'prontas', carta: 'esmalte', oferta: false },
 
   /* ---- preparação: massas (não vão para a máquina de tingimento) ---- */
   { id: 21, set: 'preparacao', marca: 'Qualyvinil',
@@ -377,8 +376,10 @@ const PRODUTOS = [
 
   { id: 25, set: 'preparacao', marca: 'Qualyvinil',
     nome: 'Massa Acrílica 3,6L', preco: 46.00,
-    /* foto retirada: foto era do balde Klasse, não da Massa Acrílica Qualyvinil (+ selo 'Terminação de Superfícies') */
-    foto: null, cor: null, oferta: false },
+    /* Foto enviada pelo Bruno em 18/08: é o balde KLASSE 3,6L. O cupom lista
+       "MASSA ACRILICA QUALY. 3,6LTS" e "MASSA ACRILICA KLASSE 18LTS" como
+       itens diferentes — confirmar se o 3,6L que a loja vende é o Klasse. */
+    foto: 'massa-acrilica-36l', cor: null, oferta: false },
 
   { id: 26, set: 'preparacao', marca: 'Qualyvinil',
     nome: 'Massa Acrílica 900ml', preco: 18.90,
