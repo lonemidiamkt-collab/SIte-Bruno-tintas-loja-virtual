@@ -338,11 +338,11 @@ const PRODUTOS = [
     foto: 'maza-ferrugem-900ml', cor: 'prontas', carta: 'esmalte', oferta: false },
 
   { id: 17, set: 'madeira', marca: 'Lukscolor',
-    nome: 'Esmalte Premium Plus Base Água 3,6L', preco: 166.90,
+    nome: 'Esmalte Base Água Premium Plus 3,6L', preco: 166.90,
     foto: 'lukscolor-esmalte-36l', cor: 'prontas', carta: 'esmalte', oferta: false },
 
   { id: 18, set: 'madeira', marca: 'Lukscolor',
-    nome: 'Esmalte Premium Plus Base Água 900ml', preco: 49.90,
+    nome: 'Esmalte Base Água Premium Plus 900ml', preco: 49.90,
     foto: 'lukscolor-esmalte-900ml', cor: 'prontas', carta: 'esmalte', oferta: false },
 
   { id: 19, set: 'madeira', marca: 'Qualyvinil',

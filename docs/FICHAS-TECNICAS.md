@@ -58,6 +58,17 @@ pelo químico responsável.
 **Coral Decora Matte.** Circula um boletim de 2020 com "76 m²/demão", em
 métrica diferente da atual. Ficou o **boletim vigente**.
 
+## Lição de método
+
+Em dois dos quatro fabricantes, a **página do produto no site divergia do
+próprio boletim técnico** — e num deles de forma impossível (lata pequena
+rendendo quase o mesmo que a grande). Resumo automático de página também
+embaralhou valores.
+
+Regra que fica: **rendimento só de PDF de boletim técnico**, nunca da página
+de produto e nunca de resumo. É o documento formal, assinado por químico
+responsável.
+
 ## A confirmar com o Bruno
 
 - **Qualyvinil Massa Acrílica**: o próprio boletim se contradiz — a tabela
@@ -67,4 +78,7 @@ métrica diferente da atual. Ficou o **boletim vigente**.
 - **Nome do produto**: a loja vende como "Acrílica Cor Econômico Interior"; o
   fabricante chama de "Qualyvinil Acrílica Econômica Cor". Conferir a
   embalagem.
+- **Lukscolor**: o nome no site foi corrigido para "Esmalte Base Água Premium
+  Plus", que é o oficial. Confirmado que é a versão base água, não a base
+  solvente — existe uma linha solvente homônima, e os dados são de outra.
 - **Klasse 18L**: pedir o boletim ao representante para completar a ficha.
