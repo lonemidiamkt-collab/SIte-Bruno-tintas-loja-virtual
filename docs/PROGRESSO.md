@@ -8,6 +8,38 @@
 
 ---
 
+## 17/08/2026 — Descrições corrigidas e arquitetura do mobile refeita
+
+**Uma promessa que o site fazia sem ter autorização.** O aviso "pelo mesmo
+preço do branco" aparecia em TODOS os produtos de cor pronta. O Bruno
+confirmou isso só para a Coral Rende Muito e a Qualyvinil Econômica — nos seis
+esmaltes, o site estava garantindo um preço que ninguém deu.
+
+Agora existe o campo `precoCorIgual`. Sem ele, o texto vira "Confirme o valor
+da cor com a loja". Prometer errado é pior que não prometer.
+
+**Fosco Completo estava só em Área externa**, mas o boletim diz "superfícies
+externas E internas". Passou para os dois setores. Área interna foi para 14.
+
+**Três bugs de arquitetura no celular:**
+
+1. **O botão de comprar ficava a 1495px** numa tela de 812. Com 27 cores na
+   carta, o cliente rolava tudo antes de conseguir adicionar. Agora o botão
+   gruda no rodapé do box e a carta rola dentro do próprio bloco. Altura do
+   modal caiu de 1518 para 1269, e o botão fica em y=752 — visível sem rolar.
+
+2. **A página rolava por trás do modal e da gaveta.** No celular o dedo
+   arrastava o catálogo de fundo e o cliente perdia o lugar ao fechar. Agora o
+   fundo trava enquanto qualquer um dos dois está aberto, e destrava sozinho.
+
+3. **As miniaturas do carrinho cortavam a lata** — estavam com `object-fit:
+   cover`, que corta topo e base de uma imagem alta. Viraram `contain`.
+
+**Verificado:** botão visível sem rolar, fundo travando e destravando nos dois
+componentes, miniatura em contain.
+
+---
+
 ## 17/08/2026 — Escolha de cor, cor sob medida e produto em dois setores
 
 Lote de respostas do Bruno aplicado.

@@ -480,7 +480,8 @@ body.com-barra{padding-bottom:84px}
 
 .item{display:flex;gap:var(--e3);padding:var(--e3) 0;border-bottom:1px solid var(--borda)}
 .item__img{width:62px;height:62px;flex:0 0 62px;min-width:0;border-radius:9px;background:var(--azul);overflow:hidden;display:grid;place-items:center}
-.item__img img{width:100%;height:100%;object-fit:cover}
+/* contain, não cover: a lata é alta e o cover cortava topo e base */
+.item__img img{width:100%;height:100%;object-fit:contain;padding:3px}
 .item__meio{flex:1;min-width:0}
 .item__nome{font-size:.86rem;font-weight:600;line-height:1.3}
 .item__cor{font-size:.72rem;color:var(--texto-fraco);margin-top:2px;display:flex;align-items:center;gap:5px}
@@ -632,3 +633,23 @@ body.com-barra{padding-bottom:84px}
 .ficha dt{color:var(--texto-fraco);font-weight:600;white-space:nowrap}
 .ficha dd{color:var(--texto);line-height:1.4}
 .ficha__aviso{margin-top:var(--e3);font-size:.82rem;color:var(--azul);font-weight:600}
+
+/* ---------- ação sempre alcançável no detalhe do produto ----------
+   Com 27 cores na carta, o botão "Adicionar ao pedido" caía a 1500px do topo
+   num celular de 812px: o cliente rolava a carta inteira antes de conseguir
+   comprar. Agora ele gruda no rodapé do modal e fica sempre à mão. */
+.det__acao{
+  position:sticky;bottom:0;z-index:3;
+  margin:var(--e6) calc(var(--e6) * -1) calc(var(--e6) * -1);
+  padding:var(--e3) var(--e6) calc(var(--e3) + env(safe-area-inset-bottom));
+  background:var(--branco);
+  border-top:1px solid var(--borda);
+  box-shadow:0 -6px 20px rgba(6,43,120,.10);
+}
+.det__acao .btn{width:100%;margin:0}
+
+/* a carta de cores não precisa de altura infinita: rola dentro do próprio
+   bloco em vez de esticar o modal */
+@media (max-width:559px){
+  .cores{max-height:184px;overflow-y:auto;padding-right:4px}
+}

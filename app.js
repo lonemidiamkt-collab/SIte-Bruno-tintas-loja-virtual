@@ -161,16 +161,22 @@ function renderFiltros() {
    Rende Muito, onde o branco vem 18L e a cor vem 16L. Nos esmaltes e nas
    demais linhas a litragem é a mesma em qualquer cor — repetir o aviso ali
    assustava o cliente com um problema que não existe naquele produto. */
+/* "pelo mesmo preço do branco" só pode ser dito onde o lojista confirmou —
+   hoje só na Coral Rende Muito e na Qualyvinil Econômica (precoCorIgual).
+   Nos outros o site diz para confirmar, em vez de prometer um preço que
+   ninguém garantiu. Prometer errado é pior que não prometer. */
 const AVISO_COR = {
   maquina: 'Cor feita na máquina, na hora. O preço é o da base branca — a cor sai por orçamento.',
-  prontas: 'Tem cores prontas de fábrica, pelo mesmo preço do branco.'
+  prontas: 'Tem cores prontas de fábrica. Confirme o valor da cor com a loja.',
+  prontasMesmoPreco: 'Tem cores prontas de fábrica, pelo mesmo preço do branco.'
 };
+const chaveAviso = p => p.cor === 'prontas' && p.precoCorIgual ? 'prontasMesmoPreco' : p.cor;
 const avisoVolume = p => VOLUME_POR_COR[p.id]
   ? `Branco vem ${VOLUME_POR_COR[p.id].branco}; nas cores vem ${VOLUME_POR_COR[p.id].colorido}, `
     + 'pelo mesmo preço — é tinta concentrada e rende igual.'
   : '';
-const avisoCor = p => AVISO_COR[p.cor]
-  ? `<span class="prod__tingir">${AVISO_COR[p.cor]}</span>` : '';
+const avisoCor = p => AVISO_COR[chaveAviso(p)]
+  ? `<span class="prod__tingir">${AVISO_COR[chaveAviso(p)]}</span>` : '';
 
 function cardProduto(p) {
   return `<article class="prod">
@@ -312,7 +318,9 @@ function verProduto(id) {
         <p class="det__avista">${brl(comDesconto(p.preco))} à vista</p>
         <p class="det__parcela">ou ${LOJA.parcelas}x de ${brl(parcela(p.preco, LOJA.parcelas))} no cartão</p>
       </div>
-      <button class="btn btn--azul btn--bloco" data-add="${p.id}">Adicionar ao pedido</button>
+      <div class="det__acao">
+        <button class="btn btn--azul btn--bloco" data-add="${p.id}">Adicionar ao pedido</button>
+      </div>
     </div>`;
   abrirModal();
 }
@@ -532,12 +540,14 @@ function renderCarrinho() {
 let focoAnterior = null;
 
 const abrirCarrinho = () => {
+  travarFundo();
   focoAnterior = d0.activeElement;
   $('#gaveta').classList.add('on');
   $('#veu').classList.add('on');
   $('#gaveta').focus();
 };
 const fecharCarrinho = () => {
+  setTimeout(destravarFundo, 0);
   $('#gaveta').classList.remove('on');
   if (!$('#modal').classList.contains('on')) {
     $('#veu').classList.remove('on');
@@ -633,14 +643,24 @@ function escolherLoja(assunto) {
 
 /* ---------------- checkout ---------------- */
 
+/* Sem travar o body, o dedo que rola o modal no celular arrasta a página de
+   trás junto — o cliente perde o lugar no catálogo ao fechar. */
+const travarFundo   = () => d0.body.style.overflow = 'hidden';
+const destravarFundo = () => {
+  if (!$('#modal').classList.contains('on') && !$('#gaveta').classList.contains('on'))
+    d0.body.style.overflow = '';
+};
+
 const abrirModal = () => {
   if (!$('#modal').classList.contains('on')) focoAnterior = focoAnterior || d0.activeElement;
   $('#modal').classList.add('on');
   $('#veu').classList.add('on');
+  travarFundo();
   $('#modal').focus();
 };
 const fecharModal = () => {
   $('#modal').classList.remove('on');
+  destravarFundo();
   if (!$('#gaveta').classList.contains('on')) {
     $('#veu').classList.remove('on');
     if (focoAnterior) { focoAnterior.focus(); focoAnterior = null; }

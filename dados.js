@@ -299,22 +299,22 @@ const PRODUTOS = [
 
   { id: 7,  set: 'interna', marca: 'Qualyvinil',
     nome: 'Acrílica Cor Econômico Interior 18L', preco: 197.00,
-    foto: 'qualy-economica-18l', cor: 'prontas', carta: 'parede', oferta: false },
+    foto: 'qualy-economica-18l', cor: 'prontas', carta: 'parede', precoCorIgual: true, oferta: false },
 
   { id: 8,  set: 'interna', marca: 'Qualyvinil',
     nome: 'Acrílica Cor Econômico Interior 3,6L', preco: 57.00,
-    foto: 'qualy-economica-36l', cor: 'prontas', carta: 'parede', oferta: false },
+    foto: 'qualy-economica-36l', cor: 'prontas', carta: 'parede', precoCorIgual: true, oferta: false },
 
   /* ---- alto rendimento: Rende Muito serve parede e teto (interna) E
        fachada e muro (externa). O Bruno confirmou que vale nos dois, então
        `set` é lista. O Fosco Completo segue só externa até ele confirmar. ---- */
   { id: 9,  set: ['interna', 'externa'], marca: 'Coral',
     nome: 'Rende Muito Tinta Concentrada Acrílico Fosco Branco 18L', preco: 475.00,
-    foto: 'coral-rende-muito-18l', cor: 'prontas', carta: 'parede', oferta: false },
+    foto: 'coral-rende-muito-18l', cor: 'prontas', carta: 'parede', precoCorIgual: true, oferta: false },
 
   { id: 10, set: ['interna', 'externa'], marca: 'Coral',
     nome: 'Rende Muito Tinta Concentrada Acrílico Fosco Branco 3,6L', preco: 125.00,
-    foto: 'coral-rende-muito-36l', cor: 'prontas', carta: 'parede', oferta: false },
+    foto: 'coral-rende-muito-36l', cor: 'prontas', carta: 'parede', precoCorIgual: true, oferta: false },
 
   { id: 11, set: ['interna', 'externa'], marca: 'Qualyvinil',
     nome: 'Rende Muito+ Acrílico Standard 18L', preco: 379.00,
@@ -324,11 +324,11 @@ const PRODUTOS = [
     nome: 'Rende Muito+ Acrílico Standard 3,6L', preco: 99.00,
     foto: 'qualy-rende-muito-36l', cor: 'prontas', carta: 'parede', oferta: false },
 
-  { id: 13, set: 'externa', marca: 'Qualyvinil',
+  { id: 13, set: ['interna', 'externa'], marca: 'Qualyvinil',
     nome: 'Fosco Completo Acrílico Premium 18L', preco: 490.00,
     foto: 'qualy-fosco-completo-18l', cor: 'maquina', oferta: false },
 
-  { id: 14, set: 'externa', marca: 'Qualyvinil',
+  { id: 14, set: ['interna', 'externa'], marca: 'Qualyvinil',
     nome: 'Fosco Completo Acrílico Premium 3,6L', preco: 130.00,
     /* foto retirada: foto era de Acrílica Cor Econômico, não Fosco Completo (+ marca d'água 'Loja das Tintas') */
     foto: null, cor: 'maquina', oferta: false },
