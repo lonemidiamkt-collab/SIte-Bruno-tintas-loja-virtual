@@ -69,6 +69,10 @@ a ficha técnica no box (25 de 26) e o peso dos banners (viraram arquivo; o
 `imagens.js` caiu de 661 KB para 25 KB). Com eles fora, o P0 real virou o que
 sempre foi: **domínio e Google Business** — sem os dois, ninguém acha a loja.
 
+**Detalhe pequeno, mentira grande:** a tarja de topo ainda dizia "as fotos dos
+produtos ainda estão entrando". As 26 entraram em 17/08. No lugar dela entrou a
+ressalva das cores, que é o que hoje precisa ser dito.
+
 **Aberto:** foto nova da carta da Maza (a atual cortou a borda direita e não tem
 as metálicas) e confirmar com o Bruno qual acabamento da Lukscolor ele estoca.
 
