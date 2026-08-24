@@ -133,60 +133,80 @@ const CARTAS = {
   /* Coral Rende Muito — a carta diz, na tarja: "cores prontas ao mesmo preço
      do branco". É a confirmação impressa do que o Bruno tinha falado. */
   'coral-rende-muito': [
-    {c:'001',n:'Branco'}, {c:'002',n:'Branco Gelo'}, {c:'062',n:'Crômio'},
-    {c:'040',n:'Cinza Alpino'}, {c:'039',n:'Tubarão Branco'}, {c:'844',n:'Palha'},
-    {c:'820',n:'Areia'}, {c:'018',n:'Pérola'}, {c:'818',n:'Marfim'},
-    {c:'814',n:'Camurça'}, {c:'666',n:'Concreto'}, {c:'858',n:'Madeira Acinzentada'},
-    {c:'393',n:'Suco de Goiaba'}, {c:'811',n:'Laranja Imperial'}, {c:'349',n:'Laranja Maracatu'},
-    {c:'388',n:'Pote de Argila'}, {c:'540',n:'Sino'}, {c:'513',n:'Amarelo Frevo'},
-    {c:'503',n:'Cromo Suave'}, {c:'636',n:'Capim Limão'}, {c:'654',n:'Verde Kiwi'},
-    {c:'612',n:'Verde Limão'}, {c:'611',n:'Verde Angra'}, {c:'170',n:'Oceano'},
-    {c:'974',n:'Azul Sereno'}, {c:'140',n:'Azul dos Andes'}, {c:'156',n:'Azul Profundo'}
+    {c:'001',n:'Branco',h:'#F6F8F0'}, {c:'002',n:'Branco Gelo',h:'#FBFDEE'},
+    {c:'062',n:'Crômio',h:'#D8DAD3'}, {c:'040',n:'Cinza Alpino',h:'#ECECE6'},
+    {c:'039',n:'Tubarão Branco',h:'#C2C6C4'}, {c:'844',n:'Palha',h:'#EDE9CA'},
+    {c:'820',n:'Areia',h:'#F1ECD2'}, {c:'018',n:'Pérola',h:'#EEE5C6'},
+    {c:'818',n:'Marfim',h:'#F9F0C7'}, {c:'814',n:'Camurça',h:'#C5B388'},
+    {c:'666',n:'Concreto',h:'#A6AA89'}, {c:'858',n:'Madeira Acinzentada',h:'#C4C1B5'},
+    {c:'393',n:'Suco de Goiaba',h:'#C86960'}, {c:'811',n:'Laranja Imperial',h:'#EB9A58'},
+    {c:'349',n:'Laranja Maracatu',h:'#E48241'}, {c:'388',n:'Pote de Argila',h:'#D19C8A'},
+    {c:'540',n:'Sino',h:'#FFFFA2'}, {c:'513',n:'Amarelo Frevo',h:'#DEBB17'},
+    {c:'503',n:'Cromo Suave',h:'#EBCD82'}, {c:'636',n:'Capim Limão',h:'#CBD8AA'},
+    {c:'654',n:'Verde Kiwi',h:'#B8D0A1'}, {c:'612',n:'Verde Limão',h:'#B0DD6D'},
+    {c:'611',n:'Verde Angra',h:'#5DAF75'}, {c:'170',n:'Oceano',h:'#3695D7'},
+    {c:'974',n:'Azul Sereno',h:'#B2CCD9'}, {c:'140',n:'Azul dos Andes',h:'#93B3D3'},
+    {c:'156',n:'Azul Profundo',h:'#4380C2'}
   ],
 
   'qualy-rende-muito': [
-    {c:'001',n:'Branco'}, {c:'003',n:'Branco Gelo'}, {c:'004',n:'Algodão Egípcio'},
-    {c:'007',n:'Cinza Escala'}, {c:'030',n:'Palha'}, {c:'031',n:'Pérola'},
-    {c:'032',n:'Areia'}, {c:'033',n:'Marfim'}, {c:'039',n:'Amarelo Sol'},
-    {c:'042',n:'Terracota'}, {c:'051',n:'Azul Índigo'}, {c:'055',n:'Azul Sereno'},
-    {c:'067',n:'Kiwi'}, {c:'069',n:'Verde Limão'}, {c:'072',n:'Camurça'},
-    {c:'161',n:'Crômio'}, {c:'163',n:'Cinza Urbano'}
+    {c:'001',n:'Branco',h:'#F8F8F5'}, {c:'003',n:'Branco Gelo',h:'#F9FAED'},
+    {c:'004',n:'Algodão Egípcio',h:'#E8E5D3'}, {c:'007',n:'Cinza Escala',h:'#BBC0BC'},
+    {c:'030',n:'Palha',h:'#EBE4C3'}, {c:'031',n:'Pérola',h:'#F9F4DA'},
+    {c:'032',n:'Areia',h:'#E7DAB0'}, {c:'033',n:'Marfim',h:'#EFDA82'},
+    {c:'039',n:'Amarelo Sol',h:'#F0D334'}, {c:'042',n:'Terracota',h:'#CD7C62'},
+    {c:'051',n:'Azul Índigo',h:'#1C3D70'}, {c:'055',n:'Azul Sereno',h:'#BFDBD6'},
+    {c:'067',n:'Kiwi',h:'#B4C285'}, {c:'069',n:'Verde Limão',h:'#70A929'},
+    {c:'072',n:'Camurça',h:'#C0A57A'}, {c:'161',n:'Crômio',h:'#BBBBB5'},
+    {c:'163',n:'Cinza Urbano',h:'#C2C2B9'}
   ],
 
   'qualy-economica': [
-    {c:'001',n:'Branco'}, {c:'003',n:'Branco Gelo'}, {c:'030',n:'Palha'},
-    {c:'031',n:'Pérola'}, {c:'032',n:'Areia'}, {c:'033',n:'Marfim'},
-    {c:'034',n:'Amarelo Canário'}, {c:'035',n:'Pêssego'}, {c:'047',n:'Cenoura'},
-    {c:'055',n:'Azul Sereno'}, {c:'060',n:'Verde Água'}, {c:'069',n:'Verde Limão'},
-    {c:'072',n:'Camurça'}, {c:'073',n:'Concreto'}, {c:'077',n:'Açaí'},
-    {c:'078',n:'Amarelo Frevo'}, {c:'079',n:'Rubí'}, {c:'096',n:'Pavão'},
-    {c:'160',n:'Elefante'}, {c:'161',n:'Crômio'}
+    {c:'001',n:'Branco',h:'#F8F7F6'}, {c:'003',n:'Branco Gelo',h:'#E9EBDC'},
+    {c:'030',n:'Palha',h:'#FCF0CC'}, {c:'031',n:'Pérola',h:'#E9E2CD'},
+    {c:'032',n:'Areia',h:'#E8D7B1'}, {c:'033',n:'Marfim',h:'#EBDB8E'},
+    {c:'034',n:'Amarelo Canário',h:'#F0DC5A'}, {c:'035',n:'Pêssego',h:'#D9B998'},
+    {c:'047',n:'Cenoura',h:'#E4905F'}, {c:'055',n:'Azul Sereno',h:'#C0DEDB'},
+    {c:'060',n:'Verde Água',h:'#CCE6C9'}, {c:'069',n:'Verde Limão',h:'#609B1A'},
+    {c:'072',n:'Camurça',h:'#D0B991'}, {c:'073',n:'Concreto',h:'#9E9B78'},
+    {c:'077',n:'Açaí',h:'#754F6B'}, {c:'078',n:'Amarelo Frevo',h:'#E0B80C'},
+    {c:'079',n:'Rubí',h:'#B96453'}, {c:'096',n:'Pavão',h:'#369DB9'},
+    {c:'160',n:'Elefante',h:'#A7AFB1'}, {c:'161',n:'Crômio',h:'#BEBFB1'}
   ],
 
   'qualy-esmalte': [
-    {c:'001',n:'Branco'}, {c:'002',n:'Branco Gelo'}, {c:'010',n:'Preto'},
-    {c:'033',n:'Marfim'}, {c:'039',n:'Amarelo'}, {c:'046',n:'Laranja'},
-    {c:'053',n:'Azul França'}, {c:'054',n:'Platina'}, {c:'057',n:'Azul Del Rey'},
-    {c:'062',n:'Verde Colonial'}, {c:'067',n:'Verde Folha'}, {c:'074',n:'Cinza Médio'},
-    {c:'075',n:'Cinza Escuro'}, {c:'080',n:'Marrom'}, {c:'081',n:'Marrom Conhaque'},
-    {c:'083',n:'Tabaco'}, {c:'085',n:'Vermelho'}
+    {c:'001',n:'Branco',h:'#F8F8E5'}, {c:'002',n:'Branco Gelo',h:'#FFF8C8'},
+    {c:'010',n:'Preto',h:'#0E1117'}, {c:'033',n:'Marfim',h:'#FFEFAB'},
+    {c:'039',n:'Amarelo',h:'#EEB101'}, {c:'046',n:'Laranja',h:'#FB7339'},
+    {c:'053',n:'Azul França',h:'#11328A'}, {c:'054',n:'Platina',h:'#AAAD9E'},
+    {c:'057',n:'Azul Del Rey',h:'#1C2548'}, {c:'062',n:'Verde Colonial',h:'#293D2F'},
+    {c:'067',n:'Verde Folha',h:'#204B18'}, {c:'074',n:'Cinza Médio',h:'#909690'},
+    {c:'075',n:'Cinza Escuro',h:'#3F4144'}, {c:'080',n:'Marrom',h:'#3D231D'},
+    {c:'081',n:'Marrom Conhaque',h:'#86441D'}, {c:'083',n:'Tabaco',h:'#552417'},
+    {c:'085',n:'Vermelho',h:'#981B19'}
   ],
 
   /* Maza — a carta traz só o nome, sem código. Só a seção CORES LISAS foi
      fotografada; a lata também anuncia cores metálicas, que faltam. */
   'maza-ferrugem': [
-    {n:'Branco'}, {n:'Preto'}, {n:'Azul'}, {n:'Vermelho'}, {n:'Platina'},
-    {n:'Amarelo'}, {n:'Cinza'}, {n:'Verde'}, {n:'Marrom'}, {n:'Preto Chassis SB'}
+    {n:'Branco',h:'#F3F8F7'}, {n:'Preto',h:'#0C0C11'},
+    {n:'Azul',h:'#1C243C'}, {n:'Vermelho',h:'#BD2D33'},
+    {n:'Platina',h:'#CDD8DF'}, {n:'Amarelo',h:'#D7A910'},
+    {n:'Cinza',h:'#768D90'}, {n:'Verde',h:'#152E2D'},
+    {n:'Marrom',h:'#3D343A'}, {n:'Preto Chassis SB',h:'#0B0B0D'}
   ],
 
   /* Lukscolor — a carta separa por ACABAMENTO. Estas são as do BRILHANTE, que
      é o acabamento mais comum de esmalte. A carta também tem Fosco (só branco
      e preto) e Acetinado (8 cores). Confirmar com o Bruno qual ele estoca. */
   'lukscolor': [
-    {n:'Branco'}, {n:'Branco Gelo'}, {n:'Platina'}, {n:'Preto'},
-    {n:'Algodão Egípcio'}, {n:'Marfim'}, {n:'Areia'}, {n:'Amarelo'},
-    {n:'Azul Del Rey'}, {n:'Vermelho'}, {n:'Verde Folha'}, {n:'Tabaco'},
-    {n:'Conhaque'}, {n:'Marrom Barroco'}
+    {n:'Branco',h:'#F6F8EF'}, {n:'Branco Gelo',h:'#CFD2BB'},
+    {n:'Platina',h:'#BAC3BD'}, {n:'Preto',h:'#1D2021'},
+    {n:'Algodão Egípcio',h:'#E3E6D0'}, {n:'Marfim',h:'#D9D7A6'},
+    {n:'Areia',h:'#F0E5BA'}, {n:'Amarelo',h:'#EB9F13'},
+    {n:'Azul Del Rey',h:'#14244C'}, {n:'Vermelho',h:'#AD1E1A'},
+    {n:'Verde Folha',h:'#093F0A'}, {n:'Tabaco',h:'#422A1C'},
+    {n:'Conhaque',h:'#80421D'}, {n:'Marrom Barroco',h:'#371610'}
   ]
 };
 

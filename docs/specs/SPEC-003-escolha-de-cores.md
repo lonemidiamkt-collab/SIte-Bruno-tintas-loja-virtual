@@ -9,6 +9,7 @@
 |---|---|---|
 | **1 — box de detalhe** | clicar no produto abre um box com foto grande, preço e as condições | **Implementada** (17/08) |
 | **2 — escolha de cor** | escolher a cor dentro do box | **Implementada** (17/08) |
+| **3 — bloco de cor** | a carta mostra a cor, não só o nome | **Implementada** (24/08) |
 
 A fase 1 foi separada porque não depende de nenhum dado que falta, e entrega
 sozinha o ganho da foto grande. A fase 2 mora dentro dela.
@@ -51,6 +52,32 @@ da base branca. Não passa pelo carrinho porque não há preço a somar.
 A carta é a **padrão da linha**, não lista de estoque. Isso é seguro aqui porque
 nada é cobrado pelo site: a loja confirma a cor no WhatsApp antes de separar,
 então existe sempre uma conferência humana antes da venda.
+
+## Fase 3 — o bloco de cor (feita)
+
+A carta da fase 2 listava nome e código em pastilha de texto. Funcionava para
+quem já sabia o nome da cor, e não servia para mais ninguém — **ninguém escolhe
+tinta lendo nome**.
+
+Cada cor de `CARTAS` ganhou um hex no campo `h`, **medido na foto da carta
+física** e não escolhido a olho (o porquê está no ADR-005), e a pastilha virou
+um quadrado de tinta de 52 px com nome e código embaixo.
+
+Três coisas que vieram junto, e que só apareceram com o bloco na tela:
+
+- o `max-height` de 184 px que a carta tinha no celular fazia sentido com
+  pastilha de texto; com bloco virou janelinha de 1,5 fileira com scroll dentro
+  de modal. Saiu — a carta cresce e quem rola é o modal;
+- **"Adicionar ao pedido" dentro da ficha abria o carrinho atrás do modal.** A
+  ficha ficava na frente e parecia que o clique não pegou. Agora a ficha sai
+  quando o item entra;
+- a cor escolhida aparece no carrinho com o quadradinho ao lado do nome.
+
+**Limite declarado na tela:** o hex sai de foto de papel impresso sob luz de
+loja, vista em tela não calibrada. Embaixo da carta o site diz que *"as cores
+da tela são aproximadas — a carta impressa da loja é a referência final"*.
+
+---
 
 ## Fase 2 — desenho original (histórico)
 

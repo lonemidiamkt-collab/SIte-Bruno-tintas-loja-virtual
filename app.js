@@ -173,6 +173,9 @@ const AVISO_COR = {
 /* O cliente escolhe pelo nome, mas o pedido leva o CÓDIGO junto quando existe:
    é o que a loja usa para separar a lata certa sem precisar perguntar. */
 const rotuloCor = c => c.c ? `${c.n} (${c.c})` : c.n;
+/* o bloco de cor é o hex medido na foto da carta; se faltar ou vier
+   torto, cai num cinza neutro em vez de injetar CSS */
+const hexSeguro = h => /^#[0-9A-Fa-f]{6}$/.test(h || '') ? h : '#E6E6E6';
 const primeiraCor = p => { const l = CARTAS[p.carta] || []; return l.length ? rotuloCor(l[0]) : ''; };
 
 const chaveAviso = p => p.cor === 'prontas' && p.precoCorIgual ? 'prontasMesmoPreco' : p.cor;
@@ -259,9 +262,14 @@ function blocoCorDoProduto(p) {
           ${carta.map((c, i) => `
             <button type="button" class="cor${i === 0 ? ' on' : ''}"
                     role="radio" aria-checked="${i === 0}"
-                    title="${c.c ? 'Código ' + esc(c.c) : esc(c.n)}"
-                    data-cor="${esc(rotuloCor(c))}" data-prod="${p.id}">${esc(c.n)}</button>`).join('')}
+                    title="${esc(rotuloCor(c))}"
+                    data-cor="${esc(rotuloCor(c))}" data-prod="${p.id}">
+              <span class="cor__bloco" style="background:${hexSeguro(c.h)}"></span>
+              <span class="cor__nome">${esc(c.n)}${c.c ? ` <span class="cor__cod">${esc(c.c)}</span>` : ''}</span>
+            </button>`).join('')}
         </div>
+        <p class="det__cor-ajuda">As cores da tela são aproximadas — a carta
+           impressa da loja é a referência final.</p>
         ${avisoVolume(p) ? `<p class="det__cor-ajuda">${avisoVolume(p)}</p>` : ''}
         <p class="det__cor-ajuda">A loja confirma a cor com você no WhatsApp antes de separar.</p>
         ${p.temMaquina ? `
@@ -411,15 +419,19 @@ function adicionar(id) {
   /* A cor faz parte da identidade do item: a mesma tinta em duas cores são
      duas linhas no carrinho, não uma com quantidade 2. */
   const cor = p.cor === 'prontas' ? (corEscolhida[p.id] || primeiraCor(p)) : '';
+  const corH = cor ? (CARTAS[p.carta] || []).find(c => rotuloCor(c) === cor)?.h : '';
   const key = cor ? `${p.id}|${cor}` : String(p.id);
   const ja = carrinho.find(i => i.key === key);
   if (ja) ja.qtd++;
   else carrinho.push({
     key, id: p.id, foto: p.foto, preco: p.preco, qtd: 1, cor,
-    nome: p.marca !== '—' ? p.marca + ' ' + p.nome : p.nome
+    nome: p.marca !== '—' ? p.marca + ' ' + p.nome : p.nome, corH
   });
   renderCarrinho();
-ligarTrilhos();
+  ligarTrilhos();
+  /* Se veio da ficha do produto, a ficha sai da frente: senão o carrinho
+     abre atrás do modal e parece que o clique não fez nada. */
+  if ($('#modal').classList.contains('on')) fecharModal();
   abrirCarrinho();
 }
 
@@ -535,7 +547,9 @@ function renderCarrinho() {
       <div class="item__img">${fotoOu(i, "")}</div>
       <div class="item__meio">
         <p class="item__nome">${esc(i.nome)}</p>
-        ${i.cor ? `<p class="item__cor">Cor: ${esc(i.cor)}</p>` : ''}
+        ${i.cor ? `<p class="item__cor">${i.corH
+              ? `<span class="item__bloco" style="background:${hexSeguro(i.corH)}"></span>` : ''
+            }Cor: ${esc(i.cor)}</p>` : ''}
         <p class="item__preco">${brl(i.preco * i.qtd)}</p>
         <div class="qtd">
           <button data-q="-1" data-k="${esc(i.key)}" aria-label="Diminuir">−</button>

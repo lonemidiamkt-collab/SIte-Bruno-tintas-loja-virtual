@@ -8,6 +8,72 @@
 
 ---
 
+## 24/08/2026 — A carta de cores ganhou cor de verdade
+
+**"Ainda não tem os blocos de cores."** A carta já estava certa nos nomes e nos
+códigos, mas era só texto: um botão escrito "Marfim (818)". Ninguém escolhe
+tinta lendo nome — escolhe olhando.
+
+**O problema real não era o CSS, era de onde tirar o hex.** Eu podia escolher
+as 105 cores a olho, ou copiar de catálogo de fabricante na internet. Foi
+exatamente o segundo caminho que, semana passada, produziu uma carta da Coral
+com Flamingo e Rosa Açaí — cores que não existem.
+
+Então medi nas próprias fotos que o Bruno mandou, com script
+(`docs/ferramentas/extrai-cores.py`). Três cuidados, cada um contra um jeito de
+a foto mentir:
+
+- **mediana** num quadrado de 29×29 px, não média — reflexo de flash é um ponto
+  claro pequeno, e a mediana ignora. Foi o que salvou a Platina da Maza, que é
+  metálica e no centro é puro brilho de flash: na primeira rodada saiu
+  `#FFFFFF`.
+- **branco de referência local**, percentil 95 numa janela de 680 px — com um
+  branco único para a carta inteira, a mesma cor saía mais clara de um lado do
+  que do outro. Foi assim que Cinza Alpino e Crômio, vizinhas na carta,
+  apareceram com duas claridades incompatíveis.
+- **calibração pelo Branco** da carta no fim: tinta branca tem que sair branca,
+  e é o único ponto de verdade que a foto dá de graça.
+
+Conferi cor por cor: o script monta uma folha com o recorte da foto ao lado da
+cor extraída, e olhei as 105.
+
+**Dois consertos que apareceram junto:**
+
+O `max-height:184px` que a carta tinha no celular fazia sentido quando ela era
+pastilha de texto. Com bloco de 52 px, virou uma janelinha de 1,5 fileira com
+scroll dentro de modal — dois scrolls aninhados no dedo. Saiu; a carta cresce e
+quem rola é o modal.
+
+E **"Adicionar ao pedido" dentro da ficha abria o carrinho atrás do modal.** A
+ficha continuava na frente, o cliente via a mesma tela de antes e concluía que
+o clique não pegou. Agora a ficha sai da frente quando o item entra.
+
+A cor escolhida também aparece no carrinho, com o quadradinho ao lado de
+"Cor: Suco de Goiaba (393)" — confere a escolha sem reabrir a ficha.
+
+**Limite, dito na tela:** é foto de papel impresso, sob luz de loja, numa tela
+que ninguém calibrou. O site avisa embaixo da carta que *"as cores da tela são
+aproximadas — a carta impressa da loja é a referência final"*, que é a mesma
+ressalva que a Lukscolor imprime no verso da carta dela. Ver ADR-005.
+
+**Também nesta entrada:** o `ESTADO.md` estava parado em 17/08, descrevendo uma
+branch `catalogo-novo` que já não existe e um desconto de 5% que virou 10%.
+Reescrito para o estado real.
+
+**O BACKLOG também estava carregando item morto.** Saíram, todos já resolvidos
+e já registrados aqui em entradas anteriores: a fila de deploy fora de ordem, o
+webhook parado da Vercel, os 5 pontos do catálogo (preço de venda, desconto de
+10%, 12x sem juros), o preço da Coral colorida (é o mesmo do branco, e está
+impresso na carta), quais cores a loja tem prontas (as cartas reais chegaram),
+a ficha técnica no box (25 de 26) e o peso dos banners (viraram arquivo; o
+`imagens.js` caiu de 661 KB para 25 KB). Com eles fora, o P0 real virou o que
+sempre foi: **domínio e Google Business** — sem os dois, ninguém acha a loja.
+
+**Aberto:** foto nova da carta da Maza (a atual cortou a borda direita e não tem
+as metálicas) e confirmar com o Bruno qual acabamento da Lukscolor ele estoca.
+
+---
+
 ## 24/08/2026 — A carta de cores estava escondida atrás de um botão que não abria ela
 
 **A pergunta do Roberto ("onde o cliente escolhe a cor?") virou bug.**

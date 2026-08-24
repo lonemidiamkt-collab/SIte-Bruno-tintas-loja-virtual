@@ -10,96 +10,56 @@ Prioridades: **P0** trava o projeto · **P1** próximo ciclo · **P2** depois ·
 
 ## P0 — travando
 
-### Fixar a versão certa em produção
-A Vercel está reprocessando a fila de deploys atrasados **fora de ordem**, e a
-produção anda para trás: chegou a servir o commit mais novo e depois voltou
-dois atrás. Enquanto a fila drena, o site oscila entre versões.
+### Apontar o domínio brunodastintas.com.br
+É o que separa o site de existir. Hoje ele está numa URL de teste da Vercel,
+com `X-Robots-Tag: noindex` **de propósito** (ADR-003): ninguém acha no Google,
+e todo o SEO regional que já está pronto no HTML não vale nada na prática.
 
-Correção: em **Deployments**, achar o deploy do commit mais recente e clicar em
-**Promote to Production**. Isso fixa e para a oscilação.
+Ao apontar, **remover o `noindex` do `vercel.json`** no mesmo movimento. O
+`canonical` do HTML já aponta para o domínio final. **Depende do Roberto.**
 
-Como saber qual está no ar sem abrir o painel — o tamanho do `dados.js`
-identifica o commit:
+### Criar os perfis no Google Business das duas lojas
+Para busca local ("tinta em Araruama"), o perfil do Google Business pesa mais
+que o site inteiro. Não tem substituto no código — é cadastro, foto e endereço,
+feito por quem é dono do negócio.
 
-```bash
-curl -s https://s-ite-bruno-tintas-loja-virtual.vercel.app/dados.js | wc -c
-```
-
-### Webhook da Vercel parou de disparar
-Vários commits estão no GitHub sem build correspondente, a partir do `7a851ac`
-(as 26 fotos). Enquanto não destravar, **nada que for commitado chega ao
-site** — o deploy contínuo está morto. O último deploy que saiu foi o
-`fe61fcb`, com o catálogo mas sem as fotos.
-
-Como conferir se voltou, sem abrir a Vercel:
-
-```bash
-curl -sI https://s-ite-bruno-tintas-loja-virtual.vercel.app/dados.js | grep -i age
-```
-
-Se o `age` só cresce, nenhum deploy novo saiu. Deploy novo zera esse número.
-
-Caminho de correção, na ordem: **Settings → Git**, desconectar e reconectar o
-repositório; se não resolver, checar a permissão do GitHub App da Vercel no
-repo; e conferir se o projeto duplicado `-b1hj` está atrapalhando.
-**Depende do Roberto** — não há CLI da Vercel nem token nesta máquina.
-
-### Confirmar 5 pontos do catálogo novo
-Os 26 produtos estão na `main`, com os preços do cupom (soma confere no
-centavo). Falta confirmar, e cada um destes muda o que o cliente vê:
-
-1. **Os preços são de venda?** O cupom parece orçamento, mas se for nota de
-   compra, a loja estaria vendendo a preço de custo. É o risco mais caro
-   desta lista.
-2. ~~O preço vale para a base branca sem tingimento?~~ **Respondido** — vale.
-   Linha Decora é tingida na máquina e a cor é orçamento à parte; Coral Rende
-   Muito e Qualy Econômica têm cores prontas. Já está no aviso de cada card.
-3. ~~Coral Rende Muito: 3,6L ou 3,2L?~~ **Respondido** — são os dois: branco
-   18L / galão 3,6L, cores 16L / galão 3,2L. Os itens cadastrados são o branco.
-   **Falta o preço da versão colorida** → SPEC-003.
-4. **Desconto: 5% ou 10%?** O `dados.js` diz 5% no PIX; o cabeçalho do cupom
-   parece dizer 10%. O site está mostrando 5%.
-5. **Parcelamento é sem juros?** O cupom parece dizer "12x sem juros". Hoje o
-   site não afirma nada (`semJuros: null`). Confirmando, dá para afirmar.
-6. ~~Qual produto é o Destaque da semana?~~ **Resolvido** — virou rodízio
-   semanal automático entre os setores, não precisa escolher.
-
-### Preço da Coral Rende Muito colorida
-Bloqueia a [SPEC-003](specs/SPEC-003-escolha-de-cores.md). Falta o preço da
-lata **16L** e do galão **3,2L** — a versão colorida, que tem menos volume que
-o branco e portanto não pode custar o mesmo. Enquanto não vier, o site só
-consegue vender a cor por orçamento.
-
-Junto com isso: a **Qualyvinil Acrílica Cor Econômica** também muda de volume
-quando é colorida, ou o preço é o mesmo do branco?
-
-### Quais cores a loja tem prontas
-A carta da Coral Rende Muito tem 27 cores, mas o que vale é o que a loja
-estoca. **Listar cor que não tem é pior que não listar cor nenhuma** — vira
-cliente indo à loja atrás de um produto que não existe.
-
-### Produtos mandados sem preço
-- **Qualyvinil Colorit Eco** (esmalte base água, 900ml) — não está no cupom
-- **Qualyvinil Complementos Premium** — provavelmente é a embalagem das massas
-  já cadastradas; se for produto separado, falta o preço
+Com o perfil no ar, o link entra em `UNIDADES[].maps`, que hoje cai numa busca
+por endereço em vez de ir direto para a ficha da loja. **Depende do Roberto.**
 
 ---
 
 ## P1 — próximo ciclo
 
-### Ficha técnica dentro do box
-O box de detalhe já existe (SPEC-003 fase 1), mas hoje só tem foto, preço e o
-aviso de cor. O que daria corpo a ele é rendimento em m², número de demãos,
-tempo de secagem e onde aplicar.
+### Perguntas para o Bruno sobre as cartas de cor
+Cada uma muda o que o cliente vê na tela:
 
-Está na ficha técnica de cada fabricante, mas alguém precisa cadastrar
-**produto a produto — são 26**. Dá para fazer aos poucos: o box mostra a ficha
-só de quem já tiver, e ignora quem não tem.
+1. **Qual acabamento da Lukscolor a loja estoca?** Brilhante, Fosco e Acetinado
+   são cartas diferentes. O site mostra as 14 do **Brilhante**, que é o mais
+   comum em esmalte — mas é escolha minha, não informação dele.
+2. **Foto nova da carta da Maza.** A atual pegou só "CORES LISAS", cortou a
+   borda direita e não tem as **metálicas**, que a lata anuncia. Com foto nova,
+   as cores se remedem com `docs/ferramentas/extrai-cores.py`.
+3. **Preço da cor** nas 4 linhas sem `precoCorIgual` — hoje o site diz "confirme
+   o valor da cor com a loja", que funciona mas gasta atendimento. Confirmado na
+   Coral Rende Muito (está impresso na carta) e na Qualyvinil Econômica.
+4. **A Massa Acrílica 3,6L é da linha Klasse?** A foto do produto mostra Klasse;
+   o nome cadastrado não diz.
+
+### Correção nas artes 01 e 02
+Erros que só designer resolve, porque estão dentro da imagem:
+- **título duplicado** — a arte já traz o título, e a página repetia em texto
+  (o texto já saiu da capa no celular, mas as artes internas seguem assim)
+- **"5%"** — o desconto à vista virou **10%**
+- **"tinge na máquina"** na arte da Rende Muito, que é linha de cor pronta
+
+### Ficha técnica do Klasse Massa Acrílica 18L
+É o único dos 26 sem ficha (25 de 26). O box mostra a ficha só de quem tem, e
+ignora quem não tem, então não quebra nada — só fica mais pobre que os vizinhos.
 
 ### Migração para Next.js + Supabase
 Catálogo sai do arquivo e vai para o banco, com painel para o Bruno editar
 preço sem depender de ninguém. → [SPEC-002](specs/SPEC-002-migracao-next-supabase.md)
-· estado: **Proposta**, aguardando aprovação.
+· estado: **Proposta**, com 4 perguntas em aberto, aguardando o Roberto.
 
 ### Apagar o projeto Vercel duplicado
 Existem **dois** projetos Vercel ligados neste mesmo repositório, e todo push
@@ -112,40 +72,30 @@ Riscos de deixar como está: build dobrado a cada push, e alguém compartilhar a
 URL do projeto errado. Antes de apagar, confirme que o domínio real não está
 apontado para o `-b1hj`. **Depende do Roberto.**
 
-### Apontar o domínio brunodastintas.com.br
-Ao apontar, **remover o `X-Robots-Tag: noindex`** do `vercel.json`, senão o
-site não indexa. O `canonical` no HTML já aponta para o domínio final.
-
-### Fechar os dados que o site hoje omite
-Três campos estão em `null` de propósito, e cada um esconde uma informação que
-converte venda:
+### Fechar os dois dados que o site ainda omite
 - `corteEntregaHoje` — sem isso o site não mostra "peça até X e receba hoje"
-- `semJuros` — o site não afirma se o parcelamento tem juros
 - `parcelaMinima` — hoje declara "sem valor mínimo"
 
 **Depende do cliente.**
+
+### Produtos mandados sem preço
+- **Qualyvinil Colorit Eco** (esmalte base água, 900ml) — não está no cupom
+- **Qualyvinil Complementos Premium** — provavelmente é a embalagem das massas
+  já cadastradas; se for produto separado, falta o preço
 
 ---
 
 ## P2 — depois
 
-### Peso dos banners
-As fotos de produto já saíram do base64 e viraram arquivo com lazy-load
-(17/08), então o problema agora é só o `imagens.js`, com 661 KB.
-
-O grosso são 3 banners — `banner@2x` 207 KB, `banner-comprar@2x` 95 KB,
-`banner-pedido@2x` 82 KB — que somam 384 KB e **só aparecem no desktop**. O
-celular baixa os três à toa. Mesmo tratamento das fotos resolve: virar
-arquivo e carregar sob demanda.
-
-### Links do Google Business
-`UNIDADES[].maps` hoje cai em busca por endereço. Com o link do perfil, o
-cliente vai direto para a ficha da loja, com avaliação e rota.
-
 ### Registro dos pedidos
 Hoje o pedido vira texto no WhatsApp e some. Não existe forma de saber quantos
 pedidos o site gerou, nem quais não foram respondidos. Entra naturalmente com
 o Supabase (SPEC-002).
+
+### Cor no card da grade, não só na ficha
+Hoje o bloco de cor só aparece depois de abrir a ficha. Um resumo na grade
+("27 cores" com uma fita das mais vendidas) encurtaria o caminho — mas mexe na
+densidade da grade, que já está apertada no celular. Precisa de spec.
 
 ---
 

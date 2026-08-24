@@ -42,6 +42,31 @@ Muito ("mais de 1000 cores do leque"), Qualyvinil Rende Muito+ ("mais de 6.000
 cores") e Lukscolor ("sistema tintométrico Luksystem"). Nessas, o box mostra a
 carta **e** oferece orçamento para cor fora dela.
 
+## De onde vem o bloco de cor da tela
+
+Cada cor tem um `h` (hex) em `CARTAS`, e é ele que pinta o quadrado no site.
+Esse hex **não foi escolhido a olho nem copiado de catálogo da internet**: foi
+medido nas mesmas fotos que o Bruno mandou, por
+`docs/ferramentas/extrai-cores.py` (o porquê está no
+`docs/decisoes/ADR-005-cores-medidas-da-foto.md`).
+
+Resumo do que o script faz, por cor:
+
+1. tira a mediana de um quadrado de 29×29 px no centro da amostra impressa —
+   mediana, e não média, para o brilho do flash não puxar a cor;
+2. procura o branco do papel numa janela de 680 px em volta (percentil 95) e
+   usa esse branco como referência, o que corrige a luz desigual da foto;
+3. no fim, calibra a carta inteira pelo **Branco**, que é a única cor que a
+   gente sabe de antemão como tem que sair.
+
+A conferência foi visual: para cada carta o script montou uma folha com o
+recorte da foto ao lado da cor extraída, e as 105 cores foram olhadas uma a uma.
+
+**Limite honesto:** é foto de papel impresso, sob luz de loja, vista numa tela
+que ninguém calibrou. O site diz isso na própria carta — *"as cores da tela são
+aproximadas — a carta impressa da loja é a referência final"* —, que é a mesma
+ressalva que a Lukscolor imprime no verso da dela.
+
 ## Aberto
 
 **Lukscolor tem três acabamentos** com cores diferentes: Brilhante (14 cores),
