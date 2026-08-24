@@ -170,6 +170,11 @@ const AVISO_COR = {
   prontas: 'Tem cores prontas de fábrica. Confirme o valor da cor com a loja.',
   prontasMesmoPreco: 'Tem cores prontas de fábrica, pelo mesmo preço do branco.'
 };
+/* O cliente escolhe pelo nome, mas o pedido leva o CÓDIGO junto quando existe:
+   é o que a loja usa para separar a lata certa sem precisar perguntar. */
+const rotuloCor = c => c.c ? `${c.n} (${c.c})` : c.n;
+const primeiraCor = p => { const l = CARTAS[p.carta] || []; return l.length ? rotuloCor(l[0]) : ''; };
+
 const chaveAviso = p => p.cor === 'prontas' && p.precoCorIgual ? 'prontasMesmoPreco' : p.cor;
 const avisoVolume = p => VOLUME_POR_COR[p.id]
   ? `Branco vem ${VOLUME_POR_COR[p.id].branco}; nas cores vem ${VOLUME_POR_COR[p.id].colorido}, `
@@ -235,7 +240,7 @@ function renderGrade() {
      que é o card "quer uma cor personalizada". */
 function blocoCorDoProduto(p) {
   if (p.cor === 'prontas') {
-    const carta = CARTAS[p.carta] || CARTAS.parede;
+    const carta = CARTAS[p.carta] || [];
     return `
       <div class="det__bloco">
         <h4 class="det__rotulo">Escolha a cor</h4>
@@ -243,10 +248,15 @@ function blocoCorDoProduto(p) {
           ${carta.map((c, i) => `
             <button type="button" class="cor${i === 0 ? ' on' : ''}"
                     role="radio" aria-checked="${i === 0}"
-                    data-cor="${esc(c)}" data-prod="${p.id}">${esc(c)}</button>`).join('')}
+                    title="${c.c ? 'Código ' + esc(c.c) : esc(c.n)}"
+                    data-cor="${esc(rotuloCor(c))}" data-prod="${p.id}">${esc(c.n)}</button>`).join('')}
         </div>
         ${avisoVolume(p) ? `<p class="det__cor-ajuda">${avisoVolume(p)}</p>` : ''}
         <p class="det__cor-ajuda">A loja confirma a cor com você no WhatsApp antes de separar.</p>
+        ${p.temMaquina ? `
+          <p class="det__cor-ajuda">Quer uma cor que não está aqui? Esta linha também
+             é tingida na máquina — a gente monta o orçamento.
+             <button type="button" class="link-cor" data-cor-medida="${p.id}">Pedir orçamento de cor</button></p>` : ''}
       </div>`;
   }
   if (p.cor === 'maquina') {
@@ -389,8 +399,7 @@ function adicionar(id) {
   if (!p) return;
   /* A cor faz parte da identidade do item: a mesma tinta em duas cores são
      duas linhas no carrinho, não uma com quantidade 2. */
-  const cor = p.cor === 'prontas'
-    ? (corEscolhida[p.id] || (CARTAS[p.carta] || CARTAS.parede)[0]) : '';
+  const cor = p.cor === 'prontas' ? (corEscolhida[p.id] || primeiraCor(p)) : '';
   const key = cor ? `${p.id}|${cor}` : String(p.id);
   const ja = carrinho.find(i => i.key === key);
   if (ja) ja.qtd++;

@@ -122,32 +122,71 @@ const MARCAS = [
   { nome: 'IF',               logo: null }
 ];
 
-/* -------- cores prontas --------
-   Carta padrão da linha, para o cliente escolher no site. Não é lista de
-   estoque: a loja confirma a cor no WhatsApp antes de fechar — nenhum pedido
-   é cobrado pelo site, então há sempre uma conferência humana antes da venda.
+/* -------- cartas de cor --------
+   Transcritas das cartas físicas que o Bruno fotografou em 24/08/2026
+   (as fotos estão em docs/cartas-de-cor). Cada linha tem a SUA carta: cor de
+   parede e cor de esmalte não são a mesma lista, e cada marca tem a dela.
 
-   Vale para os produtos com cor:'prontas'. Nos de cor:'maquina' (linha Decora)
-   não existe carta: a cor é feita na hora e cada uma tem um valor, por isso
-   o site abre um convite para orçamento em vez de listar opções. */
+   `c` é o código da carta. O cliente escolhe pelo nome; o código viaja junto
+   no pedido, para a loja separar a lata certa sem precisar perguntar. */
 const CARTAS = {
-  /* carta de parede — linha Rende Muito e acrílicas econômicas */
-  parede: [
-    'Branco', 'Branco Gelo', 'Palha', 'Areia', 'Pérola', 'Marfim', 'Vanilla',
-    'Cromo Suave', 'Camurça', 'Concreto', 'Amarelo Canário', 'Amarelo Frevo',
-    'Laranja Cítrico', 'Laranja Imperial', 'Laranja Maracatu', 'Pêssego',
-    'Flamingo', 'Rosa Açaí', 'Vermelho Cardinal', 'Lilás', 'Verde Primavera',
-    'Verde Limão', 'Verde Kiwi', 'Verde Angra', 'Azul Sereno', 'Oceano',
-    'Azul Profundo'
+  /* Coral Rende Muito — a carta diz, na tarja: "cores prontas ao mesmo preço
+     do branco". É a confirmação impressa do que o Bruno tinha falado. */
+  'coral-rende-muito': [
+    {c:'001',n:'Branco'}, {c:'002',n:'Branco Gelo'}, {c:'062',n:'Crômio'},
+    {c:'040',n:'Cinza Alpino'}, {c:'039',n:'Tubarão Branco'}, {c:'844',n:'Palha'},
+    {c:'820',n:'Areia'}, {c:'018',n:'Pérola'}, {c:'818',n:'Marfim'},
+    {c:'814',n:'Camurça'}, {c:'666',n:'Concreto'}, {c:'858',n:'Madeira Acinzentada'},
+    {c:'393',n:'Suco de Goiaba'}, {c:'811',n:'Laranja Imperial'}, {c:'349',n:'Laranja Maracatu'},
+    {c:'388',n:'Pote de Argila'}, {c:'540',n:'Sino'}, {c:'513',n:'Amarelo Frevo'},
+    {c:'503',n:'Cromo Suave'}, {c:'636',n:'Capim Limão'}, {c:'654',n:'Verde Kiwi'},
+    {c:'612',n:'Verde Limão'}, {c:'611',n:'Verde Angra'}, {c:'170',n:'Oceano'},
+    {c:'974',n:'Azul Sereno'}, {c:'140',n:'Azul dos Andes'}, {c:'156',n:'Azul Profundo'}
   ],
 
-  /* carta de esmalte — cores padrão de esmalte sintético e base água.
-     Confirmar com o Bruno o que ele mantém na prateleira. */
-  esmalte: [
-    'Branco', 'Gelo', 'Creme', 'Areia', 'Amarelo', 'Laranja',
-    'Vermelho', 'Marrom Conhaque', 'Tabaco', 'Preto',
-    'Cinza Médio', 'Cinza Escuro', 'Platina', 'Alumínio',
-    'Azul França', 'Azul Del Rey', 'Verde Folha'
+  'qualy-rende-muito': [
+    {c:'001',n:'Branco'}, {c:'003',n:'Branco Gelo'}, {c:'004',n:'Algodão Egípcio'},
+    {c:'007',n:'Cinza Escala'}, {c:'030',n:'Palha'}, {c:'031',n:'Pérola'},
+    {c:'032',n:'Areia'}, {c:'033',n:'Marfim'}, {c:'039',n:'Amarelo Sol'},
+    {c:'042',n:'Terracota'}, {c:'051',n:'Azul Índigo'}, {c:'055',n:'Azul Sereno'},
+    {c:'067',n:'Kiwi'}, {c:'069',n:'Verde Limão'}, {c:'072',n:'Camurça'},
+    {c:'161',n:'Crômio'}, {c:'163',n:'Cinza Urbano'}
+  ],
+
+  'qualy-economica': [
+    {c:'001',n:'Branco'}, {c:'003',n:'Branco Gelo'}, {c:'030',n:'Palha'},
+    {c:'031',n:'Pérola'}, {c:'032',n:'Areia'}, {c:'033',n:'Marfim'},
+    {c:'034',n:'Amarelo Canário'}, {c:'035',n:'Pêssego'}, {c:'047',n:'Cenoura'},
+    {c:'055',n:'Azul Sereno'}, {c:'060',n:'Verde Água'}, {c:'069',n:'Verde Limão'},
+    {c:'072',n:'Camurça'}, {c:'073',n:'Concreto'}, {c:'077',n:'Açaí'},
+    {c:'078',n:'Amarelo Frevo'}, {c:'079',n:'Rubí'}, {c:'096',n:'Pavão'},
+    {c:'160',n:'Elefante'}, {c:'161',n:'Crômio'}
+  ],
+
+  'qualy-esmalte': [
+    {c:'001',n:'Branco'}, {c:'002',n:'Branco Gelo'}, {c:'010',n:'Preto'},
+    {c:'033',n:'Marfim'}, {c:'039',n:'Amarelo'}, {c:'046',n:'Laranja'},
+    {c:'053',n:'Azul França'}, {c:'054',n:'Platina'}, {c:'057',n:'Azul Del Rey'},
+    {c:'062',n:'Verde Colonial'}, {c:'067',n:'Verde Folha'}, {c:'074',n:'Cinza Médio'},
+    {c:'075',n:'Cinza Escuro'}, {c:'080',n:'Marrom'}, {c:'081',n:'Marrom Conhaque'},
+    {c:'083',n:'Tabaco'}, {c:'085',n:'Vermelho'}
+  ],
+
+  /* Maza — a carta traz só o nome, sem código. Só a seção CORES LISAS foi
+     fotografada; a lata também anuncia cores metálicas, que faltam. */
+  'maza-ferrugem': [
+    {n:'Branco'}, {n:'Preto'}, {n:'Azul'}, {n:'Vermelho'}, {n:'Platina'},
+    {n:'Amarelo'}, {n:'Cinza'}, {n:'Verde'}, {n:'Marrom'}, {n:'Preto Chassis SB'}
+  ],
+
+  /* Lukscolor — a carta separa por ACABAMENTO. Estas são as do BRILHANTE, que
+     é o acabamento mais comum de esmalte. A carta também tem Fosco (só branco
+     e preto) e Acetinado (8 cores). Confirmar com o Bruno qual ele estoca. */
+  'lukscolor': [
+    {n:'Branco'}, {n:'Branco Gelo'}, {n:'Platina'}, {n:'Preto'},
+    {n:'Algodão Egípcio'}, {n:'Marfim'}, {n:'Areia'}, {n:'Amarelo'},
+    {n:'Azul Del Rey'}, {n:'Vermelho'}, {n:'Verde Folha'}, {n:'Tabaco'},
+    {n:'Conhaque'}, {n:'Marrom Barroco'}
   ]
 };
 
@@ -299,30 +338,30 @@ const PRODUTOS = [
 
   { id: 7,  set: 'interna', marca: 'Qualyvinil',
     nome: 'Acrílica Cor Econômico Interior 18L', preco: 197.00,
-    foto: 'qualy-economica-18l', cor: 'prontas', carta: 'parede', precoCorIgual: true, oferta: false },
+    foto: 'qualy-economica-18l', cor: 'prontas', carta: 'qualy-economica', precoCorIgual: true, oferta: false },
 
   { id: 8,  set: 'interna', marca: 'Qualyvinil',
     nome: 'Acrílica Cor Econômico Interior 3,6L', preco: 57.00,
-    foto: 'qualy-economica-36l', cor: 'prontas', carta: 'parede', precoCorIgual: true, oferta: false },
+    foto: 'qualy-economica-36l', cor: 'prontas', carta: 'qualy-economica', precoCorIgual: true, oferta: false },
 
   /* ---- alto rendimento: Rende Muito serve parede e teto (interna) E
        fachada e muro (externa). O Bruno confirmou que vale nos dois, então
        `set` é lista. O Fosco Completo segue só externa até ele confirmar. ---- */
   { id: 9,  set: ['interna', 'externa'], marca: 'Coral',
     nome: 'Rende Muito Tinta Concentrada Acrílico Fosco Branco 18L', preco: 475.00,
-    foto: 'coral-rende-muito-18l', cor: 'prontas', carta: 'parede', precoCorIgual: true, oferta: false },
+    foto: 'coral-rende-muito-18l', cor: 'prontas', carta: 'coral-rende-muito', temMaquina: true, precoCorIgual: true, oferta: false },
 
   { id: 10, set: ['interna', 'externa'], marca: 'Coral',
     nome: 'Rende Muito Tinta Concentrada Acrílico Fosco Branco 3,6L', preco: 125.00,
-    foto: 'coral-rende-muito-36l', cor: 'prontas', carta: 'parede', precoCorIgual: true, oferta: false },
+    foto: 'coral-rende-muito-36l', cor: 'prontas', carta: 'coral-rende-muito', temMaquina: true, precoCorIgual: true, oferta: false },
 
   { id: 11, set: ['interna', 'externa'], marca: 'Qualyvinil',
     nome: 'Rende Muito+ Acrílico Standard 18L', preco: 379.00,
-    foto: 'qualy-rende-muito-18l', cor: 'prontas', carta: 'parede', oferta: false },
+    foto: 'qualy-rende-muito-18l', cor: 'prontas', carta: 'qualy-rende-muito', temMaquina: true, oferta: false },
 
   { id: 12, set: ['interna', 'externa'], marca: 'Qualyvinil',
     nome: 'Rende Muito+ Acrílico Standard 3,6L', preco: 99.00,
-    foto: 'qualy-rende-muito-36l', cor: 'prontas', carta: 'parede', oferta: false },
+    foto: 'qualy-rende-muito-36l', cor: 'prontas', carta: 'qualy-rende-muito', temMaquina: true, oferta: false },
 
   { id: 13, set: ['interna', 'externa'], marca: 'Qualyvinil',
     nome: 'Fosco Completo Acrílico Premium 18L', preco: 490.00,
@@ -335,27 +374,27 @@ const PRODUTOS = [
   /* ---- madeira e metal: esmaltes ---- */
   { id: 15, set: 'madeira', marca: 'Maza',
     nome: 'Direto na Ferrugem Esmalte Sintético Premium 3,6L', preco: 235.00,
-    foto: 'maza-ferrugem-36l', cor: 'prontas', carta: 'esmalte', oferta: false },
+    foto: 'maza-ferrugem-36l', cor: 'prontas', carta: 'maza-ferrugem', oferta: false },
 
   { id: 16, set: 'madeira', marca: 'Maza',
     nome: 'Direto na Ferrugem Esmalte Sintético Premium 900ml', preco: 65.00,
-    foto: 'maza-ferrugem-900ml', cor: 'prontas', carta: 'esmalte', oferta: false },
+    foto: 'maza-ferrugem-900ml', cor: 'prontas', carta: 'maza-ferrugem', oferta: false },
 
   { id: 17, set: 'madeira', marca: 'Lukscolor',
     nome: 'Esmalte Base Água Premium Plus 3,6L', preco: 166.90,
-    foto: 'lukscolor-esmalte-36l', cor: 'prontas', carta: 'esmalte', oferta: false },
+    foto: 'lukscolor-esmalte-36l', cor: 'prontas', carta: 'lukscolor', temMaquina: true, oferta: false },
 
   { id: 18, set: 'madeira', marca: 'Lukscolor',
     nome: 'Esmalte Base Água Premium Plus 900ml', preco: 49.90,
-    foto: 'lukscolor-esmalte-900ml', cor: 'prontas', carta: 'esmalte', oferta: false },
+    foto: 'lukscolor-esmalte-900ml', cor: 'prontas', carta: 'lukscolor', temMaquina: true, oferta: false },
 
   { id: 19, set: 'madeira', marca: 'Qualyvinil',
     nome: 'Esmalte Sintético Standard 3,6L', preco: 135.00,
-    foto: 'qualy-esmalte-36l', cor: 'prontas', carta: 'esmalte', oferta: false },
+    foto: 'qualy-esmalte-36l', cor: 'prontas', carta: 'qualy-esmalte', oferta: false },
 
   { id: 20, set: 'madeira', marca: 'Qualyvinil',
     nome: 'Esmalte Sintético Standard 900ml', preco: 38.50,
-    foto: 'qualy-esmalte-900ml', cor: 'prontas', carta: 'esmalte', oferta: false },
+    foto: 'qualy-esmalte-900ml', cor: 'prontas', carta: 'qualy-esmalte', oferta: false },
 
   /* ---- preparação: massas (não vão para a máquina de tingimento) ---- */
   { id: 21, set: 'preparacao', marca: 'Qualyvinil',
