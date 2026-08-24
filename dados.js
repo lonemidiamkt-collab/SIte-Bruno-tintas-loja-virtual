@@ -22,8 +22,9 @@ const UNIDADES = [
     whatsappVisivel: '(22) 99822-4630',
     prontoEm: '15 min',
     instagram: 'https://www.instagram.com/brunotintas/',
-    maps: 'https://www.google.com/maps/search/?api=1&query=' +
-          encodeURIComponent('Bruno das Tintas, RJ-106, Vila Capri, Araruama - RJ')
+    /* link do perfil real no Google Business (cid), não busca por endereço:
+       leva direto para a ficha da loja, com avaliação, foto e rota */
+    maps: 'https://maps.google.com/?cid=5107521781305132340'
   },
   {
     id: 'iguaba',
@@ -36,8 +37,7 @@ const UNIDADES = [
     whatsappVisivel: '(22) 99227-2479',
     prontoEm: '15 min',
     instagram: 'https://www.instagram.com/brunotintasiguaba/',
-    maps: 'https://www.google.com/maps/search/?api=1&query=' +
-          encodeURIComponent('Bruno das Tintas, Rua Capitão Jorge Soares, 102, Estação, Iguaba Grande - RJ')
+    maps: 'https://maps.google.com/?cid=13705260537741603803'
   }
 ];
 

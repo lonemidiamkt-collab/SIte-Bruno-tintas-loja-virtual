@@ -34,7 +34,7 @@ aberta; `catalogo-novo` já foi incorporada.
 | Parcelamento | ✅ funcionando | até 12x sem juros |
 | Corte de entrega no mesmo dia | ⛔ desligado | `corteEntregaHoje: null` — falta o Bruno confirmar o horário |
 | Cabeçalhos de segurança | ✅ funcionando | CSP, X-Frame-Options, Permissions-Policy, COOP, CORP |
-| SEO regional | ✅ funcionando | título, descrição e LocalBusiness com Araruama e Iguaba |
+| SEO regional | ✅ funcionando | título, descrição e LocalBusiness com coordenadas reais e link do perfil do Google |
 | PWA / instalar no celular | ⛔ removido | decisão consciente, ver ADR-002 |
 | Indexação no Google | ⛔ bloqueada | `noindex` proposital enquanto for URL de teste (ADR-003) |
 
@@ -44,8 +44,11 @@ Coisas que não dependem de código, e sim de informação ou ação de fora:
 
 - **Domínio `brunodastintas.com.br`** apontado para a Vercel. Enquanto não for,
   o `noindex` fica, e o SEO regional não vale nada na prática.
-- **Perfis no Google Business** das duas lojas — é o item de SEO local de maior
-  retorno, e não tem substituto no código. `dados.js` já tem o campo.
+- **Pôr o domínio no campo "site" dos dois perfis do Google Business.** Os
+  perfis existem (Araruama 4,8 com 164 avaliações; Iguaba 5,0 com 1). Hoje
+  Araruama aponta para o Instagram e Iguaba não aponta para nada.
+- **Avaliações em Iguaba** — 1 contra 237 do concorrente na mesma praça.
+- **Número da rua de Araruama** (RJ-106, **89920**), que o site omite.
 - **Horário de corte** para entrega no mesmo dia. `dados.js` → `LOJA.corteEntregaHoje`
 - **Se os três acabamentos da Lukscolor custam o mesmo.** Ele estoca os três,
   mas o site só oferece o Brilhante enquanto o preço não estiver confirmado —

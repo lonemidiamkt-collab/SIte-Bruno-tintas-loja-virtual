@@ -8,6 +8,50 @@
 
 ---
 
+## 24/08/2026 — Eu tinha escrito "criar perfil no Google" para dois perfis que já existem
+
+O Roberto desconfiou do meu item de P0 ("criar os perfis no Google Business") e
+estava certo. Fui conferir no Google Maps em vez de supor, e os dois existem:
+
+| Perfil | Nota | Site declarado |
+|---|---|---|
+| BRUNO TINTAS (Araruama) | 4,8 · **164 avaliações** | aponta para o Instagram |
+| Bruno Tintas - Iguaba Grande | 5,0 · **1 avaliação** | nenhum |
+
+O item estava errado no alvo, e isso importa: eu ia mandar o Roberto fazer
+trabalho que já estava feito, enquanto o trabalho que **falta** é outro.
+
+**O que era o item de verdade:** os perfis não apontam para o site. Araruama
+manda o cliente para o Instagram, Iguaba não manda para lugar nenhum. Quando o
+domínio existir, é pôr o endereço no campo "site" dos dois — é o elo que liga
+164 avaliações reais ao catálogo, e nenhuma linha de código faz isso.
+
+**E apareceu um buraco competitivo que eu não tinha visto.** Iguaba tem **1**
+avaliação. Na mesma praça, Tintas 1000 tem 237, Casa das Tintas 55 e Celinho
+33. Para "loja de tinta em Iguaba", o perfil praticamente não existe. Isso não
+é problema de site — é pedir avaliação a quem compra —, mas é o que mais pesa
+naquela cidade, e estava fora do radar.
+
+**O que dava para fazer no código, feito:**
+
+- `UNIDADES[].maps` agora é o **link do perfil real** (`?cid=`), e não uma busca
+  por endereço. O botão de rota abre a ficha da loja, com nota, foto e horário.
+- o `schema.org` das duas unidades ganhou **coordenadas reais**, lidas dos
+  próprios perfis, e o perfil do Google entrou no `sameAs` junto do Instagram.
+  Antes o `hasMap` era a mesma busca genérica.
+
+**Divergência que não corrigi por conta própria:** o Google e o cadastro do CNPJ
+dizem "RJ-106, **89920** — Vila Capri"; o site diz "RJ-106, Vila Capri", sem o
+número. Endereço igual em todo lugar é critério de busca local, e é o único
+campo que destoa. É dado de loja, então foi para o BACKLOG em vez de eu mudar.
+
+**Outra coisa que apareceu na busca:** existe um `brunotintas.com.br` indexado
+pelo Google, mas o domínio **não resolve DNS** — está morto ou expirado. Se for
+do Bruno, vale saber antes de registrar um domínio novo do zero: reaproveitar o
+que já tem histórico é diferente de começar em branco.
+
+---
+
 ## 24/08/2026 — A resposta do Bruno sobre a Lukscolor tirou 2 cores e destravou 7
 
 Perguntei qual dos três acabamentos da Lukscolor ele estoca, porque cada um tem

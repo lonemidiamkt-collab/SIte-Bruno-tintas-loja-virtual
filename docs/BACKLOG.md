@@ -18,13 +18,29 @@ e todo o SEO regional que já está pronto no HTML não vale nada na prática.
 Ao apontar, **remover o `noindex` do `vercel.json`** no mesmo movimento. O
 `canonical` do HTML já aponta para o domínio final. **Depende do Roberto.**
 
-### Criar os perfis no Google Business das duas lojas
-Para busca local ("tinta em Araruama"), o perfil do Google Business pesa mais
-que o site inteiro. Não tem substituto no código — é cadastro, foto e endereço,
-feito por quem é dono do negócio.
+### Ligar os perfis do Google Business ao site
+Os dois perfis **já existem** — eu tinha registrado "criar" por engano, o
+Roberto corrigiu e eu confirmei no Google Maps em 24/08:
 
-Com o perfil no ar, o link entra em `UNIDADES[].maps`, que hoje cai numa busca
-por endereço em vez de ir direto para a ficha da loja. **Depende do Roberto.**
+| Perfil | Nota | Site declarado |
+|---|---|---|
+| BRUNO TINTAS (Araruama) | 4,8 · 164 avaliações | aponta para o **Instagram** |
+| Bruno Tintas - Iguaba Grande | 5,0 · 1 avaliação | **nenhum** |
+
+O que falta, e só o dono do perfil pode fazer:
+
+1. **Pôr o domínio no campo "site" dos dois perfis**, quando ele existir. Hoje
+   Araruama manda o cliente para o Instagram e Iguaba não manda para lugar
+   nenhum. É o elo que liga 164 avaliações reais ao catálogo.
+2. **Iguaba tem 1 avaliação.** Os vizinhos têm 237 (Tintas 1000), 55 (Casa das
+   Tintas) e 33 (Celinho). Nessa praça o perfil praticamente não existe, e
+   nenhuma linha de código conserta isso — é pedir avaliação a quem compra.
+3. **Nome do perfil.** Araruama está como "BRUNO TINTAS" e Iguaba como "Bruno
+   Tintas - Iguaba Grande"; o site e a logo dizem "Bruno das Tintas". Para
+   busca local, nome igual em todo lugar conta. Decidir qual é o certo e
+   uniformizar — inclusive no site, se for o caso.
+
+**Depende do Roberto.**
 
 ---
 
@@ -86,6 +102,13 @@ dispara build nos dois:
 Riscos de deixar como está: build dobrado a cada push, e alguém compartilhar a
 URL do projeto errado. Antes de apagar, confirme que o domínio real não está
 apontado para o `-b1hj`. **Depende do Roberto.**
+
+### Número da rua no endereço de Araruama
+O perfil do Google e o cadastro do CNPJ dizem **RJ-106, 89920** — Vila Capri. O
+site diz só "RJ-106, Vila Capri", sem o número. Endereço igual em todo lugar
+(site, Google, redes) é critério de busca local, e este é o único campo que
+diverge. Não mexi por conta própria porque é dado de loja. **Confirmar e eu
+ajusto** em `dados.js` e no `schema.org`.
 
 ### Fechar os dois dados que o site ainda omite
 - `corteEntregaHoje` — sem isso o site não mostra "peça até X e receba hoje"
