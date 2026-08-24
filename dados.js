@@ -196,17 +196,35 @@ const CARTAS = {
     {n:'Marrom',h:'#3D343A'}, {n:'Preto Chassis SB',h:'#0B0B0D'}
   ],
 
-  /* Lukscolor — a carta separa por ACABAMENTO. Estas são as do BRILHANTE, que
-     é o acabamento mais comum de esmalte. A carta também tem Fosco (só branco
-     e preto) e Acetinado (8 cores). Confirmar com o Bruno qual ele estoca. */
+  /* Lukscolor — a carta separa por ACABAMENTO, e cada um tem cores diferentes.
+     O Bruno confirmou (24/08) que estoca os TRÊS: Brilhante, Fosco e Acetinado.
+
+     `fora: true` = a cor está impressa na carta, mas a loja não tem. Ele não
+     tem Algodão Egípcio nem Marrom Barroco em nenhum acabamento. A cor fica
+     aqui, marcada, em vez de ser apagada: a carta é transcrição do papel, e
+     estoque muda — para repor, tira a marca.
+
+     Fosco e Acetinado ainda NÃO estão ligados a nenhum produto: falta decidir
+     como o cliente escolhe o acabamento (SPEC-003 fase 4, em Proposta). */
+  'lukscolor-fosco': [
+    {n:'Branco',h:'#F1F8F3'}, {n:'Preto',h:'#171920'}
+  ],
+
+  'lukscolor-acetinado': [
+    {n:'Branco',h:'#F3F8F2'}, {n:'Pérola',h:'#CEC59F'},
+    {n:'Areia Tropical',h:'#D9D3B2'}, {n:'Gelo Alaska',h:'#C2C5BB'},
+    {n:'Preto',h:'#15171F'}, {n:'Algodão Egípcio',h:'#C7C7B0',fora:true},
+    {n:'Platina',h:'#A6ADAE'}, {n:'Marrom Barroco',h:'#23130F',fora:true}
+  ],
+
   'lukscolor': [
     {n:'Branco',h:'#F6F8EF'}, {n:'Branco Gelo',h:'#CFD2BB'},
     {n:'Platina',h:'#BAC3BD'}, {n:'Preto',h:'#1D2021'},
-    {n:'Algodão Egípcio',h:'#E3E6D0'}, {n:'Marfim',h:'#D9D7A6'},
+    {n:'Algodão Egípcio',h:'#E3E6D0',fora:true}, {n:'Marfim',h:'#D9D7A6'},
     {n:'Areia',h:'#F0E5BA'}, {n:'Amarelo',h:'#EB9F13'},
     {n:'Azul Del Rey',h:'#14244C'}, {n:'Vermelho',h:'#AD1E1A'},
     {n:'Verde Folha',h:'#093F0A'}, {n:'Tabaco',h:'#422A1C'},
-    {n:'Conhaque',h:'#80421D'}, {n:'Marrom Barroco',h:'#371610'}
+    {n:'Conhaque',h:'#80421D'}, {n:'Marrom Barroco',h:'#371610',fora:true}
   ]
 };
 

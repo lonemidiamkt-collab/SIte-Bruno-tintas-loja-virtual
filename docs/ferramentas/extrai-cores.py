@@ -46,6 +46,13 @@ CARTAS = {
 # amostra no rodape da chapa, onde o reflexo nao bate.
 CARTAS['maza-ferrugem']['pontos'][4] = (120, 948)
 
+# A carta da Lukscolor traz os tres acabamentos, com cores diferentes, na
+# mesma folha. O Bruno estoca os tres — entao os tres sao medidos.
+CARTAS['lukscolor-fosco'] = dict(arq=CARTAS['lukscolor']['arq'],
+  pontos=[(365,1058), (498,1058)])
+CARTAS['lukscolor-acetinado'] = dict(arq=CARTAS['lukscolor']['arq'],
+  pontos=grade([240,372,500,625],[1250,1374],8))
+
 R    = 14    # meia-aresta da amostra da cor
 JAN  = 340   # meia-janela onde procuro o branco do papel ali perto
 ALVO = 248.0

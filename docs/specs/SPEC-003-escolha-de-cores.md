@@ -10,6 +10,7 @@
 | **1 — box de detalhe** | clicar no produto abre um box com foto grande, preço e as condições | **Implementada** (17/08) |
 | **2 — escolha de cor** | escolher a cor dentro do box | **Implementada** (17/08) |
 | **3 — bloco de cor** | a carta mostra a cor, não só o nome | **Implementada** (24/08) |
+| **4 — acabamento** | escolher Brilhante / Fosco / Acetinado no esmalte Lukscolor | **Proposta** (24/08) — não implementar |
 
 A fase 1 foi separada porque não depende de nenhum dado que falta, e entrega
 sozinha o ganho da foto grande. A fase 2 mora dentro dela.
@@ -76,6 +77,68 @@ Três coisas que vieram junto, e que só apareceram com o bloco na tela:
 **Limite declarado na tela:** o hex sai de foto de papel impresso sob luz de
 loja, vista em tela não calibrada. Embaixo da carta o site diz que *"as cores
 da tela são aproximadas — a carta impressa da loja é a referência final"*.
+
+---
+
+## Fase 4 — escolha de acabamento (PROPOSTA — não implementar)
+
+> Estado: **Proposta**. Depende de uma resposta do Bruno (abaixo). Enquanto não
+> for aprovada por escrito, o site segue oferecendo só o Brilhante.
+
+### O problema
+
+Em 24/08 o Bruno confirmou que estoca os **três acabamentos** da Lukscolor:
+Brilhante, Fosco e Acetinado. E na carta dela acabamento não é só brilho — é
+**carta de cor diferente**:
+
+| Acabamento | Cores na carta | Em estoque |
+|---|---|---|
+| Brilhante | 14 | 12 |
+| Fosco | 2 (branco e preto) | 2 |
+| Acetinado | 8 | 6 |
+
+São **7 cores** que só existem em Acetinado (Pérola, Areia Tropical, Gelo
+Alaska) ou que a pessoa talvez queira sem brilho. Hoje o site mostra só as 12
+do Brilhante, então essas 7 não existem para o cliente.
+
+Os dois produtos Lukscolor cadastrados (3,6L e 900ml) não dizem o acabamento no
+nome. Quem compra "Esmalte Base Água 3,6L, cor Preto" pode estar querendo
+qualquer um dos três, e a loja não tem como saber pelo pedido.
+
+### Desenho proposto
+
+O box de detalhe ganha **um passo antes da cor**: três botões de acabamento,
+Brilhante marcado por padrão. Trocar o acabamento **troca a carta** logo abaixo.
+
+O acabamento entra na identidade do item, do mesmo jeito que a cor já entra:
+`${id}|${acabamento}|${cor}`. Preto Brilhante e Preto Fosco viram duas linhas no
+carrinho, e o acabamento vai na nota do WhatsApp junto com a cor.
+
+Se a cor escolhida não existir no acabamento novo, cai na primeira do novo (é o
+que já acontece hoje quando o box abre).
+
+Reaproveita quase tudo: `coresDe()` já filtra estoque, o chip já sabe pintar
+bloco, o carrinho já sabe carregar atributo de cor. O trabalho real é o seletor
+e a chave do item.
+
+### O que trava esta fase
+
+**Os três acabamentos custam o mesmo?** O cupom da loja lista um preço por
+volume (3,6L R$ 166,90 · 900ml R$ 49,90), sem separar acabamento. Um seletor de
+acabamento **afirma na tela que o preço não muda** — e se mudar, o site mente
+sobre preço.
+
+É exatamente o erro que já custou caro aqui duas vezes: o desconto que dizia 5%
+quando era 10%, e o "mesmo preço na cor" que eu afirmei antes de ter
+confirmação. Por isso esta fase não sai do papel sem essa resposta.
+
+Se o preço **for diferente por acabamento**, o desenho muda: viram produtos
+separados no catálogo, com preço próprio, e não um seletor.
+
+### Fora de escopo
+
+Aplicar o mesmo seletor a outras marcas. Só a Lukscolor tem carta por
+acabamento entre as seis que a loja usa.
 
 ---
 

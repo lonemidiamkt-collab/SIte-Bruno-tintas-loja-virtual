@@ -22,7 +22,7 @@ aberta; `catalogo-novo` já foi incorporada.
 | Faixa de marcas | ✅ funcionando | 11 cadastradas, 4 com produto |
 | Ficha do produto | ✅ funcionando | modal com foto, ficha técnica, cor e preço |
 | Ficha técnica | ⚠️ 25 de 26 | falta a do Klasse Massa Acrílica 18L |
-| Carta de cores | ✅ funcionando | 6 cartas reais, 105 cores, com bloco de cor visível |
+| Carta de cores | ✅ funcionando | 8 cartas reais, 115 cores medidas; 103 na tela (2 fora de estoque, 10 nos acabamentos ainda não ligados) |
 | Cor sob medida | ✅ funcionando | card "quer uma cor personalizada" nas 8 linhas de máquina |
 | Carrinho | ✅ funcionando | cor faz parte da identidade do item; upsell por setor |
 | Checkout em 3 passos | ✅ funcionando | termina em mensagem no WhatsApp |
@@ -47,8 +47,9 @@ Coisas que não dependem de código, e sim de informação ou ação de fora:
 - **Perfis no Google Business** das duas lojas — é o item de SEO local de maior
   retorno, e não tem substituto no código. `dados.js` já tem o campo.
 - **Horário de corte** para entrega no mesmo dia. `dados.js` → `LOJA.corteEntregaHoje`
-- **Acabamento da Lukscolor** que a loja estoca (Brilhante, Fosco ou Acetinado —
-  são cartas diferentes). O site usa o Brilhante.
+- **Se os três acabamentos da Lukscolor custam o mesmo.** Ele estoca os três,
+  mas o site só oferece o Brilhante enquanto o preço não estiver confirmado —
+  é o que trava a [SPEC-003 fase 4](specs/SPEC-003-escolha-de-cores.md).
 - **Foto nova da carta da Maza** — a atual pegou só "CORES LISAS", cortou a
   borda direita e não tem as metálicas.
 - **Preço da cor** nas 4 linhas sem `precoCorIgual`: hoje o site diz "confirme
@@ -64,7 +65,9 @@ Coisas que não dependem de código, e sim de informação ou ação de fora:
 - Impermeabilizantes e Acessórios sem produto, portanto escondidos
 - Faixa de preço: R$ 16,70 (Massa Corrida 900ml) a R$ 928,00 (Decora Diamante 18L)
 - **26 fotos**, uma por produto, em `fotos/` (460 KB, lazy)
-- **6 cartas de cor, 105 cores**, cada uma com hex medido na foto da carta
+- **8 cartas de cor, 115 cores** medidas na foto da carta física.
+  Na tela aparecem **103**: 2 estão marcadas fora de estoque e 10 são dos
+  acabamentos Fosco e Acetinado, ainda não ligados a produto (SPEC-003 fase 4)
 - 12 produtos com cores prontas · 8 tingidos na máquina
 - 6 setores e 11 marcas cadastrados, 2 unidades
 - 4 formas de pagamento, 3 destinos de entrega

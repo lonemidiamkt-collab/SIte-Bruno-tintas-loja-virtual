@@ -23,7 +23,9 @@ Um cliente que escolhesse "Flamingo" pediria uma cor inexistente.
 | Qualyvinil Acrílica Econômica | 20 | sim |
 | Qualyvinil Rende Muito+ | 17 | sim |
 | Qualyvinil Esmalte Sintético | 17 | sim |
-| Lukscolor (brilhante) | 14 | não |
+| Lukscolor Brilhante | 14 (12 em estoque) | não |
+| Lukscolor Fosco | 2 | não |
+| Lukscolor Acetinado | 8 (6 em estoque) | não |
 | Maza Direto na Ferrugem | 10 | não |
 
 **O código viaja no pedido.** O cliente escolhe "Marfim"; a loja recebe
@@ -67,12 +69,26 @@ que ninguém calibrou. O site diz isso na própria carta — *"as cores da tela 
 aproximadas — a carta impressa da loja é a referência final"* —, que é a mesma
 ressalva que a Lukscolor imprime no verso da dela.
 
+## Cor que a loja não tem
+
+O Bruno não estoca **Algodão Egípcio** nem **Marrom Barroco** em nenhum
+acabamento da Lukscolor. As duas continuam em `CARTAS`, marcadas com
+`fora: true`, e o site não as mostra.
+
+Ficam marcadas em vez de apagadas por dois motivos: a carta aqui é a
+**transcrição do papel** e não pode ser podada sem virar outra coisa; e estoque
+muda — para repor a cor, tira-se a marca, sem precisar remedir hex nenhum.
+
+A regra por trás: **listar cor que a loja não tem é pior que não listar cor
+nenhuma**, porque manda o cliente ao balcão atrás de uma lata que não existe.
+
 ## Aberto
 
-**Lukscolor tem três acabamentos** com cores diferentes: Brilhante (14 cores),
-Fosco (só branco e preto) e Acetinado (8 cores). O site usa o **Brilhante**,
-que é o mais comum em esmalte. O produto cadastrado não diz o acabamento —
-**confirmar qual o Bruno estoca**, ou desdobrar em produtos separados.
+**Lukscolor: os três acabamentos estão em estoque** (Brilhante, Fosco e
+Acetinado), confirmado pelo Bruno em 24/08. As três cartas estão transcritas e
+medidas, mas **só o Brilhante está ligado aos produtos**: falta decidir como o
+cliente escolhe o acabamento, e isso depende de saber se os três custam o mesmo.
+→ [SPEC-003, fase 4](specs/SPEC-003-escolha-de-cores.md), em **Proposta**.
 
 **Maza está incompleta.** A foto pegou só a seção "CORES LISAS", e a lata
 também anuncia **cores metálicas**. A borda direita da foto está cortada, então

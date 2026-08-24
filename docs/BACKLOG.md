@@ -33,9 +33,10 @@ por endereço em vez de ir direto para a ficha da loja. **Depende do Roberto.**
 ### Perguntas para o Bruno sobre as cartas de cor
 Cada uma muda o que o cliente vê na tela:
 
-1. **Qual acabamento da Lukscolor a loja estoca?** Brilhante, Fosco e Acetinado
-   são cartas diferentes. O site mostra as 14 do **Brilhante**, que é o mais
-   comum em esmalte — mas é escolha minha, não informação dele.
+1. ~~Qual acabamento da Lukscolor a loja estoca?~~ **Respondido em 24/08** —
+   estoca os **três**, e não tem Algodão Egípcio nem Marrom Barroco em nenhum
+   deles. As duas cores saíram da tela; as três cartas estão medidas. Virou a
+   pergunta de preço, logo abaixo.
 2. **Foto nova da carta da Maza.** A atual pegou só "CORES LISAS", cortou a
    borda direita e não tem as **metálicas**, que a lata anuncia. Com foto nova,
    as cores se remedem com `docs/ferramentas/extrai-cores.py`.
@@ -44,6 +45,20 @@ Cada uma muda o que o cliente vê na tela:
    Coral Rende Muito (está impresso na carta) e na Qualyvinil Econômica.
 4. **A Massa Acrílica 3,6L é da linha Klasse?** A foto do produto mostra Klasse;
    o nome cadastrado não diz.
+
+### Os três acabamentos da Lukscolor custam o mesmo?
+É o que trava a [SPEC-003 fase 4](specs/SPEC-003-escolha-de-cores.md) e, com
+ela, **7 cores** que só existem no Acetinado e hoje não aparecem para o cliente.
+
+O cupom lista um preço por volume (3,6L R$ 166,90 · 900ml R$ 49,90) sem separar
+acabamento. Um seletor de acabamento na tela **afirma que o preço não muda** —
+e se mudar, o site mente sobre preço, que é o erro mais caro que este projeto
+já cometeu duas vezes.
+
+- **preço igual** → seletor de acabamento no box, e as três cartas entram
+- **preço diferente** → viram produtos separados no catálogo, com preço próprio
+
+**Depende do Bruno.**
 
 ### Correção nas artes 01 e 02
 Erros que só designer resolve, porque estão dentro da imagem:

@@ -176,7 +176,11 @@ const rotuloCor = c => c.c ? `${c.n} (${c.c})` : c.n;
 /* o bloco de cor é o hex medido na foto da carta; se faltar ou vier
    torto, cai num cinza neutro em vez de injetar CSS */
 const hexSeguro = h => /^#[0-9A-Fa-f]{6}$/.test(h || '') ? h : '#E6E6E6';
-const primeiraCor = p => { const l = CARTAS[p.carta] || []; return l.length ? rotuloCor(l[0]) : ''; };
+/* A carta é a transcrição do papel; o que a loja tem é um subconjunto dela.
+   Cor marcada `fora` some da tela — listar cor que a loja não tem manda o
+   cliente até o balcão atrás de uma lata que não existe. */
+const coresDe = chave => (CARTAS[chave] || []).filter(c => !c.fora);
+const primeiraCor = p => { const l = coresDe(p.carta); return l.length ? rotuloCor(l[0]) : ''; };
 
 const chaveAviso = p => p.cor === 'prontas' && p.precoCorIgual ? 'prontasMesmoPreco' : p.cor;
 const avisoVolume = p => VOLUME_POR_COR[p.id]
@@ -208,7 +212,7 @@ function cardProduto(p) {
            para o cliente escolher. Antes ele adicionava calado como Branco, e
            a loja receberia quase todo pedido em branco sem o cliente saber
            que havia cor. */
-        const n = (CARTAS[p.carta] || []).length;
+        const n = coresDe(p.carta).length;
         return p.cor === 'prontas' && n
           ? `<button class="btn btn--azul btn--bloco" style="margin-top:12px" data-ver="${p.id}">
                Escolher a cor <span class="prod__ncores">${n} cores</span>
@@ -254,7 +258,7 @@ function renderGrade() {
      que é o card "quer uma cor personalizada". */
 function blocoCorDoProduto(p) {
   if (p.cor === 'prontas') {
-    const carta = CARTAS[p.carta] || [];
+    const carta = coresDe(p.carta);
     return `
       <div class="det__bloco">
         <h4 class="det__rotulo">Escolha a cor</h4>
@@ -419,7 +423,7 @@ function adicionar(id) {
   /* A cor faz parte da identidade do item: a mesma tinta em duas cores são
      duas linhas no carrinho, não uma com quantidade 2. */
   const cor = p.cor === 'prontas' ? (corEscolhida[p.id] || primeiraCor(p)) : '';
-  const corH = cor ? (CARTAS[p.carta] || []).find(c => rotuloCor(c) === cor)?.h : '';
+  const corH = cor ? coresDe(p.carta).find(c => rotuloCor(c) === cor)?.h : '';
   const key = cor ? `${p.id}|${cor}` : String(p.id);
   const ja = carrinho.find(i => i.key === key);
   if (ja) ja.qtd++;

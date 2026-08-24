@@ -8,6 +8,42 @@
 
 ---
 
+## 24/08/2026 — A resposta do Bruno sobre a Lukscolor tirou 2 cores e destravou 7
+
+Perguntei qual dos três acabamentos da Lukscolor ele estoca, porque cada um tem
+carta de cor diferente e eu tinha escolhido o Brilhante por conta própria.
+Resposta: **estoca os três**, e não tem **Algodão Egípcio** nem **Marrom
+Barroco** em nenhum deles.
+
+**Duas cores saíram da tela.** Listar cor que a loja não tem é pior que não
+listar cor nenhuma: manda o cliente ao balcão atrás de uma lata que não existe.
+A Lukscolor caiu de 14 para 12 no botão e na carta.
+
+Elas não foram apagadas, e sim marcadas com `fora: true`. Duas razões: `CARTAS`
+é a **transcrição do papel** — podar a carta a torna outra coisa —, e estoque
+muda. Para repor a cor, tira-se a marca; não precisa remedir hex nenhum. O
+`coresDe()` filtra num lugar só, e o botão do card, a carta, o carrinho e a cor
+padrão saem todos coerentes de graça.
+
+**Medi os outros dois acabamentos** com o mesmo script: Fosco (branco e preto) e
+Acetinado (8 cores). Estão em `CARTAS`, mas **ainda não ligados a produto
+nenhum** — de propósito.
+
+**Por que não liguei.** Ele estoca os três, então o certo seria o cliente
+escolher o acabamento e a carta trocar junto. Só que os dois produtos Lukscolor
+têm **um preço por volume**, sem separar acabamento, e um seletor na tela
+afirma que o preço não muda. Se mudar, o site mente sobre preço — que é o erro
+que este projeto já cometeu duas vezes, no desconto que dizia 5% quando era 10%
+e no "mesmo preço na cor" que eu afirmei antes de ter confirmação.
+
+Então virou [SPEC-003 fase 4](specs/SPEC-003-escolha-de-cores.md), em
+**Proposta**, com a pergunta que a destrava: os três custam o mesmo? Se sim,
+seletor de acabamento; se não, produtos separados com preço próprio. Estão
+presas nessa resposta **7 cores** que só existem no Acetinado (Pérola, Areia
+Tropical, Gelo Alaska) e hoje não existem para o cliente.
+
+---
+
 ## 24/08/2026 — A carta de cores ganhou cor de verdade
 
 **"Ainda não tem os blocos de cores."** A carta já estava certa nos nomes e nos
