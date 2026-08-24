@@ -8,6 +8,33 @@
 
 ---
 
+## 24/08/2026 — A carta de cores estava escondida atrás de um botão que não abria ela
+
+**A pergunta do Roberto ("onde o cliente escolhe a cor?") virou bug.**
+
+A carta só existia dentro do box de detalhe, que abre clicando na foto ou no
+nome. Mas o card na grade tinha um botão **"Adicionar"** logo ali — e clicando
+nele o produto ia para o carrinho como **"Branco (001)"**, calado.
+
+Na prática, quase todo pedido chegaria em branco na loja, sem o cliente saber
+que existiam 27 cores. O caminho mais óbvio da tela era o que dava o resultado
+errado.
+
+**Correção:** produto com carta não entra mais no carrinho direto. O botão do
+card virou **"Escolher a cor — 27 cores"** e abre o box. O número no botão faz
+o trabalho de convidar: quem não sabia que havia cor, agora sabe.
+
+Produto sem carta (massas) e de máquina (Decora) seguem com "Adicionar", porque
+ali não há escolha a fazer.
+
+**Segundo bug, no mesmo lugar:** o aviso de cor estava com `display:none`
+abaixo de 560px. No celular o cliente via "Decora Diamante 18L — R$ 928,00 —
+Adicionar" e **nada dizia que o preço era o da base branca e a cor saía por
+orçamento**. Era informação de preço escondida por falta de espaço. Agora
+aparece nas duas telas, em corpo menor no celular.
+
+---
+
 ## 17/08/2026 — Descrições corrigidas e arquitetura do mobile refeita
 
 **Uma promessa que o site fazia sem ter autorização.** O aviso "pelo mesmo

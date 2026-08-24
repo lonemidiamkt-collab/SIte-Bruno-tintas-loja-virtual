@@ -200,7 +200,18 @@ function cardProduto(p) {
         <span class="prod__avista">${brl(comDesconto(p.preco))} à vista</span>
         <span class="prod__parcela">ou ${LOJA.parcelas}x de ${brl(parcela(p.preco, LOJA.parcelas))}</span>
       </div>
-      <button class="btn btn--azul btn--bloco" style="margin-top:12px" data-add="${p.id}">Adicionar</button>
+      ${(() => {
+        /* Produto com carta NÃO entra no carrinho direto: o botão abre o box
+           para o cliente escolher. Antes ele adicionava calado como Branco, e
+           a loja receberia quase todo pedido em branco sem o cliente saber
+           que havia cor. */
+        const n = (CARTAS[p.carta] || []).length;
+        return p.cor === 'prontas' && n
+          ? `<button class="btn btn--azul btn--bloco" style="margin-top:12px" data-ver="${p.id}">
+               Escolher a cor <span class="prod__ncores">${n} cores</span>
+             </button>`
+          : `<button class="btn btn--azul btn--bloco" style="margin-top:12px" data-add="${p.id}">Adicionar</button>`;
+      })()}
     </div>
   </article>`;
 }
