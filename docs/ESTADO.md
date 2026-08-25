@@ -3,11 +3,11 @@
 > Retrato do agora. Este arquivo é **sobrescrito** a cada commit — não é
 > histórico. O histórico está em [PROGRESSO.md](PROGRESSO.md).
 
-**Atualizado em:** 24/08/2026
+**Atualizado em:** 25/08/2026
 **Branch ativa:** `main` — é a que a Vercel publica. Não há branch de trabalho
 aberta; `catalogo-novo` já foi incorporada.
 **Último commit publicado:** `3a937df`
-**Versão no site:** v7 · catálogo real, aguardando domínio
+**Versão no site:** v7 · catálogo real, domínio registrado e aguardando DNS
 **Stack:** HTML + CSS + JS puro, sem build
 **Deploy:** Vercel, branch `main`
 
@@ -42,8 +42,9 @@ aberta; `catalogo-novo` já foi incorporada.
 
 Coisas que não dependem de código, e sim de informação ou ação de fora:
 
-- **Domínio `brunodastintas.com.br`** apontado para a Vercel. Enquanto não for,
-  o `noindex` fica, e o SEO regional não vale nada na prática.
+- **Apontar o `brunodastintas.com` para a Vercel.** Registrado em 25/08/2026 na
+  Hostinger; hoje os NS ainda são os de parking (`*.dns-parking.com`). Enquanto
+  não apontar, o `noindex` fica (ADR-003) e o SEO regional não vale nada.
 - **Pôr o domínio no campo "site" dos dois perfis do Google Business.** Os
   perfis existem (Araruama 4,8 com 164 avaliações; Iguaba 5,0 com 1). Hoje
   Araruama aponta para o Instagram e Iguaba não aponta para nada.

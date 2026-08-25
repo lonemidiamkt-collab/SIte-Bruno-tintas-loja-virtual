@@ -53,5 +53,5 @@ A Vercel detecta o push, publica e atualiza o link de produção sozinha.
 ## Atenção antes de apontar o domínio real
 
 O `vercel.json` manda `X-Robots-Tag: noindex, nofollow` — isso é de propósito, para o
-Google não indexar a URL de teste da Vercel. **Quando o `brunodastintas.com.br` for
+Google não indexar a URL de teste da Vercel. **Quando o `brunodastintas.com` for
 apontado para cá, tire esse header**, senão o site não aparece na busca.

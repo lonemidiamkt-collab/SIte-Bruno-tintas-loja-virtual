@@ -8,7 +8,7 @@
 
 O site está no ar numa URL da Vercel (`*.vercel.app`) enquanto o Bruno aprova.
 Ao mesmo tempo, ele já tem SEO completo montado: `canonical` apontando para
-`brunodastintas.com.br`, dados estruturados `HardwareStore` para as duas
+`brunodastintas.com`, dados estruturados `HardwareStore` para as duas
 unidades, Open Graph.
 
 Se o Google indexar a URL de teste, dois estragos: conteúdo duplicado
@@ -45,5 +45,5 @@ limites) e `BACKLOG.md` como P1, amarrado à tarefa de apontar o domínio.
 
 ## Quando revisitar
 
-No momento exato em que `brunodastintas.com.br` for apontado para a Vercel.
+No momento exato em que `brunodastintas.com` for apontado para a Vercel.
 Aí este ADR é revertido e o header sai.

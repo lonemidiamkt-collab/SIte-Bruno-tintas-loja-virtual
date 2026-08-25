@@ -10,13 +10,29 @@ Prioridades: **P0** trava o projeto · **P1** próximo ciclo · **P2** depois ·
 
 ## P0 — travando
 
-### Apontar o domínio brunodastintas.com.br
-É o que separa o site de existir. Hoje ele está numa URL de teste da Vercel,
-com `X-Robots-Tag: noindex` **de propósito** (ADR-003): ninguém acha no Google,
-e todo o SEO regional que já está pronto no HTML não vale nada na prática.
+### Apontar o brunodastintas.com para a Vercel
+O domínio foi **registrado em 25/08/2026** na Hostinger. Falta o DNS: hoje os
+NS são os de parking (`apollo`/`athena.dns-parking.com`) e o domínio não resolve
+para lugar nenhum.
 
-Ao apontar, **remover o `noindex` do `vercel.json`** no mesmo movimento. O
-`canonical` do HTML já aponta para o domínio final. **Depende do Roberto.**
+Ordem certa: adicionar o domínio no projeto da Vercel primeiro (ela mostra os
+registros exatos), depois criar esses registros na zona DNS da Hostinger.
+Tipicamente `A` no apex para `76.76.21.21` e `CNAME` do `www` para
+`cname.vercel-dns.com` — mas **vale o que a Vercel mostrar**, não este texto.
+
+Quando resolver, aí sim: **tirar o `X-Robots-Tag: noindex` do `vercel.json`**
+(ADR-003) e a tarja "v7 · Versão para aprovação" do topo. Enquanto o DNS não
+estiver de pé, os dois ficam.
+
+Duas decisões que vieram junto:
+
+- **É `.com`, não `.com.br`.** As 9 referências do HTML já foram trocadas.
+- **`brunotintas.com.br` continua vencido e em `on-hold`**, no CNPJ do Bruno.
+  É o que o Google conhece, e casa com o `@brunotintas` e com o nome do perfil
+  do Google Business. Vale renovar nem que seja para redirecionar — se for
+  liberado, qualquer um pega um domínio com a marca dele.
+
+**Depende do Roberto.**
 
 ### Ligar os perfis do Google Business ao site
 Os dois perfis **já existem** — eu tinha registrado "criar" por engano, o

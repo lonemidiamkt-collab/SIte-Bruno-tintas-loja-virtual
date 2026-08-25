@@ -8,6 +8,36 @@
 
 ---
 
+## 25/08/2026 — O domínio saiu, e é `.com` — não o `.com.br` que o código declarava
+
+O Roberto registrou **`brunodastintas.com`** na Hostinger. Confirmei no whois
+(`clientTransferProhibited`, NS de parking em `*.dns-parking.com`).
+
+**O código declarava outro domínio.** `canonical`, `og:url`, `og:image` e o
+`@id`/`url`/`image` das duas unidades no `schema.org` apontavam todos para
+`www.brunodastintas.com.br`, com `.br`. Nove referências no `index.html`, mais
+três na documentação. Trocadas.
+
+Isso tinha que ser feito **antes** de indexar: trocar domínio depois que o
+Google leu a página custa redirecionamento, reindexação e queda temporária.
+Como o `noindex` ainda está de pé, não custou nada.
+
+**O `noindex` continua.** O domínio existe mas não resolve — os NS ainda são os
+de parking da Hostinger. A ADR-003 diz que o `noindex` sai "no momento exato em
+que o domínio for apontado para a Vercel", e apontado ele não está. Sai num
+segundo commit, junto com a tarja "v7 · Versão para aprovação", quando o DNS
+estiver de pé.
+
+**O que o whois mostrou de graça, e importa:** `brunodastintas.com.br` **nunca
+existiu** (`No match`), e o `brunotintas.com.br` — esse sim registrado no CNPJ
+do Bruno, `21.744.703/0001-02`, o mesmo do `dados.js` — está **vencido desde
+26/06/2026 e em `on-hold`**. É o domínio que o Google ainda tem indexado, que
+casa com o `@brunotintas` do Instagram e com o nome "BRUNO TINTAS" do perfil de
+164 avaliações. Ficou no BACKLOG: vale renovar nem que seja para redirecionar,
+porque quando o registro.br liberar, qualquer um registra a marca dele.
+
+---
+
 ## 24/08/2026 — Eu tinha escrito "criar perfil no Google" para dois perfis que já existem
 
 O Roberto desconfiou do meu item de P0 ("criar os perfis no Google Business") e
