@@ -111,7 +111,7 @@ automático mas nunca dar push sozinho.
 | `brunodastintas.com` | 308 |
 | `brunotintas.vercel.app` | 308 |
 | `s-ite-bruno-tintas-loja-virtual.vercel.app` | 308 |
-| `bruno-das-tintas.vercel.app` | serve o site — é o alias do projeto |
+| `bruno-das-tintas.vercel.app` | serve o site — alias do projeto, criado à mão |
 
 **Todos os redirecionamentos são de domínio, configurados na Vercel** — não há
 regra no `vercel.json`. Houve uma, e ela quebrava o ícone do projeto no painel:
@@ -119,7 +119,9 @@ a Vercel busca o favicon no alias `.vercel.app` e recebia 308 para um domínio
 externo, que o buscador dela não segue.
 
 O alias do projeto **serve o site em vez de redirecionar**, de propósito. É o que
-a Vercel lê para montar o painel. O risco de conteúdo duplicado fica com o
+a Vercel lê para montar o painel. Ele teve de ser **adicionado à mão** depois da
+renomeação: a Vercel não recria o alias `<nome>.vercel.app` sozinha, e o projeto
+ficou só com a URL com hash do deploy. O risco de conteúdo duplicado fica com o
 `canonical`, que é o mecanismo padrão e já aponta certo.
 
 O projeto duplicado `...-b1hj` foi **apagado em 25/08**; servia o mesmo site em

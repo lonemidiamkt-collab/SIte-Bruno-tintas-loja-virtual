@@ -40,8 +40,15 @@ para isso e já aponta certo; o ícone é visível todo dia.
   `apple-touch-icon.png`. Muitos buscadores de ícone tentam `/favicon.ico`
   direto, sem ler o `<link>` do HTML — o site só tinha `.png`
 
-**Detalhe:** `bruno-das-tintas.vercel.app` respondia 404 logo após a renomeação.
-A Vercel só cria o alias novo no próximo deploy.
+**Detalhe que quase passou:** `bruno-das-tintas.vercel.app` respondia 404 depois
+da renomeação — e continuou 404 depois do deploy. A Vercel **não recria** o alias
+`<nome>.vercel.app` sozinha ao renomear: o projeto ficou só com a URL com hash
+(`bruno-das-tintas-6hts9uc33-...`), e todos os `.vercel.app` dele eram redirect.
+
+Ou seja, o projeto ficou sem nenhum endereço `.vercel.app` servindo o site — que
+era justamente a condição que apagava o ícone. Consertar a causa e criar a
+mesma condição por outro caminho teria sido um jeito silencioso de não resolver
+nada. O alias foi adicionado à mão pela API.
 
 ---
 
