@@ -96,7 +96,7 @@ Nenhum.
 git add -A  →  git commit  →  git push  →  Vercel publica sozinha
 ```
 
-**URL de produção:** https://s-ite-bruno-tintas-loja-virtual.vercel.app
+**Projeto na Vercel:** `bruno-das-tintas`
 
 A credencial do GitHub está salva no keychain do macOS, então o push não pede
 senha. **Push publica na loja ao vivo** — por isso o `CLAUDE.md` manda commitar
@@ -107,19 +107,27 @@ automático mas nunca dar push sozinho.
 
 | Endereço | O que faz |
 |---|---|
-| `www.brunodastintas.com` | serve o site (200) |
-| `brunodastintas.com` | 308 (redirect de domínio, na Vercel) |
-| `brunotintas.vercel.app` | 308 (redirect de domínio, na Vercel) |
-| `s-ite-bruno-tintas-loja-virtual.vercel.app` | 308 (regra no `vercel.json`) |
+| `www.brunodastintas.com` | serve o site (200) — é o endereço oficial |
+| `brunodastintas.com` | 308 |
+| `brunotintas.vercel.app` | 308 |
+| `s-ite-bruno-tintas-loja-virtual.vercel.app` | 308 |
+| `bruno-das-tintas.vercel.app` | serve o site — é o alias do projeto |
 
-O host de produção é o único que não dá para redirecionar pelo painel — por isso
-ele usa `redirects` no `vercel.json`, casando o host exato para não afetar
-deploy de preview. **Renomear o projeto muda esse host e faz a regra parar de
-casar em silêncio.**
+**Todos os redirecionamentos são de domínio, configurados na Vercel** — não há
+regra no `vercel.json`. Houve uma, e ela quebrava o ícone do projeto no painel:
+a Vercel busca o favicon no alias `.vercel.app` e recebia 308 para um domínio
+externo, que o buscador dela não segue.
 
-O projeto duplicado `...-b1hj` foi **apagado em 25/08**. Ele servia o mesmo site
-em `brunotintas.vercel.app`, sem redirecionamento; essa URL foi reivindicada
-pelo projeto bom e virou redirect.
+O alias do projeto **serve o site em vez de redirecionar**, de propósito. É o que
+a Vercel lê para montar o painel. O risco de conteúdo duplicado fica com o
+`canonical`, que é o mecanismo padrão e já aponta certo.
+
+O projeto duplicado `...-b1hj` foi **apagado em 25/08**; servia o mesmo site em
+`brunotintas.vercel.app`, sem redirecionamento. Essa URL foi reivindicada pelo
+projeto bom e virou redirect.
+
+**Nome do projeto na Vercel:** `bruno-das-tintas` (era
+`s-ite-bruno-tintas-loja-virtual`).
 
 ## Como rodar local
 

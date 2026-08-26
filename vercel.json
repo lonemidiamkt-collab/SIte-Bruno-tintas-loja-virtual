@@ -2,30 +2,6 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
-  "redirects": [
-    {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "s-ite-bruno-tintas-loja-virtual.vercel.app"
-        }
-      ],
-      "destination": "https://www.brunodastintas.com/",
-      "permanent": true
-    },
-    {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "s-ite-bruno-tintas-loja-virtual.vercel.app"
-        }
-      ],
-      "destination": "https://www.brunodastintas.com/:path*",
-      "permanent": true
-    }
-  ],
   "headers": [
     {
       "source": "/(.*)",

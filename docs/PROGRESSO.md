@@ -8,6 +8,43 @@
 
 ---
 
+## 25/08/2026 — O redirecionamento que eu subi apagou o ícone do projeto no painel
+
+O Roberto mandou um print do painel da Vercel: o `armazem-do-ferro` aparece com
+o ícone da marca, e o do Bruno com o triângulo cinza de "sem favicon". Disse que
+continuava desorganizado — e estava.
+
+**A causa era a minha regra de redirecionamento.** A Vercel monta o ícone do
+painel buscando o favicon **no alias `.vercel.app` do projeto**. No Armazém ela
+recebe 200. No do Bruno ela batia na regra do `vercel.json` e levava 308 para um
+domínio externo, que o buscador dela não segue.
+
+Os dois sites têm exatamente os mesmos arquivos de ícone e a mesma declaração no
+HTML — comparei antes de mexer. A diferença era só o 308.
+
+**O trade-off que apareceu:** ou o alias `.vercel.app` redireciona (sem cópia
+duplicada, sem ícone), ou serve o site (com ícone, e a cópia duplicada
+controlada pelo `canonical`). Escolhi servir. O `canonical` é o mecanismo padrão
+para isso e já aponta certo; o ícone é visível todo dia.
+
+**O que mudou:**
+
+- projeto renomeado de `s-ite-bruno-tintas-loja-virtual` para
+  **`bruno-das-tintas`**
+- o alias antigo virou **redirect de domínio na Vercel**, não regra de arquivo —
+  link velho continua funcionando
+- o bloco `redirects` saiu do `vercel.json`, agora redundante. Menos uma regra
+  frágil: ela dependia do nome do projeto e teria parado de casar em silêncio na
+  renomeação
+- entrou um **`favicon.ico`** de verdade (16/32/48/64 num arquivo só), gerado do
+  `apple-touch-icon.png`. Muitos buscadores de ícone tentam `/favicon.ico`
+  direto, sem ler o `<link>` do HTML — o site só tinha `.png`
+
+**Detalhe:** `bruno-das-tintas.vercel.app` respondia 404 logo após a renomeação.
+A Vercel só cria o alias novo no próximo deploy.
+
+---
+
 ## 25/08/2026 — Havia uma terceira cópia do site no ar, e eu não sabia
 
 O Roberto perguntou por que agora eu precisava de login na Vercel se no Armazém
