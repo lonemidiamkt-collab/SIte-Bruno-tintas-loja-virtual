@@ -8,6 +8,36 @@
 
 ---
 
+## 25/08/2026 — Tirar o `noindex` abriu a URL da Vercel junto
+
+Efeito colateral que só existe porque o `noindex` saiu: o
+`s-ite-bruno-tintas-loja-virtual.vercel.app` serve exatamente o mesmo site, e
+até hoje de manhã ele estava protegido pelo mesmo header. Agora está aberto — e
+vira conteúdo duplicado competindo com o domínio que acabou de nascer.
+
+O `canonical` ajuda o Google a consolidar, mas não impede a URL feia de
+aparecer, nem impede alguém de compartilhar aquele link achando que é o
+endereço da loja.
+
+Entrou um `redirects` no `vercel.json`: quem chega pelo host exato de produção
+da Vercel leva **308** para `https://www.brunodastintas.com/`, preservando o
+caminho.
+
+**Por que o host exato, e não `*.vercel.app`:** deploy de preview também mora em
+`vercel.app`, com host diferente. Regra genérica redirecionaria os previews e
+tiraria a única forma de testar uma mudança antes de publicar.
+
+**Consequência a lembrar:** se o projeto for renomeado na Vercel, o host de
+produção muda e esta regra silenciosamente deixa de casar. Não quebra nada —
+só volta a existir a URL duplicada, sem aviso.
+
+**De passagem, uma confirmação que vale registrar:** o desconto à vista é **10%**,
+e vale em **PIX, dinheiro e cartão de débito** — os três estão marcados com
+`desconto: true` em `PAGAMENTOS`. A arte 02, além de dizer 5%, também **omite o
+débito**. Os dois erros vão para o designer juntos.
+
+---
+
 ## 25/08/2026 — O site foi para o ar em www.brunodastintas.com
 
 Domínio apontado e `noindex` removido. O site deixou de ser link de teste e

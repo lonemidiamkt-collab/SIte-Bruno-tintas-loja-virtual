@@ -26,7 +26,9 @@ Vale renovar nem que seja só para redirecionar 301 para o
 Erros que só designer resolve, porque estão dentro da imagem:
 - **título duplicado** — a arte já traz o título, e a página repetia em texto
   (o texto já saiu da capa no celular, mas as artes internas seguem assim)
-- **"5%"** — o desconto à vista virou **10%**
+- **"5%"** — o desconto à vista é **10%**
+- **falta o débito** — a arte diz "Pix e dinheiro"; o desconto vale em **PIX,
+  dinheiro e cartão de débito** (os três com `desconto: true` em `PAGAMENTOS`)
 - **"tinge na máquina"** na arte da Rende Muito, que é linha de cor pronta
 
 **Subiu para P0 em 25/08**, quando o site foi para o domínio real. Enquanto era
