@@ -4,6 +4,17 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "s-ite-bruno-tintas-loja-virtual.vercel.app"
+        }
+      ],
+      "destination": "https://www.brunodastintas.com/",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [
         {

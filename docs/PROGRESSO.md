@@ -27,6 +27,17 @@ caminho.
 `vercel.app`, com host diferente. Regra genérica redirecionaria os previews e
 tiraria a única forma de testar uma mudança antes de publicar.
 
+**A primeira versão da regra não pegou a raiz.** Só `/:path*`: `/dados.js`
+redirecionava com 308, mas `/` continuava servindo 200 — o padrão não casa com
+o caminho vazio. Ou seja, a única URL que alguém realmente compartilharia era
+justamente a que escapava. Só apareceu porque testei o caminho **e** a raiz;
+testar um dos dois teria dado tudo certo.
+
+Corrigido com uma segunda entrada explícita para `/`.
+
+Detalhe que confundiu no meio do caminho: `/index.html` já dava 308 para `/`
+antes disso — mas era o `cleanUrls`, não o redirecionamento novo.
+
 **Consequência a lembrar:** se o projeto for renomeado na Vercel, o host de
 produção muda e esta regra silenciosamente deixa de casar. Não quebra nada —
 só volta a existir a URL duplicada, sem aviso.
