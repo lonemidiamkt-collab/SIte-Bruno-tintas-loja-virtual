@@ -103,17 +103,6 @@ Catálogo sai do arquivo e vai para o banco, com painel para o Bruno editar
 preço sem depender de ninguém. → [SPEC-002](specs/SPEC-002-migracao-next-supabase.md)
 · estado: **Proposta**, com 4 perguntas em aberto, aguardando o Roberto.
 
-### Apagar o projeto Vercel duplicado
-Existem **dois** projetos Vercel ligados neste mesmo repositório, e todo push
-dispara build nos dois:
-
-- `s-ite-bruno-tintas-loja-virtual` ← **este é o bom**, serve a versão atual
-- `s-ite-bruno-tintas-loja-virtual-b1hj` ← duplicado, a URL limpa dele dá 404
-
-Riscos de deixar como está: build dobrado a cada push, e alguém compartilhar a
-URL do projeto errado. Antes de apagar, confirme que o domínio real não está
-apontado para o `-b1hj`. **Depende do Roberto.**
-
 ### Número da rua no endereço de Araruama
 O perfil do Google e o cadastro do CNPJ dizem **RJ-106, 89920** — Vila Capri. O
 site diz só "RJ-106, Vila Capri", sem o número. Endereço igual em todo lugar

@@ -8,6 +8,55 @@
 
 ---
 
+## 25/08/2026 — Havia uma terceira cópia do site no ar, e eu não sabia
+
+O Roberto perguntou por que agora eu precisava de login na Vercel se no Armazém
+do Ferro tinha feito tudo sozinho. Fui olhar em vez de responder de memória: a
+credencial da CLI existe nesta máquina e **venceu hoje às 18:49**, três horas
+antes. Eu tinha registrado no BACKLOG, semanas atrás, que "não há CLI da Vercel
+nem token nesta máquina" — estava desatualizado, e eu repeti sem conferir.
+
+Com o `npx --yes vercel login` refeito, dei de cara com o problema real.
+
+**O projeto duplicado `-b1hj` estava servindo o site em `brunotintas.vercel.app`,
+com 200 e sem `noindex`.** Meu redirecionamento cobria só o host do projeto bom.
+Ou seja: eu tinha resolvido *uma* cópia duplicada de manhã e deixado outra de pé
+— com um nome que, por azar, é justamente a marca da loja.
+
+Só apareceu porque listei os domínios de cada projeto pela API antes de apagar.
+Se eu tivesse apagado direto, teria funcionado, mas por sorte: eu não sabia que
+aquela URL existia.
+
+**O que fiz, em vez de só apagar:** o projeto duplicado foi removido, e o
+`brunotintas.vercel.app` foi **reivindicado pelo projeto bom** já como
+redirecionamento 308 para `www.brunodastintas.com`. Se alguém compartilhou esse
+link em algum lugar, ele continua funcionando e cai no site certo, em vez de
+morrer em 404.
+
+**Aprendizado sobre a API:** o campo `redirect` de um domínio da Vercel quer o
+**nome do domínio**, não a URL. Mandando `https://www.brunodastintas.com` ela
+responde `Unable to redirect […] because that domain is not added to the
+project` — que sugere um problema de configuração quando na verdade é formato.
+
+**Estado final — uma só cópia do site na internet:**
+
+| Endereço | |
+|---|---|
+| `www.brunodastintas.com` | 200 |
+| `brunodastintas.com` | 308 |
+| `brunotintas.vercel.app` | 308 |
+| `s-ite-bruno-tintas-loja-virtual.vercel.app` | 308 |
+
+Os três primeiros são redirecionamento de domínio configurado na Vercel; só o
+host de produção precisa da regra no `vercel.json`, porque o painel não deixa
+redirecionar o alias principal do projeto.
+
+**Não renomeei o projeto**, apesar de ter oferecido. É cosmético, e o custo é
+real: renomear muda o host de produção, faz a regra do `vercel.json` parar de
+casar em silêncio e libera o alias antigo. Fica como escolha do Roberto.
+
+---
+
 ## 25/08/2026 — Tirar o `noindex` abriu a URL da Vercel junto
 
 Efeito colateral que só existe porque o `noindex` saiu: o

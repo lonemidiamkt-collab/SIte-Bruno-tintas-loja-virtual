@@ -38,7 +38,7 @@ aberta; `catalogo-novo` já foi incorporada.
 | SEO regional | ✅ funcionando | título, descrição e LocalBusiness com coordenadas reais e link do perfil do Google |
 | PWA / instalar no celular | ⛔ removido | decisão consciente, ver ADR-002 |
 | Indexação no Google | ✅ liberada | `noindex` removido em 25/08 com o domínio no ar (ADR-003) |
-| URL antiga da Vercel | ✅ redirecionada | `*.vercel.app` de produção manda 308 para o domínio real |
+| Cópias do site na web | ✅ uma só | 3 endereços mandam 308 para `www.brunodastintas.com` |
 
 ## Pendente de terceiro
 
@@ -102,13 +102,24 @@ A credencial do GitHub está salva no keychain do macOS, então o push não pede
 senha. **Push publica na loja ao vivo** — por isso o `CLAUDE.md` manda commitar
 automático mas nunca dar push sozinho.
 
-O host de produção da Vercel (`s-ite-bruno-tintas-loja-virtual.vercel.app`)
-redireciona 308 para `www.brunodastintas.com`, via `redirects` no `vercel.json`.
-A regra casa o host exato, então **deploys de preview não são afetados** — e ela
-para de valer se o projeto for renomeado, porque o host muda.
+**Existe uma só cópia do site na internet.** Todos os endereços caem em
+`www.brunodastintas.com`:
 
-⚠️ Existe um **segundo projeto Vercel duplicado** (`...-b1hj`) ligado no mesmo
-repositório, que builda junto a cada push. Ver BACKLOG.
+| Endereço | O que faz |
+|---|---|
+| `www.brunodastintas.com` | serve o site (200) |
+| `brunodastintas.com` | 308 (redirect de domínio, na Vercel) |
+| `brunotintas.vercel.app` | 308 (redirect de domínio, na Vercel) |
+| `s-ite-bruno-tintas-loja-virtual.vercel.app` | 308 (regra no `vercel.json`) |
+
+O host de produção é o único que não dá para redirecionar pelo painel — por isso
+ele usa `redirects` no `vercel.json`, casando o host exato para não afetar
+deploy de preview. **Renomear o projeto muda esse host e faz a regra parar de
+casar em silêncio.**
+
+O projeto duplicado `...-b1hj` foi **apagado em 25/08**. Ele servia o mesmo site
+em `brunotintas.vercel.app`, sem redirecionamento; essa URL foi reivindicada
+pelo projeto bom e virou redirect.
 
 ## Como rodar local
 
