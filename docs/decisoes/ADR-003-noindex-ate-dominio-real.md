@@ -1,7 +1,7 @@
 # ADR-003 — `noindex` até o domínio real ser apontado
 
 - **Data:** registrada em 06/08/2026
-- **Estado:** Aceita — temporária por natureza
+- **Estado:** Cumprida e revertida em 25/08/2026 — era temporária por natureza
 - **Relacionadas:** SPEC-001, BACKLOG (P1)
 
 ## Contexto
@@ -43,7 +43,19 @@ enquanto o site viver na URL de teste.
 O aviso está em três lugares de propósito: `README.md`, `CLAUDE.md` (seção de
 limites) e `BACKLOG.md` como P1, amarrado à tarefa de apontar o domínio.
 
-## Quando revisitar
+## Quando revisitar — cumprido
 
-No momento exato em que `brunodastintas.com` for apontado para a Vercel.
-Aí este ADR é revertido e o header sai.
+Era "no momento exato em que `brunodastintas.com` for apontado para a Vercel".
+Aconteceu em **25/08/2026**: domínio registrado na Hostinger, `A @` para
+`216.198.79.1` e `CNAME www` para `c04a1a6546dc7122.vercel-dns-017.com`, apex
+com 308 para o `www`, certificado emitido, `https` respondendo 200.
+
+O `X-Robots-Tag: noindex, nofollow` saiu do `vercel.json` no mesmo commit, e a
+tarja "v7 · Versão para aprovação" saiu do topo junto — ela dizia ao cliente
+real que o site não estava pronto.
+
+**O que a decisão evitou:** entre 06/08 e 25/08 o site esteve no ar com preços
+de exemplo, depois com preços reais mas catálogo em formação, e com o
+`canonical` apontando para `brunodastintas.com.br` — um domínio que nunca
+existiu. Se o Google tivesse indexado nesse período, teríamos preço errado no
+resultado de busca e um canonical apontando para o nada.

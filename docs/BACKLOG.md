@@ -10,29 +10,29 @@ Prioridades: **P0** trava o projeto · **P1** próximo ciclo · **P2** depois ·
 
 ## P0 — travando
 
-### Apontar o brunodastintas.com para a Vercel
-O domínio foi **registrado em 25/08/2026** na Hostinger. Falta o DNS: hoje os
-NS são os de parking (`apollo`/`athena.dns-parking.com`) e o domínio não resolve
-para lugar nenhum.
+### Renovar o brunotintas.com.br antes de ser liberado
+O domínio está no CNPJ do Bruno (`21.744.703/0001-02`), **venceu em 26/06/2026**
+e está em `on-hold` no registro.br. É o que o Google ainda tem indexado, o que
+casa com o `@brunotintas` do Instagram e com o nome "BRUNO TINTAS" do perfil de
+164 avaliações.
 
-Ordem certa: adicionar o domínio no projeto da Vercel primeiro (ela mostra os
-registros exatos), depois criar esses registros na zona DNS da Hostinger.
-Tipicamente `A` no apex para `76.76.21.21` e `CNAME` do `www` para
-`cname.vercel-dns.com` — mas **vale o que a Vercel mostrar**, não este texto.
+Enquanto está em `on-hold` dá para renovar. Depois que o registro.br libera,
+qualquer um registra um domínio com a marca dele — e aí não tem volta.
 
-Quando resolver, aí sim: **tirar o `X-Robots-Tag: noindex` do `vercel.json`**
-(ADR-003) e a tarja "v7 · Versão para aprovação" do topo. Enquanto o DNS não
-estiver de pé, os dois ficam.
+Vale renovar nem que seja só para redirecionar 301 para o
+`www.brunodastintas.com`, que é o domínio novo. **Depende do Roberto.**
 
-Duas decisões que vieram junto:
+### Correção nas artes 01 e 02
+Erros que só designer resolve, porque estão dentro da imagem:
+- **título duplicado** — a arte já traz o título, e a página repetia em texto
+  (o texto já saiu da capa no celular, mas as artes internas seguem assim)
+- **"5%"** — o desconto à vista virou **10%**
+- **"tinge na máquina"** na arte da Rende Muito, que é linha de cor pronta
 
-- **É `.com`, não `.com.br`.** As 9 referências do HTML já foram trocadas.
-- **`brunotintas.com.br` continua vencido e em `on-hold`**, no CNPJ do Bruno.
-  É o que o Google conhece, e casa com o `@brunotintas` e com o nome do perfil
-  do Google Business. Vale renovar nem que seja para redirecionar — se for
-  liberado, qualquer um pega um domínio com a marca dele.
-
-**Depende do Roberto.**
+**Subiu para P0 em 25/08**, quando o site foi para o domínio real. Enquanto era
+URL de teste, era um detalhe; agora é o cliente lendo **5%** na arte e **10% OFF
+À VISTA** no número grande da mesma página. Contradição sobre preço, em público,
+é argumento de desconto no balcão.
 
 ### Ligar os perfis do Google Business ao site
 Os dois perfis **já existem** — eu tinha registrado "criar" por engano, o
@@ -91,13 +91,6 @@ já cometeu duas vezes.
 - **preço diferente** → viram produtos separados no catálogo, com preço próprio
 
 **Depende do Bruno.**
-
-### Correção nas artes 01 e 02
-Erros que só designer resolve, porque estão dentro da imagem:
-- **título duplicado** — a arte já traz o título, e a página repetia em texto
-  (o texto já saiu da capa no celular, mas as artes internas seguem assim)
-- **"5%"** — o desconto à vista virou **10%**
-- **"tinge na máquina"** na arte da Rende Muito, que é linha de cor pronta
 
 ### Ficha técnica do Klasse Massa Acrílica 18L
 É o único dos 26 sem ficha (25 de 26). O box mostra a ficha só de quem tem, e

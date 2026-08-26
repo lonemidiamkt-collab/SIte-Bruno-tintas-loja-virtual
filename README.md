@@ -50,8 +50,9 @@ git push
 
 A Vercel detecta o push, publica e atualiza o link de produção sozinha.
 
-## Atenção antes de apontar o domínio real
+## No ar
 
-O `vercel.json` manda `X-Robots-Tag: noindex, nofollow` — isso é de propósito, para o
-Google não indexar a URL de teste da Vercel. **Quando o `brunodastintas.com` for
-apontado para cá, tire esse header**, senão o site não aparece na busca.
+**https://www.brunodastintas.com** — domínio apontado em 25/08/2026. O apex
+redireciona para o `www` com 308, e o `X-Robots-Tag: noindex` saiu do
+`vercel.json` no mesmo movimento (ver `docs/decisoes/ADR-003`). O site está
+aberto para o Google.

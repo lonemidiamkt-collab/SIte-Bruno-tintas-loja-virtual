@@ -120,8 +120,9 @@ WhatsApp da unidade escolhida. Nada é persistido. Ver `docs/specs/SPEC-001`.
 
 - Não altere preço, produto ou dado de loja por conta própria. Esses números
   são do negócio do Bruno, não do código.
-- Não remova o `X-Robots-Tag: noindex` do `vercel.json` sem o Roberto mandar.
-  Ele só sai quando o domínio real for apontado.
+- O site está no ar em **www.brunodastintas.com** e **indexável** desde
+  25/08/2026. O `noindex` já saiu (ADR-003) — não reponha sem ADR novo.
+  A partir daqui, todo push mexe numa loja que o Google lê.
 - Não faça push.
 - Não reintroduza service worker / PWA sem ADR. Ver `docs/decisoes/ADR-002`.
 - Não suba token, credencial ou `.env` para o repositório.

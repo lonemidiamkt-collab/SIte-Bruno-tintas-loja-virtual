@@ -7,7 +7,8 @@
 **Branch ativa:** `main` — é a que a Vercel publica. Não há branch de trabalho
 aberta; `catalogo-novo` já foi incorporada.
 **Último commit publicado:** `3a937df`
-**Versão no site:** v7 · catálogo real, domínio registrado e aguardando DNS
+**No ar em:** https://www.brunodastintas.com (apex com 308 para o `www`)
+**Versão no site:** v8 · no domínio real, aberto para o Google
 **Stack:** HTML + CSS + JS puro, sem build
 **Deploy:** Vercel, branch `main`
 
@@ -36,15 +37,12 @@ aberta; `catalogo-novo` já foi incorporada.
 | Cabeçalhos de segurança | ✅ funcionando | CSP, X-Frame-Options, Permissions-Policy, COOP, CORP |
 | SEO regional | ✅ funcionando | título, descrição e LocalBusiness com coordenadas reais e link do perfil do Google |
 | PWA / instalar no celular | ⛔ removido | decisão consciente, ver ADR-002 |
-| Indexação no Google | ⛔ bloqueada | `noindex` proposital enquanto for URL de teste (ADR-003) |
+| Indexação no Google | ✅ liberada | `noindex` removido em 25/08 com o domínio no ar (ADR-003) |
 
 ## Pendente de terceiro
 
 Coisas que não dependem de código, e sim de informação ou ação de fora:
 
-- **Apontar o `brunodastintas.com` para a Vercel.** Registrado em 25/08/2026 na
-  Hostinger; hoje os NS ainda são os de parking (`*.dns-parking.com`). Enquanto
-  não apontar, o `noindex` fica (ADR-003) e o SEO regional não vale nada.
 - **Pôr o domínio no campo "site" dos dois perfis do Google Business.** Os
   perfis existem (Araruama 4,8 com 164 avaliações; Iguaba 5,0 com 1). Hoje
   Araruama aponta para o Instagram e Iguaba não aponta para nada.

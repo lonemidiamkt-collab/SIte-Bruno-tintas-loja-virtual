@@ -8,6 +8,56 @@
 
 ---
 
+## 25/08/2026 — O site foi para o ar em www.brunodastintas.com
+
+Domínio apontado e `noindex` removido. O site deixou de ser link de teste e
+virou a loja do Bruno.
+
+**O que foi feito no DNS**, na zona da Hostinger (nameservers dela, sem trocar):
+
+| Tipo | Nome | Valor |
+|---|---|---|
+| `A` | `@` | `216.198.79.1` |
+| `CNAME` | `www` | `c04a1a6546dc7122.vercel-dns-017.com` |
+
+Antes, os dois registros de parking (`A @ → 2.57.91.91` e `CNAME www →
+brunodastintas.com`) foram apagados. O `CNAME www` velho apontava para o
+próprio apex — deixá-lo junto com o `A` novo daria loop de resolução.
+
+Conferido nos três resolvedores públicos antes de considerar pronto, e não só
+no cache local — o resolvedor da máquina ainda respondia vazio quando o 8.8.8.8,
+o 1.1.1.1 e o 9.9.9.9 já tinham a resposta certa. Confiar no `dig` sem `@` teria
+me feito dizer que não estava propagado.
+
+**O que saiu do código:**
+
+- `X-Robots-Tag: noindex, nofollow` do `vercel.json`. Era o que a ADR-003 mandava
+  fazer "no momento exato em que o domínio for apontado", e o momento chegou.
+- a tarja **"v7 · Versão para aprovação"** do topo, com o CSS `.mvp-bar` junto.
+  Ela existia para você mostrar internamente; cliente real lendo "versão para
+  aprovação" desconfia do resto da página.
+
+**Estado verificado em produção:** `https://www.brunodastintas.com/` responde
+200, o apex responde 308 para o `www`, certificado emitido, servindo de `gru1`,
+com CSP e `X-Frame-Options: DENY` aplicados.
+
+**O que a ADR-003 evitou, agora que dá para medir:** entre 06/08 e hoje o site
+esteve no ar com preço de exemplo, depois com catálogo em formação, e com o
+`canonical` apontando para `brunodastintas.com.br` — domínio que nunca existiu.
+Indexar em qualquer ponto desse intervalo teria colocado preço errado no
+resultado de busca e um canonical apontando para o nada.
+
+**Uma pendência mudou de gravidade.** A arte "Pedido pelo site" diz *"Pix e
+dinheiro com 5% de desconto"*, e três seções acima o número grande diz **10% OFF
+À VISTA**. Enquanto era URL de teste, era detalhe. Agora é contradição sobre
+preço, em público, na mesma página — argumento pronto para o cliente pedir
+desconto no balcão. Subiu de P1 para **P0**.
+
+**Aberto e com relógio:** o `brunotintas.com.br` segue vencido e em `on-hold`,
+no CNPJ do Bruno. Continua sendo o domínio que o Google conhece.
+
+---
+
 ## 25/08/2026 — O domínio saiu, e é `.com` — não o `.com.br` que o código declarava
 
 O Roberto registrou **`brunodastintas.com`** na Hostinger. Confirmei no whois
