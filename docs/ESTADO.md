@@ -35,7 +35,9 @@ aberta; `catalogo-novo` já foi incorporada.
 | Parcelamento | ✅ funcionando | até 12x sem juros |
 | Corte de entrega no mesmo dia | ⛔ desligado | `corteEntregaHoje: null` — falta o Bruno confirmar o horário |
 | Cabeçalhos de segurança | ✅ funcionando | CSP, X-Frame-Options, Permissions-Policy, COOP, CORP |
-| SEO regional | ✅ funcionando | título, descrição e LocalBusiness com coordenadas reais e link do perfil do Google |
+| SEO regional | ✅ funcionando | título, descrição e 2× `HardwareStore` com coordenadas reais e link do perfil |
+| Catálogo estruturado | ✅ funcionando | 26 produtos em `ItemList`/`Product`, montados de `PRODUTOS` (ADR-006) |
+| `robots.txt` e `sitemap.xml` | ✅ no ar | criados em 25/08; até então davam 404 |
 | PWA / instalar no celular | ⛔ removido | decisão consciente, ver ADR-002 |
 | Indexação no Google | ✅ liberada | `noindex` removido em 25/08 com o domínio no ar (ADR-003) |
 | Cópias do site na web | ✅ uma só | 3 endereços mandam 308 para `www.brunodastintas.com` |

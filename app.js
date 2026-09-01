@@ -1053,6 +1053,60 @@ function ligarTrilhos() {
   });
 }
 
+/* ---------------- dados estruturados do catálogo ----------------
+
+   O `index.html` já declara as duas lojas como HardwareStore. Faltava o
+   catálogo: 26 produtos com marca, foto e preço que o Google não tinha como
+   ler, porque estão em `dados.js` e não na marcação.
+
+   Por que montado aqui, em vez de escrito à mão no HTML: preço é o dado que
+   mais muda neste projeto, e uma cópia no HTML iria envelhecer calada. Preço
+   errado em dado estruturado é pior que dado estruturado nenhum — sai no
+   resultado de busca com a cara de oficial. Gerando de `PRODUTOS`, existe uma
+   fonte só. Ver ADR-006.
+
+   Não declaro `availability`. O site nunca afirmou estoque — quem confirma é
+   a loja, no WhatsApp, antes de separar. `InStock` seria uma promessa que o
+   código não tem como cumprir. O campo é opcional no schema.org. */
+const SITE = 'https://www.brunodastintas.com';
+
+function descricaoDe(p) {
+  const f = FICHAS[p.id];
+  if (!f) return '';
+  return [f.onde, f.rendimento && `Rende ${f.rendimento}.`].filter(Boolean).join('. ');
+}
+
+function dadosEstruturadosDoCatalogo() {
+  const lista = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Catálogo — Bruno das Tintas',
+    numberOfItems: PRODUTOS.length,
+    itemListElement: PRODUTOS.map((p, i) => {
+      const prod = {
+        '@type': 'Product',
+        name: p.marca !== '—' ? `${p.marca} ${p.nome}` : p.nome,
+        offers: {
+          '@type': 'Offer',
+          price: p.preco.toFixed(2),
+          priceCurrency: 'BRL',
+          url: SITE + '/',
+          seller: { '@id': SITE + '/#araruama' }
+        }
+      };
+      if (p.marca !== '—') prod.brand = { '@type': 'Brand', name: p.marca };
+      if (p.foto) prod.image = `${SITE}/fotos/${p.foto}.webp`;
+      const desc = descricaoDe(p);
+      if (desc) prod.description = desc;
+      return { '@type': 'ListItem', position: i + 1, item: prod };
+    })
+  };
+  const el = d0.createElement('script');
+  el.type = 'application/ld+json';
+  el.textContent = JSON.stringify(lista);
+  d0.head.appendChild(el);
+}
+
 /* ---------------- start ---------------- */
 renderSetores();
 renderMarcas();
@@ -1062,6 +1116,7 @@ renderGrade();
 renderDestaque();
 renderCarrinho();
 ligarTrilhos();
+dadosEstruturadosDoCatalogo();
 
 /* O logo e as artes vêm direto no src do HTML. O MAPA_IMG guarda só os logos
    de marca, que o renderMarcas() resolve. */

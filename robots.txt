@@ -1,0 +1,7 @@
+# Bruno das Tintas — https://www.brunodastintas.com
+# Loja de tintas em Araruama e Iguaba Grande, RJ.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://www.brunodastintas.com/sitemap.xml

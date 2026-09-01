@@ -8,6 +8,47 @@
 
 ---
 
+## 25/08/2026 — SEO: o que faltava era o catálogo, não as palavras-chave
+
+Auditei antes de mexer, porque boa parte já estava feita: título e descrição com
+Araruama e Iguaba, `canonical`, Open Graph completo com `twitter:card`,
+`lang="pt-BR"`, um `<h1>` só, todas as imagens com `alt`, e as duas lojas em
+`HardwareStore` com coordenadas reais e link do perfil do Google.
+
+Quatro buracos de verdade:
+
+**1. `robots.txt` e `sitemap.xml` davam 404.** Criados. O sitemap tem uma URL só,
+e isso é correto: o site é de página única — catálogo, lojas e checkout são
+seções do mesmo endereço, e âncora não é URL própria.
+
+**2. O catálogo não existia para o Google.** Vinte e seis produtos com marca,
+foto e **preço**, todos em `dados.js`, invisíveis na marcação. Para loja, preço é
+justamente o que gera resultado rico. Agora saem como `ItemList` de `Product`.
+
+Montados **em tempo de execução**, de `PRODUTOS`, e não escritos à mão no HTML.
+O motivo está na ADR-006 e é o mesmo erro que este projeto já cometeu duas
+vezes: uma cópia de preço no HTML envelheceria calada, e **preço errado em dado
+estruturado é pior que dado estruturado nenhum** — sai na busca com cara de
+oficial e o cliente chega à loja cobrando.
+
+**Não declarei `availability`.** O site nunca afirmou estoque; quem confirma é a
+loja, no WhatsApp. `InStock` seria promessa que o código não cumpre.
+
+**3. Quatro metas duplicadas no `<head>`**, e uma delas com valores conflitantes:
+`apple-mobile-web-app-title` aparecia como "Bruno das Tintas" e "Bruno Tintas".
+Ficou a primeira, que é a marca da logo e do domínio.
+
+**4. Verificado que a CSP não atrapalha.** `script-src 'self'` bloqueia script
+executável; `application/ld+json` é bloco de dados e não cai na regra. Testei no
+navegador com os mesmos cabeçalhos do `vercel.json` — 2 blocos lidos, 26 itens,
+nenhum sem preço ou imagem, console limpo.
+
+**O que continua fora do meu alcance, e vale mais que tudo acima:** os dois
+perfis do Google Business ainda não apontam para o site, e Iguaba tem 1
+avaliação contra 237 do concorrente na mesma praça.
+
+---
+
 ## 25/08/2026 — O redirecionamento que eu subi apagou o ícone do projeto no painel
 
 O Roberto mandou um print do painel da Vercel: o `armazem-do-ferro` aparece com
